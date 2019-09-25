@@ -94,7 +94,7 @@ Converting to PSF ASCII
 -----------------------
 
 *psf_utils* only supports PSF ASCII files. As an alternative, `libpsf 
-<https://pypi.org/project/libpsf`_ is a Python package that can read both ASCII 
+<https://pypi.org/project/libpsf>`_ is a Python package that can read both ASCII 
 and binary PSF files. Or, you can use the Cadence 'psf' program to convert 
 various types of simulation results files into PSF ASCII format. To use it, 
 simply specify the input and output files::
