@@ -6,11 +6,12 @@ Usage:
     psf_plot [options] <signal>...
 
 Options:
-    -f, --psf_file    PSF file
-    -t, --title       title
-    -d, --db          plot the magnitude of the signals in dB
-    -m, --mag         plot the magnitude of the signals
-    -p, --ph          plot the phase of the signals
+    -f, --psf_file             PSF file
+    -t, --title                title
+    -d, --db                   plot the magnitude of the signals in dB
+    -m, --mag                  plot the magnitude of the signals
+    -p, --ph                   plot the phase of the signals
+    -s <file>, --svg <file>    Produce plot as SVG file rather than display it
 
 <psf_file> need only be given if it differs from the one use previously.
 """
@@ -20,6 +21,7 @@ Options:
 from .psf import PSF
 from docopt import docopt
 from inform import Error, Info, display, done, render
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter, EngFormatter
 import numpy as np
@@ -48,6 +50,7 @@ def plot_signals():
         psf_file = get_psf_filename(cmdline['--psf_file'])
         args = cmdline['<signal>']
         title = cmdline['--title']
+        svg_file = cmdline['--svg']
         dB = cmdline['--db']
         mag = cmdline['--mag']
         phase = cmdline['--ph']
@@ -98,6 +101,8 @@ def plot_signals():
             elif phase:
                 y_data = np.angle(y_data, deg=True)
                 units = '°'
+            elif np.iscomplexobj(y_data):
+                y_data = np.absolute(y_data)
             waves.append((name, y_data, units))
             y_units.append(units)
 
@@ -109,6 +114,8 @@ def plot_signals():
         }
 
         # Generate the plot {{{2
+        if svg_file:
+            matplotlib.use('SVG')
         figure, axes = plt.subplots(len(y_units), 1, sharex=True, squeeze=False)
         for i, y_units in enumerate(y_units):
             for sig_name, y_data, sig_units in waves:
@@ -124,7 +131,10 @@ def plot_signals():
             axes[i,0].yaxis.set_major_formatter(y_formatters[units])
         if title:
             plt.suptitle(title)
-        plt.show()
+        if svg_file:
+            plt.savefig(svg_file)
+        else:
+            plt.show()
     except Error as e:
         e.terminate()
     except KeyboardInterrupt as e:
