@@ -2,8 +2,8 @@ PSF Utilities
 =============
 
 :Author: Ken Kundert
-:Version: 0.0.1
-:Released: 2019-09-21
+:Version: 0.0.2
+:Released: 2019-09-25
 
 
 What?
@@ -111,7 +111,7 @@ Releases
 --------
 
 **Latest development release**:
-    | Version: 0.0.1
-    | Released: 2019-09-23
+    | Version: 0.0.2
+    | Released: 2019-09-25
 
     - Initial version
