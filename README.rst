@@ -114,4 +114,11 @@ Releases
     | Version: 0.3.0
     | Released: 2019-09-25
 
+**0.3 (2019-09-25)**:
+    - Fix import errors in plot command.
+
+**0.2 (2019-09-25)**:
+    - Fix dependencies.
+
+**0.1 (2019-09-25)**:
     - Initial version
