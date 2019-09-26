@@ -20,7 +20,7 @@ class Signal(Info):
     pass
 
 class UnknownSignal(Error):
-    template = 'unknown signal: {name}'
+    template = 'unknown signal: {name}.'
 
 
 unicode_unit_maps = [
