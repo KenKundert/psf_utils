@@ -20,7 +20,7 @@ class Signal(Info):
     pass
 
 class UnknownSignal(Error):
-    template = 'unknown signal: {name}.'
+    template = 'unknown signal: {}.'
 
 
 unicode_unit_maps = [
@@ -157,7 +157,7 @@ class PSF:
         try:
             return self.signals[name]
         except KeyError:
-            raise UnknownSignal(name=name)
+            raise UnknownSignal(name)
 
     def all_signals(self):
         """
