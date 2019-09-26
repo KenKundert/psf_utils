@@ -87,6 +87,8 @@ is a typical session::
     R2:total    A²/Hz  real
     out         A/√Hz  real
     > plot_psf out    # display out from resistor.raw/pnoise.pnoise
+
+    > list_psf        # list available signals again
     > plot_psf        # display out again
 
 
