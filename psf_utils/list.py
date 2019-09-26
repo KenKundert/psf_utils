@@ -17,7 +17,7 @@ Options:
 from .plot import get_psf_filename
 from .psf import PSF
 from docopt import docopt
-from inform import Error, columns, display, fatal, os_error, warn
+from inform import Error, columns, display
 import warnings
 
 # Globals {{{1

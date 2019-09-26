@@ -21,7 +21,7 @@ Options:
 # Imports {{{1
 from .psf import PSF
 from docopt import docopt
-from inform import Error, Info, display, done, render
+from inform import Error, Info, display, done, fatal, render, os_error, warn
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter, EngFormatter
@@ -175,4 +175,3 @@ def get_psf_filename(psf_file):
     except OSError as e:
         warn(os_error(e))
     return psf_file
-
