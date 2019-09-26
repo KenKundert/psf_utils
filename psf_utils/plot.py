@@ -3,7 +3,7 @@
 Plot Signals
 
 Usage:
-    psf_plot [options] <signal>...
+    plot_psf [options] <signal>...
 
 Options:
     -f, --psf_file             PSF file
@@ -12,6 +12,7 @@ Options:
     -m, --mag                  plot the magnitude of the signals
     -p, --ph                   plot the phase of the signals
     -s <file>, --svg <file>    Produce plot as SVG file rather than display it
+    -c, --no-cache   ignore, then regenerate, the cache
 
 <psf_file> need only be given if it differs from the one use previously.
 """
@@ -54,9 +55,10 @@ def plot_signals():
         dB = cmdline['--db']
         mag = cmdline['--mag']
         phase = cmdline['--ph']
+        use_cache = not cmdline['--no-cache']
 
         # Open PSF file {{{2
-        psf = PSF(psf_file, sep=':')
+        psf = PSF(psf_file, sep=':', use_cache=use_cache)
         sweep = psf.get_sweep()
         x_name = sweep.name
         x_units = sweep.units
@@ -152,7 +154,8 @@ def get_argv():
             done()
     try:
         with open(saved_arguments_filename, 'w') as f:
-            f.write('\n'.join(argv))
+            args = [a for a in argv if a not in ['-c', '--no-cache']]
+            f.write('\n'.join(args))
     except OSError as e:
         warn(os_error(e))
     return argv

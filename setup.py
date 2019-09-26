@@ -16,8 +16,8 @@ setup(
     zip_safe = True,
     packages='psf_utils'.split(),
     entry_points = {'console_scripts': [
-        'psf_list=psf_utils.list:list_signals',
-        'psf_plot=psf_utils.plot:plot_signals',
+        'list_psf=psf_utils.list:list_signals',
+        'plot_psf=psf_utils.plot:plot_signals',
     ]},
     install_requires='docopt inform matplotlib numpy ply quantiphy shlib'.split(),
     python_requires='>=3.6',

@@ -4,18 +4,20 @@
 List Signals
 
 Usage:
-    psf_list [options] [<psf_file>]
+    list_psf [options] [<psf_file>]
 
 Options:
-    -l, --long    include signal meta data
+    -l, --long       include signal meta data
+    -c, --no-cache   ignore, then regenerate, the cache
 
 <psf_file> need only be given if it differs from the one use previously.
 """
 
 # Imports {{{1
+from .plot import get_psf_filename
+from .psf import PSF
 from docopt import docopt
 from inform import Error, columns, display, fatal, os_error, warn
-from psf_utils import PSF
 import warnings
 
 # Globals {{{1
@@ -32,45 +34,30 @@ def list_signals():
     cmdline = docopt(__doc__)
     psf_file = get_psf_filename(cmdline['<psf_file>'])
     show_meta = cmdline['--long']
+    use_cache = not cmdline['--no-cache']
 
     # List signals {{{2
     try:
-        results = PSF(psf_file, sep=':')
+        psf = PSF(psf_file, sep=':', use_cache=use_cache)
 
         if show_meta:
             nw = uw = kw = 0
             data = []
-            for each in results.all_signals():
-                if len(each.name) > nw:
-                    nw = len(each.name)
-                units = results.units_to_unicode(each.units)
+            for signal in psf.all_signals():
+                if len(signal.name) > nw:
+                    nw = len(signal.name)
+                units = psf.units_to_unicode(signal.units)
                 if len(units) > uw:
                     uw = len(units)
-                kind = each.type.kind
+                kind = signal.type.kind
                 kind = kinds.get(kind, kind)
                 if len(kind) > kw:
                     kw = len(kind)
-                data.append((each.name, units, kind))
-            for name, units, kind in data:
-                display(f'    {name:<{nw}}  {units:<{uw}}  {kind:<{kw}}')
+                points = len(signal.ordinate)
+                data.append((signal.name, units, kind, points))
+            for name, units, kind, points in data:
+                display(f'    {name:<{nw}}  {units:<{uw}}  {kind:<{kw}}  ({points} points)')
         else:
-            display(columns([s.name for s in results.all_signals()]))
+            display(columns([s.name for s in psf.all_signals()]))
     except Error as e:
         e.terminate()
-
-# get_psf_filename() {{{1
-def get_psf_filename(psf_file):
-    if not psf_file:
-        try:
-            with open(saved_psf_file_filename) as f:
-                psf_file = f.read().strip()
-            display(f'Using {psf_file}:')
-        except OSError:
-            fatal('missing psf file name.')
-    try:
-        with open(saved_psf_file_filename, 'w') as f:
-            f.write(psf_file)
-    except OSError as e:
-        warn(os_error(e))
-    return psf_file
-
