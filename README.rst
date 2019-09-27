@@ -1,6 +1,12 @@
 PSF Utilities
 =============
 
+.. image:: https://img.shields.io/pypi/v/psf_utils.svg
+    :target: https://pypi.python.org/pypi/psf_utils
+
+.. image:: https://img.shields.io/pypi/pyversions/psf_utils.svg
+    :target: https://pypi.python.org/pypi/psf_utils/
+
 :Author: Ken Kundert
 :Version: 0.4.0
 :Released: 2019-09-26
