@@ -3,34 +3,39 @@
 Plot Signals
 
 Usage:
-    plot_psf [options] <signal>...
+    plot-psf [options] <signal>...
 
 Options:
-    -f, --psf_file             PSF file
-    -t, --title                title
-    -d, --db                   plot the magnitude of the signals in dB
-    -m, --mag                  plot the magnitude of the signals
-    -p, --ph                   plot the phase of the signals
-    -s <file>, --svg <file>    Produce plot as SVG file rather than display it
-    -c, --no-cache   ignore, then regenerate, the cache
+    -c, --no-cache                ignore, then regenerate, the cache
+    -f <path>, --psf-file <path>  PSF file
+    -d, --db                      plot the magnitude of the signals in dB
+    -m, --mag                     plot the magnitude of the signals
+    -p, --ph                      plot the phase of the signals
+    -s <file>, --svg <file>       produce plot as SVG file rather than display it
+    -t <title>, --title <title>   title
 
-<psf_file> need only be given if it differs from the one use previously.
+The PSF file need only be given if it differs from the one use previously.
 """
 
 
 # Imports {{{1
 from .psf import PSF
 from docopt import docopt
-from inform import Error, Info, display, done, fatal, render, os_error, warn
+import fnmatch
+from inform import (
+    Error, Info, conjoin, display, done, fatal, os_error, plural, render, warn
+)
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter, EngFormatter
 import numpy as np
 from quantiphy import Quantity
 Quantity.set_prefs(
-    prec = 2,
     map_sf = Quantity.map_sf_to_sci_notation,
-    minus = Quantity.minus_sign
+    minus = Quantity.minus_sign,
+    output_sf = 'TGMkmunpfazy',
+        # include small scale factors for noise power results
+    prec = 2,
 )
 from shlib import Run, set_prefs
 set_prefs(use_inform=True)
@@ -48,7 +53,7 @@ def plot_signals():
     try:
         # process command line {{{2
         cmdline = docopt(__doc__, argv=get_argv())
-        psf_file = get_psf_filename(cmdline['--psf_file'])
+        psf_file = get_psf_filename(cmdline['--psf-file'])
         args = cmdline['<signal>']
         title = cmdline['--title']
         svg_file = cmdline['--svg']
@@ -69,32 +74,27 @@ def plot_signals():
         )
 
         # Process arguments {{{2
+        to_plot = expand_args(psf.signals.keys(), args)
         waves = []
-        y_units = []
-        for arg in ' '.join(args[1:]).split():
-            args = arg.split('-')
-            if len(args) == 2:
-                try:
-                    psig = psf.get_signal(args[0])
-                    nsig = psf.get_signal(args[1])
-                    name = arg
-                    if psig.units != nsig.units:
-                        warn(
-                            f'incompatible units ({psig.units} != {nsig.units}',
-                            culprit=arg
-                        )
-                    units = psig.units
-                    y_data = psig.ordinate - nsig.ordinate
-                except KeyError as e:
-                    raise Error('unknown.', culprit=e.args[0])
+        y_units = set()
+        for arg in to_plot:
+            pair = arg.split('-')
+            if len(pair) == 2:
+                psig = psf.get_signal(pair[0])
+                nsig = psf.get_signal(pair[1])
+                name = arg
+                if psig.units != nsig.units:
+                    warn(
+                        f'incompatible units ({psig.units} != {nsig.units}',
+                        culprit=arg
+                    )
+                units = psig.units
+                y_data = psig.ordinate - nsig.ordinate
             else:
-                try:
-                    sig = psf.get_signal(arg)
-                    name = arg
-                    units = sig.units
-                    y_data = sig.ordinate
-                except KeyError as e:
-                    raise Error('unknown.', culprit=e.args[0])
+                sig = psf.get_signal(arg)
+                name = arg
+                units = sig.units
+                y_data = sig.ordinate
             if dB:
                 y_data = 20*np.log10(np.absolute(y_data))
                 units = 'dB' + units
@@ -106,7 +106,9 @@ def plot_signals():
             elif np.iscomplexobj(y_data):
                 y_data = np.absolute(y_data)
             waves.append((name, y_data, units))
-            y_units.append(units)
+            y_units.add(units)
+        if not y_units:
+            raise Error(f'{plural(args):no match/es}.', culprit=args)
 
         y_formatters = {
             u:FuncFormatter(
@@ -119,7 +121,7 @@ def plot_signals():
         if svg_file:
             matplotlib.use('SVG')
         figure, axes = plt.subplots(len(y_units), 1, sharex=True, squeeze=False)
-        for i, y_units in enumerate(y_units):
+        for i, units in enumerate(y_units):
             for sig_name, y_data, sig_units in waves:
                 if sig_units == units:
                     axes[i,0].plot(
@@ -144,20 +146,23 @@ def plot_signals():
 
 # get_argv() {{{1
 def get_argv():
-    argv = sys.argv
-    if len(argv) == 1:
+    argv = sys.argv[1:]
+    if argv:
+        # save the command line arguments for next time
+        try:
+            with open(saved_arguments_filename, 'w') as f:
+                args = [a for a in argv if a not in ['-c', '--no-cache']]
+                f.write('\n'.join(args))
+        except OSError as e:
+            warn(os_error(e))
+    else:
+        # command line arguments not give, reuse previous ones
         try:
             with open(saved_arguments_filename) as f:
                 argv = f.read().split('\n')
             display(f'Using command:', ' '.join(argv))
         except OSError:
             done()
-    try:
-        with open(saved_arguments_filename, 'w') as f:
-            args = [a for a in argv if a not in ['-c', '--no-cache']]
-            f.write('\n'.join(args))
-    except OSError as e:
-        warn(os_error(e))
     return argv
 
 # get_psf_filename() {{{1
@@ -175,3 +180,12 @@ def get_psf_filename(psf_file):
     except OSError as e:
         warn(os_error(e))
     return psf_file
+
+# in_args() {{{1
+def expand_args(signals, args):
+    # special case args that contain -, they are considered differential signals
+    # they should not include glob chars (*, ?)
+    selected = set(a for a in args if '-' in a)
+    for arg in args:
+        selected.update(fnmatch.filter(signals, arg))
+    return sorted(selected)

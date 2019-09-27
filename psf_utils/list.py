@@ -4,20 +4,21 @@
 List Signals
 
 Usage:
-    list_psf [options] [<psf_file>]
+    list-psf [options] [<signal>...]
 
 Options:
-    -l, --long       include signal meta data
-    -c, --no-cache   ignore, then regenerate, the cache
+    -c, --no-cache                ignore, then regenerate, the cache
+    -f <path>, --psf-file <path>  the path of the ASCII PSF file
+    -l, --long                    include signal meta data
 
-<psf_file> need only be given if it differs from the one use previously.
+The PSF file need only be given if it differs from the one use previously.
 """
 
 # Imports {{{1
-from .plot import get_psf_filename
+from .plot import expand_args, get_psf_filename
 from .psf import PSF
 from docopt import docopt
-from inform import Error, columns, display
+from inform import Error, columns, display, plural
 import warnings
 
 # Globals {{{1
@@ -32,7 +33,10 @@ kinds = {
 def list_signals():
     # Read command line {{{2
     cmdline = docopt(__doc__)
-    psf_file = get_psf_filename(cmdline['<psf_file>'])
+    args = cmdline['<signal>']
+    if not args:
+        args = ['*']
+    psf_file = get_psf_filename(cmdline['--psf-file'])
     show_meta = cmdline['--long']
     use_cache = not cmdline['--no-cache']
 
@@ -43,7 +47,10 @@ def list_signals():
         if show_meta:
             nw = uw = kw = 0
             data = []
-            for signal in psf.all_signals():
+            for name in expand_args(psf.signals.keys(), args):
+                if name not in psf.signals:
+                    warn('not found.', culprit=name)
+                signal = psf.get_signal(name)
                 if len(signal.name) > nw:
                     nw = len(signal.name)
                 units = psf.units_to_unicode(signal.units)
@@ -55,9 +62,14 @@ def list_signals():
                     kw = len(kind)
                 points = len(signal.ordinate)
                 data.append((signal.name, units, kind, points))
+            if not data:
+                raise Error(f'{plural(args):no match/es}.', culprit=args)
             for name, units, kind, points in data:
                 display(f'    {name:<{nw}}  {units:<{uw}}  {kind:<{kw}}  ({points} points)')
         else:
-            display(columns([s.name for s in psf.all_signals()]))
+            signals = expand_args(psf.signals.keys(), args)
+            if not signals:
+                raise Error(f'{plural(args):no match/es}.', culprit=args)
+            display(columns(signals))
     except Error as e:
         e.terminate()

@@ -157,7 +157,7 @@ class PSF:
         try:
             return self.signals[name]
         except KeyError:
-            raise UnknownSignal(name)
+            raise UnknownSignal(name, choices=self.signals.keys())
 
     def all_signals(self):
         """
