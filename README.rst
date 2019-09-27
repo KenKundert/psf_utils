@@ -2,8 +2,8 @@ PSF Utilities
 =============
 
 :Author: Ken Kundert
-:Version: 0.3.0
-:Released: 2019-09-25
+:Version: 0.4.0
+:Released: 2019-09-26
 
 
 What?
@@ -135,8 +135,8 @@ Releases
 --------
 
 **Latest development release**:
-    | Version: 0.3.0
-    | Released: 2019-09-25
+    | Version: 0.4.0
+    | Released: 2019-09-26
 
 **0.4 (2019-09-26)**:
     - Allow glob patterns to be passed to both *list-psf* and *plot-psf*.
