@@ -124,7 +124,7 @@ various types of simulation results files into PSF ASCII format. To use it,
 simply specify the input and output files::
 
     > psf -i adc.raw/tran.tran -o adc.raw/tran.psfascii
-    > list-psf adc.raw/tran.psfascii
+    > list-psf -f adc.raw/tran.psfascii
 
 In this example there is nothing special about the 'psfascii' suffix, it is
 simply mnemonic.  Rather, the output is in ASCII format because the ``-b``
