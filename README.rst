@@ -1,5 +1,5 @@
-PSF Utilities
-=============
+PSF Utilities - Read Spectre Data Files
+=======================================
 
 .. image:: https://img.shields.io/pypi/v/psf_utils.svg
     :target: https://pypi.python.org/pypi/psf_utils
