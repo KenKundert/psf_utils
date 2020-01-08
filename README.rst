@@ -8,8 +8,8 @@ PSF Utilities - Read Spectre Data Files
     :target: https://pypi.python.org/pypi/psf_utils/
 
 :Author: Ken Kundert
-:Version: 0.4.0
-:Released: 2019-09-26
+:Version: 0.5.0
+:Released: 2020-01-08
 
 
 What?
@@ -141,8 +141,8 @@ Releases
 --------
 
 **Latest development release**:
-    | Version: 0.4.0
-    | Released: 2019-09-26
+    | Version: 0.5.0
+    | Released: 2020-01-08
 
 **0.4 (2019-09-26)**:
     - Allow glob patterns to be passed to both *list-psf* and *plot-psf*.
