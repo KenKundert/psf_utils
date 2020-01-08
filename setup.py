@@ -1,12 +1,12 @@
 from setuptools import setup
-
 from codecs import open
+
 with open('README.rst', encoding='utf-8') as f:
     readme = f.read()
 
 setup(
     name = 'psf_utils',
-    version = '0.5.0',
+    version = '0.4.0',
     description = 'Cadence PSF file utilities',
     long_description = readme,
     author = "Ken Kundert",
