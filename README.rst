@@ -70,7 +70,13 @@ This example plots the output signal::
     except Error as e:
         e.terminate()
 
-*abscissa* and *ordinate* are NumPy arrays.
+*abscissa* and *ordinate* are NumPy arrays.  As such, you can perform 
+computation with them::
+
+    out = out_p.ordinate - out_n.ordinate
+
+    from numpy import sin
+    sine = sin(sweep.abscissa)
 
 
 Utility Programs
@@ -135,6 +141,14 @@ simply specify the input and output files::
 In this example there is nothing special about the 'psfascii' suffix, it is
 simply mnemonic.  Rather, the output is in ASCII format because the ``-b``
 (binary) option is not specified.
+
+
+Examples
+--------
+
+`flicker noise <https://github.com/KenKundert/flicker-noise>`_ is a simulation 
+script that shows how to write simple Python scripts that run Spectre and use 
+*psf_utils* to extract and display the desired results.
 
 
 Releases
