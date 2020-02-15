@@ -146,7 +146,7 @@ simply mnemonic.  Rather, the output is in ASCII format because the ``-b``
 Examples
 --------
 
-`flicker noise <https://github.com/KenKundert/flicker-noise>`_ is a simulation 
+`Flicker Noise <https://github.com/KenKundert/flicker-noise>`_ is a simulation 
 script that shows how to write simple Python scripts that run Spectre and use 
 *psf_utils* to extract and display the desired results.
 
