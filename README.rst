@@ -158,6 +158,9 @@ Releases
     | Version: 0.5.0
     | Released: 2020-01-08
 
+**0.5 (2020-01-08)**:
+    - beta release
+
 **0.4 (2019-09-26)**:
     - Allow glob patterns to be passed to both *list-psf* and *plot-psf*.
 
