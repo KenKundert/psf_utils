@@ -107,7 +107,7 @@ is a typical session::
         R2:total    A²/Hz  real  (12042 points)
         out         A/√Hz  real  (12042 points)
 
-    # display only those that match R1:*
+    # display only those that match R1:* (assumes nonomatch variable is set in shell)
     > list-psf -l R1:*
     Using pnoise.raw/pnoise.pnoise.
         R1:flicker  A²/Hz  real  (12042 points)
@@ -117,7 +117,7 @@ is a typical session::
     # display a graph containing signals that start with R1:
     > plot-psf R1:*
 
-    # display the thermal noise of R1, and then the total noise minue the flicker noise
+    # display the thermal noise of R1, and then the total noise minus the flicker noise
     > plot-psf R1:thermal R1:total-R1:flicker
 
     # display a graph containing only out
