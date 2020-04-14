@@ -80,7 +80,7 @@ class PSF:
                 e,
                 culprit = psf_filepath,
                 codicil = join(
-                    'This might be a binary PSF file,',
+                    'This is likely a binary PSF file,',
                     'psf_utils only supports ASCII PSF files.',
                 )
             )
