@@ -82,6 +82,7 @@ class PSF:
                 codicil = join(
                     'This is likely a binary PSF file,',
                     'psf_utils only supports ASCII PSF files.',
+                    '\nUse `psf {0!s} {0!s}.ascii` to convert.'.format(psf_filepath),
                 )
             )
         meta, types, sweeps, traces, value = sections
