@@ -69,7 +69,7 @@ class PSF:
         # open and parse PSF file
         parser = ParsePSF()
         try:
-            content = psf_filepath.read_text()
+            content = psf_filepath.read_text(encoding='utf-8', errors='replace')
             sections = parser.parse(filename, content)
         except ParseError as e:
             raise Error(str(e))
