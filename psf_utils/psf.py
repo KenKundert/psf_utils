@@ -4,7 +4,7 @@ Read PSF File
 
 # Imports {{{1
 from .parse import ParsePSF, ParseError
-from inform import Error, Info, cull, log, os_error
+from inform import Error, Info, cull, log, join, os_error
 from shlib import Run, set_prefs,to_path
 set_prefs(use_inform=True)
 import numpy as np
@@ -69,12 +69,21 @@ class PSF:
         # open and parse PSF file
         parser = ParsePSF()
         try:
-            content = psf_filepath.read_text(encoding='utf-8', errors='replace')
+            content = psf_filepath.read_text()
             sections = parser.parse(filename, content)
         except ParseError as e:
             raise Error(str(e))
         except OSError as e:
             raise Error(os_error(e))
+        except UnicodeError as e:
+            raise Error(
+                e,
+                culprit = psf_filepath,
+                codicil = join(
+                    'This might be a binary PSF file,',
+                    'psf_utils only supports ASCII PSF files.',
+                )
+            )
         meta, types, sweeps, traces, value = sections
         self.meta = meta
         self.types = types
