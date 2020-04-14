@@ -318,7 +318,6 @@ def p_end(p):
 def p_error(p):
     if p:
         loc = TokenLocation(p)
-        print('HEYNOW', p, loc)
         raise ParseError("syntax error at '%s'." % (p.value), loc)
     else:
         raise ParseError("premature end of content.")
