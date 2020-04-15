@@ -6,7 +6,7 @@ with open('README.rst', encoding='utf-8') as f:
 
 setup(
     name = 'psf_utils',
-    version = '0.5.2',
+    version = '0.5.3',
     description = 'Cadence PSF file utilities',
     long_description = readme,
     author = "Ken Kundert",
