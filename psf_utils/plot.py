@@ -14,7 +14,21 @@ Options:
     -s <file>, --svg <file>       produce plot as SVG file rather than display it
     -t <title>, --title <title>   title
 
-The PSF file need only be given if it differs from the one use previously.
+The PSF file need only be given if it differs from the one used previously.
+
+Reading large ASCII data files is slow, so plot-psf reads the PSF file once,
+then pickles the data and writes it to disk. On subsequent runs the pickled data
+is used if the pickle file is newer that the corresponding PSF file.
+
+A signal may contain glob characters. For examples, R1:* plots all signals that
+start with R1:.
+
+If a signal as specified on the command line contains a dash, it is split into
+two pieces, each of which are considered signals that are components of a
+differential signal. The two are accessed individually and the difference is
+plotted. So for example, out_p-out_n results in V(out_p, ount_n) being plotted.
+There may only be one dash in a signal, and signals with dashes must not contain
+glob characters.
 """
 
 

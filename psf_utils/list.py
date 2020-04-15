@@ -12,6 +12,10 @@ Options:
     -l, --long                    include signal meta data
 
 The PSF file need only be given if it differs from the one use previously.
+
+Reading large ASCII data files is slow, so list-psf reads the PSF file once,
+then pickles the data and writes it to disk. On subsequent runs the pickled data
+is used if the pickle file is newer that the corresponding PSF file.
 """
 
 # Imports {{{1
