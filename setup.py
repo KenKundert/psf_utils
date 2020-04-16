@@ -9,6 +9,7 @@ setup(
     version = '0.5.3',
     description = 'Cadence PSF file utilities',
     long_description = readme,
+    long_description_content_type = 'text/x-rst',
     author = "Ken Kundert",
     author_email = 'psf_utils@nurdletech.com',
     url = 'https://psf_utils.readthedocs.io',
