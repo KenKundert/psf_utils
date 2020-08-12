@@ -1,0 +1,101 @@
+HEADER
+"PSFversion" "1.00"
+"Log Generator" "drlLog rev. 1.0"
+"Log Time Stamp" "Sat Sep 14 09:11:11 2019"
+"simulator" "spectre"
+"version" "15.1.0.284.isr1"
+"date" "9:11:11 AM, Sat Sep 14, 2019"
+"design" ""
+"signalNameType" "spectre"
+"simMode" "Spectre"
+"measdgt" 0
+"ingold" 2
+"sst2usecolon" 0
+TYPE
+"analysisInst" STRUCT(
+"analysisType" STRING *
+"dataFile" STRING *
+"format" STRING *
+"parent" STRING *
+"sweepVariable" ARRAY ( * ) STRING *
+"description" STRING *
+)
+VALUE
+"noiva-noise" "analysisInst" (
+"noise"
+"noiva.noise"
+"PSF"
+""
+("freq")
+"Noise Analysis `noiva': freq = (4 Hz -> 4.19 MHz)"
+) PROP(
+"data_type" "swept_struct"
+)
+
+"noiref-noise" "analysisInst" (
+"noise"
+"noiref.noise"
+"PSF"
+""
+("freq")
+"Noise Analysis `noiref': freq = (4 Hz -> 4.19 MHz)"
+) PROP(
+"data_type" "swept_struct"
+)
+
+"pss-td.pss" "analysisInst" (
+"td.pss"
+"pss.td.pss"
+"PSF"
+""
+("time")
+"Periodic Steady-State Analysis `pss': time = (0 s -> 7.63359 us)"
+) PROP(
+"data_type" "swept_scalar"
+)
+
+"pnoiva-pnoise" "analysisInst" (
+"pnoise"
+"pnoiva.pnoise"
+"PSF"
+""
+("freq")
+"Periodic Noise Analysis `pnoiva': freq = (4 Hz -> 4.19 MHz)"
+) PROP(
+"data_type" "swept_struct"
+)
+
+"pnoiref-pnoise" "analysisInst" (
+"pnoise"
+"pnoiref.pnoise"
+"PSF"
+""
+("freq")
+"Periodic Noise Analysis `pnoiref': freq = (4 Hz -> 4.19 MHz)"
+) PROP(
+"data_type" "swept_struct"
+)
+
+"aclin-ac" "analysisInst" (
+"ac"
+"aclin.ac"
+"PSF"
+""
+("freq")
+"AC Analysis `aclin': freq = (0 Hz -> 1 MHz)"
+) PROP(
+"data_type" "swept_scalar"
+)
+
+"aclog-ac" "analysisInst" (
+"ac"
+"aclog.ac"
+"PSF"
+""
+("freq")
+"AC Analysis `aclog': freq = (1 Hz -> 1 MHz)"
+) PROP(
+"data_type" "swept_scalar"
+)
+
+END

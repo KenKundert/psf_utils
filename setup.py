@@ -15,7 +15,6 @@ setup(
     url = 'https://psf_utils.readthedocs.io',
     download_url = 'https://github.com/kenkundert/psf_utils/tarball/master',
     license = 'GPLv3+',
-    zip_safe = False,
     packages = 'psf_utils'.split(),
     entry_points = {'console_scripts': [
         'list-psf = psf_utils.list:list_signals',

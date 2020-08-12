@@ -22,7 +22,7 @@ is used if the pickle file is newer that the corresponding PSF file.
 from .plot import expand_args, get_psf_filename
 from .psf import PSF
 from docopt import docopt
-from inform import Error, columns, display, plural
+from inform import Error, columns, display, plural, warn
 import warnings
 
 # Globals {{{1
@@ -32,6 +32,7 @@ kinds = {
     'float double': 'real',
     'float complex': 'complex',
 }
+
 
 # list_signals() {{{1
 def list_signals():

@@ -37,30 +37,29 @@ from .psf import PSF
 from docopt import docopt
 import fnmatch
 from inform import (
-    Error, Info, conjoin, display, done, fatal, os_error, plural, render, warn
+    Error, display, done, fatal, os_error, plural, warn
 )
 import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter, EngFormatter
+from matplotlib.ticker import FuncFormatter
 import numpy as np
 from quantiphy import Quantity
-Quantity.set_prefs(
-    map_sf = Quantity.map_sf_to_sci_notation,
-    minus = Quantity.minus_sign,
-    output_sf = 'TGMkmunpfazy',
-        # include small scale factors for noise power results
-    prec = 2,
-)
-from shlib import Run, set_prefs
-set_prefs(use_inform=True)
 import warnings
 import sys
 
 # Globals {{{1
+Quantity.set_prefs(
+    map_sf = Quantity.map_sf_to_sci_notation,
+    minus = Quantity.minus_sign,
+    # include small scale factors for noise power results
+    output_sf = 'TGMkmunpfazy',
+    prec = 2,
+)
 warnings.filterwarnings('ignore', category=FutureWarning)
 saved_psf_file_filename = '.psf_file'
 saved_arguments_filename = '.psf_plot_args'
 operators = '+ - * /'.split()
+
 
 # plot_signals() {{{1
 def plot_signals():
@@ -79,7 +78,7 @@ def plot_signals():
         # Open PSF file {{{2
         psf = PSF(psf_file, sep=':', use_cache=use_cache)
         sweep = psf.get_sweep()
-        x_name = sweep.name
+        # x_name = sweep.name
         x_units = sweep.units
         x_data = sweep.abscissa
 
@@ -125,7 +124,7 @@ def plot_signals():
             raise Error(f'{plural(args):no match/es}.', culprit=args)
 
         y_formatters = {
-            u:FuncFormatter(
+            u: FuncFormatter(
                 lambda v, p, u=u: str(Quantity(v, psf.units_to_unicode(u)))
             )
             for u in y_units
@@ -138,15 +137,15 @@ def plot_signals():
         for i, units in enumerate(y_units):
             for sig_name, y_data, sig_units in waves:
                 if sig_units == units:
-                    axes[i,0].plot(
+                    axes[i, 0].plot(
                         x_data, y_data,
                         linewidth=2, label=sig_name
                     )
-            axes[i,0].legend(frameon=False, loc='best')
-            axes[i,0].set_xscale('log' if psf.log_x(sweep) else 'linear')
-            axes[i,0].set_yscale('log' if psf.log_y(sweep) and not dB else 'linear')
-            axes[i,0].xaxis.set_major_formatter(x_formatter)
-            axes[i,0].yaxis.set_major_formatter(y_formatters[units])
+            axes[i, 0].legend(frameon=False, loc='best')
+            axes[i, 0].set_xscale('log' if psf.log_x(sweep) else 'linear')
+            axes[i, 0].set_yscale('log' if psf.log_y(sweep) and not dB else 'linear')
+            axes[i, 0].xaxis.set_major_formatter(x_formatter)
+            axes[i, 0].yaxis.set_major_formatter(y_formatters[units])
         if title:
             plt.suptitle(title)
         if svg_file:
@@ -155,8 +154,9 @@ def plot_signals():
             plt.show()
     except Error as e:
         e.terminate()
-    except KeyboardInterrupt as e:
+    except KeyboardInterrupt:
         done()
+
 
 # get_argv() {{{1
 def get_argv():
@@ -174,10 +174,11 @@ def get_argv():
         try:
             with open(saved_arguments_filename) as f:
                 argv = f.read().split('\n')
-            display(f'Using command:', ' '.join(argv))
+            display('Using command:', ' '.join(argv))
         except OSError:
             done()
     return argv
+
 
 # get_psf_filename() {{{1
 def get_psf_filename(psf_file):
@@ -194,6 +195,7 @@ def get_psf_filename(psf_file):
     except OSError as e:
         warn(os_error(e))
     return psf_file
+
 
 # in_args() {{{1
 def expand_args(signals, args):

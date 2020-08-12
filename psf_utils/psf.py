@@ -4,9 +4,8 @@ Read PSF File
 
 # Imports {{{1
 from .parse import ParsePSF, ParseError
-from inform import Error, Info, cull, log, join, os_error
-from shlib import Run, set_prefs,to_path
-set_prefs(use_inform=True)
+from inform import Error, Info, log, join, os_error
+from shlib import to_path
 import numpy as np
 try:
     import cPickle as pickle
@@ -19,6 +18,7 @@ import re
 class Signal(Info):
     pass
 
+
 class UnknownSignal(Error):
     template = 'unknown signal: {}.'
 
@@ -27,6 +27,8 @@ unicode_unit_maps = [
     (r'sqrt\(([^)]+)\)', r'√\1'),
     (r'\^2', r'²'),
 ]
+
+
 def unicode_units(u):
     for s, r in unicode_unit_maps:
         u = re.sub(s, r, u)

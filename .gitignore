@@ -1,3 +1,7 @@
+psf_utils/parser.out
+psf_utils/parsetab.py
+psf_utils/lextab.py
+
 # version info
 .bump.cfg
 
