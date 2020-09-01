@@ -61,6 +61,56 @@ saved_arguments_filename = '.psf_plot_args'
 operators = '+ - * /'.split()
 
 
+# Utilities {{{1
+# get_argv() {{{3
+def get_argv():
+    argv = sys.argv[1:]
+    if argv:
+        # save the command line arguments for next time
+        try:
+            with open(saved_arguments_filename, 'w') as f:
+                args = [a for a in argv if a not in ['-c', '--no-cache']]
+                f.write('\n'.join(args))
+        except OSError as e:
+            warn(os_error(e))
+    else:
+        # command line arguments not give, reuse previous ones
+        try:
+            with open(saved_arguments_filename) as f:
+                argv = f.read().split('\n')
+            display('Using command:', ' '.join(argv))
+        except OSError:
+            done()
+    return argv
+
+
+# get_psf_filename() {{{2
+def get_psf_filename(psf_file):
+    if not psf_file:
+        try:
+            with open(saved_psf_file_filename) as f:
+                psf_file = f.read().strip()
+            display(f'Using {psf_file}.')
+        except OSError:
+            fatal('missing psf file name.')
+    try:
+        with open(saved_psf_file_filename, 'w') as f:
+            f.write(psf_file)
+    except OSError as e:
+        warn(os_error(e))
+    return psf_file
+
+
+# in_args() {{{2
+def expand_args(signals, args):
+    # special case args that contain -, they are considered differential signals
+    # they should not include glob chars (*, ?)
+    selected = set(a for a in args if '-' in a)
+    for arg in args:
+        selected.update(fnmatch.filter(signals, arg))
+    return sorted(selected)
+
+
 # plot_signals() {{{1
 def plot_signals():
     try:
@@ -156,52 +206,3 @@ def plot_signals():
         e.terminate()
     except KeyboardInterrupt:
         done()
-
-
-# get_argv() {{{1
-def get_argv():
-    argv = sys.argv[1:]
-    if argv:
-        # save the command line arguments for next time
-        try:
-            with open(saved_arguments_filename, 'w') as f:
-                args = [a for a in argv if a not in ['-c', '--no-cache']]
-                f.write('\n'.join(args))
-        except OSError as e:
-            warn(os_error(e))
-    else:
-        # command line arguments not give, reuse previous ones
-        try:
-            with open(saved_arguments_filename) as f:
-                argv = f.read().split('\n')
-            display('Using command:', ' '.join(argv))
-        except OSError:
-            done()
-    return argv
-
-
-# get_psf_filename() {{{1
-def get_psf_filename(psf_file):
-    if not psf_file:
-        try:
-            with open(saved_psf_file_filename) as f:
-                psf_file = f.read().strip()
-            display(f'Using {psf_file}.')
-        except OSError:
-            fatal('missing psf file name.')
-    try:
-        with open(saved_psf_file_filename, 'w') as f:
-            f.write(psf_file)
-    except OSError as e:
-        warn(os_error(e))
-    return psf_file
-
-
-# in_args() {{{1
-def expand_args(signals, args):
-    # special case args that contain -, they are considered differential signals
-    # they should not include glob chars (*, ?)
-    selected = set(a for a in args if '-' in a)
-    for arg in args:
-        selected.update(fnmatch.filter(signals, arg))
-    return sorted(selected)
