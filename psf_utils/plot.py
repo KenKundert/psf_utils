@@ -13,6 +13,8 @@ Options:
     -p, --ph                      plot the phase of the signals
     -s <file>, --svg <file>       produce plot as SVG file rather than display it
     -t <title>, --title <title>   title
+    -M, --mark-points             place marker on each point
+    -P, --just-points             do not connect points with lines (implies -M)
 
 The PSF file need only be given if it differs from the one used previously.
 
@@ -48,17 +50,20 @@ import warnings
 import sys
 
 # Globals {{{1
+axis_prec = 9  # can request many digits as unneeded digits are not shown
+cursor_prec = 9
 Quantity.set_prefs(
     map_sf = Quantity.map_sf_to_sci_notation,
     minus = Quantity.minus_sign,
     # include small scale factors for noise power results
     output_sf = 'TGMkmunpfazy',
-    prec = 2,
+    prec = axis_prec,
 )
 warnings.filterwarnings('ignore', category=FutureWarning)
 saved_psf_file_filename = '.psf_file'
 saved_arguments_filename = '.psf_plot_args'
 operators = '+ - * /'.split()
+signal_kinds = dict(V='V', A='I', s='t', Hz='f')
 
 
 # Utilities {{{1
@@ -124,6 +129,9 @@ def plot_signals():
         mag = cmdline['--mag']
         phase = cmdline['--ph']
         use_cache = not cmdline['--no-cache']
+        linestyle = '' if cmdline['--just-points'] else '-'
+        marker = '.' if cmdline['--mark-points'] or cmdline['--just-points'] else ''
+
 
         # Open PSF file {{{2
         psf = PSF(psf_file, sep=':', use_cache=use_cache)
@@ -180,6 +188,17 @@ def plot_signals():
             for u in y_units
         }
 
+        xy_formatters = {}
+        x_kind = signal_kinds.get(x_units, x_units)
+        for u in y_units:
+            y_kind = signal_kinds.get(x_units, u)
+            xy_label = f"{x_kind} = {{x}},  {y_kind} = {{y}}"
+            units = psf.units_to_unicode(u)
+            xy_formatters[u] = lambda x, y: xy_label.format(
+                x = Quantity(x, x_units).render(prec=cursor_prec),
+                y = Quantity(y, units).render(prec=cursor_prec)
+            )
+
         # Generate the plot {{{2
         if svg_file:
             matplotlib.use('SVG')
@@ -189,13 +208,17 @@ def plot_signals():
                 if sig_units == units:
                     axes[i, 0].plot(
                         x_data, y_data,
-                        linewidth=2, label=sig_name
+                        label = sig_name,
+                        marker = marker,
+                        linestyle = linestyle,
+                        linewidth = 2,
                     )
             axes[i, 0].legend(frameon=False, loc='best')
             axes[i, 0].set_xscale('log' if psf.log_x(sweep) else 'linear')
             axes[i, 0].set_yscale('log' if psf.log_y(sweep) and not dB else 'linear')
             axes[i, 0].xaxis.set_major_formatter(x_formatter)
             axes[i, 0].yaxis.set_major_formatter(y_formatters[units])
+            axes[i, 0].format_coord = xy_formatters[units]
         if title:
             plt.suptitle(title)
         if svg_file:
