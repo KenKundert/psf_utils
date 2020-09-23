@@ -3,6 +3,7 @@
 set nonomatch
 rm -rf generated_settings
 rm -rf .cache
+rm -f psf_utils/parser.out psf_utils/parsetab.py psf_utils/lextab.py
 
 # the rest is common to all python directories
 rm -f *.pyc *.pyo
