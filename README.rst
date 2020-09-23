@@ -127,9 +127,13 @@ is a typical session::
     # display a graph containing only out
     > plot-psf out
 
-    > plot-psf -M       # display out again, this time include point markers
+    > plot-psf            # display out again, exactly as in previous run
 
-    > plot-psf -P       # display out again, this time only show point markers
+    > plot-psf -M out     # display out again, this time include point markers
+
+    > plot-psf -P out     # display out again, this time only show point markers
+
+    > plot-psf -s out.svg out     # send graph of out to svg file
 
     # display signals in transient PSF file
     > list-psf -f diffamp.raw/tran.tran
