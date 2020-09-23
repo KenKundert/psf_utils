@@ -182,6 +182,10 @@ Releases
     | Version: 0.6.1
     | Released: 2020-08-11
 
+    - Add ability to show individual points
+    - Improve the cursor values display
+    - Increase precision of both cursor values and axis labels
+
 **0.6 (2020-04-16)**:
     - modest refinements
 

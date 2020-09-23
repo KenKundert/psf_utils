@@ -132,7 +132,6 @@ def plot_signals():
         linestyle = '' if cmdline['--just-points'] else '-'
         marker = '.' if cmdline['--mark-points'] or cmdline['--just-points'] else ''
 
-
         # Open PSF file {{{2
         psf = PSF(psf_file, sep=':', use_cache=use_cache)
         sweep = psf.get_sweep()
