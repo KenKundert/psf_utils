@@ -50,7 +50,7 @@ def list_signals():
         psf = PSF(psf_file, sep=':', use_cache=use_cache)
 
         if show_meta:
-            nw = uw = kw = 0
+            nw = uw = kw = 0  # name width, units width, kind width
             data = []
             for name in expand_args(psf.signals.keys(), args):
                 if name not in psf.signals:

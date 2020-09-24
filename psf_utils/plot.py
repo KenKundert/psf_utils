@@ -95,9 +95,9 @@ def get_psf_filename(psf_file):
         try:
             with open(saved_psf_file_filename) as f:
                 psf_file = f.read().strip()
-            display(f'Using {psf_file}.')
+            display('Using PSF file:', psf_file)
         except OSError:
-            fatal('missing psf file name.')
+            fatal('missing PSF file name.')
     try:
         with open(saved_psf_file_filename, 'w') as f:
             f.write(psf_file)
@@ -165,6 +165,8 @@ def plot_signals():
                 name = arg
                 units = sig.units
                 y_data = sig.ordinate
+            if units == 'Unitless':
+                units = ''
             if dB:
                 y_data = 20*np.log10(np.absolute(y_data))
                 units = 'dB' + units
