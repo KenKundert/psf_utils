@@ -186,6 +186,9 @@ Releases
     | Version: 0.7.1
     | Released: 2020-09-23
 
+**1.0 (2020-11-03)**:
+    - Production release
+
 **0.7 (2020-09-23)**:
     - Add ability to show individual points
     - Improve the cursor values display
