@@ -126,7 +126,7 @@ literals = r'()'
 # Regular expression tokens
 # Regular expressions that define numbers
 t_INTEGER = r"-?[0-9]+"
-t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][[0-9]+)?"
+t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
 
 # Regular expression for a string
 t_STRING = r'"[^\\\n"]*"'
