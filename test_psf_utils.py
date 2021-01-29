@@ -178,6 +178,45 @@ def test_pss_td():
     assert not signals
 
 
+def test_tran_tran_tran():
+    # a variant of the psf file format adds a unit property to the trace
+    # definitions, this test assures that works.
+    psf = PSF('samples/tran.tran.tran')
+    sweep = psf.get_sweep()
+    assert sweep.name == 'time', 'sweep'
+    assert sweep.units == 's', 'sweep'
+    assert len(sweep.abscissa) == 55, 'sweep'
+    assert isinstance(sweep.abscissa[0], float), 'sweep'
+
+    signals = {
+        'I2.comp_out_pre':    ('V', 'float double'),
+        'I2.diff_cm':         ('V', 'float double'),
+        'I2.diff_out_left':   ('V', 'float double'),
+        'I2.diff_out_right':  ('V', 'float double'),
+        'I2.pup2':            ('V', 'float double'),
+        'I2.pup_b':           ('V', 'float double'),
+        'V1:p':               ('A', 'float double'),
+        'ibias':              ('V', 'float double'),
+        'out':                ('V', 'float double'),
+        'pup':                ('V', 'float double'),
+        'vinp':               ('V', 'float double'),
+        'vref_o':             ('V', 'float double'),
+    }
+
+    for signal in psf.all_signals():
+        name = signal.name
+        assert name in signals, signal.name
+        units, kind = signals.pop(name)
+        assert units == signal.units, signal.name
+        assert kind == signal.type.kind, signal.name
+        if name == 'top':
+            assert isinstance(signal.ordinate[0], float), signal.name
+            assert len(signal.ordinate) == 1601
+            assert max(signal.ordinate) <= 0.1
+            assert min(signal.ordinate) >= -0.1
+    assert not signals
+
+
 if __name__ == '__main__':
     # As a debugging aid allow the tests to be run on their own, outside pytest.
     # This makes it easier to see and interpret and textual output.
