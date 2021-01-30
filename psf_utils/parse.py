@@ -302,12 +302,14 @@ def p_trace(p):
     name, type = p[1]
     p[0] = Trace(name=name, type=type)
 
+
 def p_trace_with_props(p):
     "trace : named_value prop"
     # some psf files place a units property on terminal current traces,
     # but the information seems redundant and can be ignored.
     name, type = p[1]
     p[0] = Trace(name=name, type=type)
+
 
 def p_value_section(p):
     "value_section : VALUE values"

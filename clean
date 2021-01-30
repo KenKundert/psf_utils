@@ -13,4 +13,4 @@ rm -rf .coverage .coverage-html htmlcov .tox
 rm -rf .pytest_cache .cache dist .build *.egg.info
 rm -rf tests/{htmlcov,.cache,.coverage,.pytest_cache}
 rm -rf doc/.build
-rm -f  samples/pnoise.raw/*.cache
+rm -f  samples/*.cache samples/*/*.cache
