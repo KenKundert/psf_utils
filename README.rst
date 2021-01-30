@@ -186,6 +186,9 @@ Releases
     | Version: 1.0.1
     | Released: 2021-01-29
 
+**1.1 (2021-01-30)**:
+    - Allow, but ignore, properties on traces.
+
 **1.0 (2020-11-03)**:
     - Production release
 
