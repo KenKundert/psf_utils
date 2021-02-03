@@ -178,10 +178,10 @@ def test_pss_td():
     assert not signals
 
 
-def test_tran_tran_tran():
+def test_joop_banaan_tran():
     # a variant of the psf file format adds a unit property to the trace
     # definitions, this test assures that works.
-    psf = PSF('samples/tran.tran.tran')
+    psf = PSF('samples/joop-banaan.tran')
     sweep = psf.get_sweep()
     assert sweep.name == 'time', 'sweep'
     assert sweep.units == 's', 'sweep'
@@ -214,6 +214,38 @@ def test_tran_tran_tran():
             assert len(signal.ordinate) == 1601
             assert max(signal.ordinate) <= 0.1
             assert min(signal.ordinate) >= -0.1
+    assert not signals
+
+def test_joop_banaan_dc():
+    psf = PSF('samples/joop-banaan.dc')
+    sweep = psf.get_sweep()
+    assert sweep == None, 'sweep'
+
+    signals = {
+        'I2.Idiffpair:in':    ('A', 'float double', 4.767791259200037e-08),
+        'I2.comp_out_pre':    ('V', 'float double', 1.106383385957654e-06),
+        'I2.diff_cm':         ('V', 'float double', 8.761644386176266e-04),
+        'I2.diff_out_left':   ('V', 'float double', 7.998743518479743e-01),
+        'I2.diff_out_right':  ('V', 'float double', 7.998743518480765e-01),
+        'I2.pup2':            ('V', 'float double', 2.795768876173348e-07),
+        'I2.pup_b':           ('V', 'float double', 7.999982644672001e-01),
+        'Vsupply800m:p':      ('A', 'float double', -1.050027794352513e-06),
+        'ibias':              ('V', 'float double', 3.588155366237979e-01),
+        'out':                ('V', 'float double', 1.737370212928399e-07),
+        'pup':                ('V', 'float double', 0.000000000000000e+00),
+        'vinp':               ('V', 'float double', 2.000000000000000e-01),
+        'vref_o':             ('V', 'float double', 2.000000000000000e-01),
+    }
+
+    for signal in psf.all_signals():
+        name = signal.name
+        assert name in signals, signal.name
+        units, kind, expected = signals.pop(name)
+        assert units == signal.units, signal.name
+        assert kind == signal.type.kind, signal.name
+        assert isinstance(signal.ordinate, float), signal.name
+        assert signal.ordinate <= expected + 1e12
+        assert signal.ordinate >= expected - 1e12
     assert not signals
 
 

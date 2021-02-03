@@ -35,7 +35,7 @@ glob characters.
 
 
 # Imports {{{1
-from .psf import PSF
+from .psf import PSF, Quantity
 from docopt import docopt
 import fnmatch
 from inform import (
@@ -45,13 +45,13 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import numpy as np
-from quantiphy import Quantity
 import warnings
 import sys
 
 # Globals {{{1
 axis_prec = 9  # can request many digits as unneeded digits are not shown
 cursor_prec = 9
+print_prec = 4
 Quantity.set_prefs(
     map_sf = Quantity.map_sf_to_sci_notation,
     minus = Quantity.minus_sign,
@@ -135,16 +135,45 @@ def plot_signals():
         # Open PSF file {{{2
         psf = PSF(psf_file, sep=':', use_cache=use_cache)
         sweep = psf.get_sweep()
+        to_plot = expand_args(psf.signals.keys(), args)
+
         # x_name = sweep.name
+        if not sweep:
+            with Quantity.prefs(map_sf = Quantity.map_sf_to_greek, prec = print_prec):
+                to_print = []
+                width = 0
+                for arg in to_plot:
+                    pair = arg.split('-')
+                    if len(pair) == 2:
+                        psig = psf.get_signal(pair[0])
+                        nsig = psf.get_signal(pair[1])
+                        if psig.units != nsig.units:
+                            warn(
+                                f'incompatible units ({psig.units} != {nsig.units}',
+                                culprit=arg
+                            )
+                        units = psig.units
+                        access = psig.access
+                        y_data = Quantity(psig.ordinate - nsig.ordinate, units)
+                        name = f'{access}({psig.name},{nsig.name})'
+                    else:
+                        sig = psf.get_signal(arg)
+                        access = sig.access
+                        name = f'{access}({sig.name})'
+                        y_data = sig.ordinate
+                    to_print.append((name, y_data))
+                    width = max(width, len(name))
+                for name, y_data in to_print:
+                    display(f'{name:>{width+4}} = {y_data}')
+                return
+
         x_units = sweep.units
         x_data = sweep.abscissa
-
         x_formatter = FuncFormatter(
             lambda v, p: Quantity(v, x_units).render()
         )
 
         # Process arguments {{{2
-        to_plot = expand_args(psf.signals.keys(), args)
         waves = []
         y_units = set()
         for arg in to_plot:

@@ -29,7 +29,7 @@ Accessing the Results
 You can use the PSF class to read ASCII Parameter Storage Format files. When
 instantiating the class you pass in the path to the file and then the resulting
 PSF object contains a dictionary that containing the signals. For example, the
-following lists is a::
+following lists the signals present in a ASCII PSF file::
 
     from psf_utils import PSF
     from inform import Error, display
@@ -81,6 +81,18 @@ computation with them::
 Reading large ASCII data files is slow, so *PSF* reads the PSF file once,
 then pickles the data and writes it to disk. On subsequent runs the pickled data
 is used if the pickle file is newer that the corresponding PSF file.
+
+Things are a bit different for DC operating point results. In this case, *sweep* 
+is None and the results are scalar `quantities 
+<https://quantiphy.readthedocs.io>`_::
+
+    from psf_utils import PSF, Quantity
+
+    psf = PSF('opamp.raw/op.dc')
+    with Quantity.prefs(map_sf=Quantity.map_sf_to_greek):
+        for signal in sorted(psf.all_signals(), key=lambda s: s.name):
+            name = f'{signal.access}({signal.name})'
+            print(f'{name:>20} = {signal.ordinate}')
 
 
 Utility Programs

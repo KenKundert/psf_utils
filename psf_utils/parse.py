@@ -29,6 +29,10 @@ class Trace(Info):
     pass
 
 
+class Value(Info):
+    pass
+
+
 # Exceptions {{{1
 # ParseError {{{2
 class ParseError(Exception):
@@ -101,19 +105,19 @@ class TokenLocation(object):
 
 # Lexer {{{1
 # List of the token names
-reserved = {
-    'HEADER'  : 'HEADER',
-    'TYPE'    : 'TYPE',
-    'SWEEP'   : 'SWEEP',
-    'TRACE'   : 'TRACE',
-    'VALUE'   : 'VALUE',
-    'FLOAT'   : 'FLOAT',
-    'COMPLEX' : 'COMPLEX',
-    'DOUBLE'  : 'DOUBLE',
-    'STRUCT'  : 'STRUCT',
-    'PROP'    : 'PROP',
-    'END'     : 'END',
-}
+reserved = {rw: rw for rw in [
+    'HEADER',
+    'TYPE',
+    'SWEEP',
+    'TRACE',
+    'VALUE',
+    'FLOAT',
+    'COMPLEX',
+    'DOUBLE',
+    'STRUCT',
+    'PROP',
+    'END',
+]}
 tokens = [
     'INTEGER',
     'REAL',
@@ -135,7 +139,11 @@ t_STRING = r'"[^\\\n"]*"'
 # Identifiers
 def t_ID(t):
     r'[A-Z]+'
-    t.type = reserved.get(t.value, 'ID')    # check for reserved words
+    t.type = reserved.get(t.value)
+    if t.type is None:
+        loc = TokenLocation(t)
+        t.lexer.skip(1)
+        raise ParseError(f"unknown keyword '{t.value}'.", loc)
     return t
 
 
@@ -154,6 +162,11 @@ def t_error(t):
 def p_contents(p):
     "contents : header_section type_section sweep_section trace_section value_section end"
     p[0] = (p[1], p[2], p[3], p[4], p[5])
+
+
+def p_contents_without_sweep(p):
+    "contents : header_section type_section value_section end"
+    p[0] = (p[1], p[2], None, None, p[3])
 
 
 def p_header_section(p):
@@ -314,10 +327,10 @@ def p_trace_with_props(p):
 def p_value_section(p):
     "value_section : VALUE values"
     values = {}
-    for n, v in p[2]:
+    for n, t, v in p[2]:
         if n not in values:
-            values[n] = []
-        values[n].append(v)
+            values[n] = Value(type=t, values=[])
+        values[n].values.append(v)
     p[0] = values
 
 
@@ -334,12 +347,17 @@ def p_values_last(p):
 
 def p_named_signal_scalar(p):
     "named_signal_value : string number"
-    p[0] = (p[1], p[2])
+    p[0] = (p[1], None, p[2])
+
+
+def p_named_signal_scalar_with_type(p):
+    "named_signal_value : string string number"
+    p[0] = (p[1], p[2], p[3])
 
 
 def p_named_signal_group(p):
     "named_signal_value : string '(' numbers ')'"
-    p[0] = (p[1], tuple(p[3]))
+    p[0] = (p[1], None, tuple(p[3]))
 
 
 def p_integer_number(p):
@@ -347,8 +365,14 @@ def p_integer_number(p):
     p[0] = int(p[1])
 
 
-def p_reals_number(p):
+def p_real_number(p):
     "number : REAL"
+    p[0] = float(p[1])
+
+
+def p_real_number_with_props(p):
+    "number : REAL prop"
+    # props are redundant, so ignore them
     p[0] = float(p[1])
 
 

@@ -7,6 +7,7 @@ from .parse import ParsePSF, ParseError
 from inform import Error, Info, log, join, os_error
 from shlib import to_path
 import numpy as np
+from quantiphy import Quantity
 try:
     import cPickle as pickle
 except ImportError:
@@ -87,60 +88,83 @@ class PSF:
                     '\nUse `psf {0!s} {0!s}.ascii` to convert.'.format(psf_filepath),
                 )
             )
-        meta, types, sweeps, traces, value = sections
+        meta, types, sweeps, traces, values = sections
         self.meta = meta
         self.types = types
         self.sweeps = sweeps
         self.traces = traces
 
         # add values to sweeps
-        for sweep in sweeps:
-            n = sweep.name
-            v = np.array(value[n])
-            sweep.abscissa = v
+        if sweeps:
+            for sweep in sweeps:
+                n = sweep.name
+                sweep.abscissa = np.array(values[n].values)
 
         # process signals
         # 1. convert to numpy and delete the original list
         # 2. convert to Signal class
         # 3. create signals dictionary
         signals = {}
-        for i, trace in enumerate(traces):
-            name = trace.name
-            type = types[trace.type]
-            if type.struct:
-                for i, v in enumerate(type.struct.types.items()):
-                    n, t = v
-                    names = (name, n)
-                    joined_names = sep.join(names)
-                    if 'complex' in t.kind:
-                        ordinate = np.array([complex(*v[i]) for v in value[name]])
+        if traces:
+            for trace in traces:
+                name = trace.name
+                type = types[trace.type]
+                vals = values[name].values
+                if type.struct:
+                    for i, v in enumerate(type.struct.types.items()):
+                        n, t = v
+                        names = (name, n)
+                        joined_names = sep.join(names)
+                        if 'complex' in t.kind:
+                            ordinate = np.array([complex(*v[i]) for v in vals])
+                        else:
+                            ordinate = np.array(vals)
+                        signal = Signal(
+                            name = joined_names,
+                            names = names,
+                            ordinate = ordinate,
+                            type = t,
+                            access = t.name,
+                            units = t.units,
+                            meta = meta,
+                        )
+                        signals[joined_names] = signal
+                else:
+                    names = (name,)
+                    if 'complex' in type.kind:
+                        ordinate = np.array([complex(*v) for v in vals])
                     else:
-                        ordinate = np.array([v[i] for v in value[name]])
+                        ordinate = np.array(vals)
                     signal = Signal(
-                        name = joined_names,
+                        name = name,
                         names = names,
                         ordinate = ordinate,
-                        type = t,
-                        units = t.units,
+                        type = type,
+                        access = type.name,
+                        units = type.units,
                         meta = meta,
                     )
-                    signals[joined_names] = signal
-            else:
+                    signals[name] = signal
+                del values[name]
+        else:
+            # no traces, this should be a DC op-point analysis dataset
+            for name, value in values.items():
                 names = (name,)
+                type = types[value.type]
                 if 'complex' in type.kind:
-                    ordinate = np.array([complex(*v) for v in value[name]])
-                else:
-                    ordinate = np.array(value[name])
+                    # these should be DC values, so complex is not needed
+                    raise NotImplementedError
+                assert len(value.values) == 1
                 signal = Signal(
                     name = name,
                     names = names,
-                    ordinate = ordinate,
+                    ordinate = Quantity(value.values[0], type.units),
                     type = type,
+                    access = type.name,
                     units = type.units,
                     meta = meta,
                 )
                 signals[name] = signal
-            del value[name]
         self.signals = signals
 
         if update_cache:
@@ -154,7 +178,8 @@ class PSF:
             PSF allows multiple sweeps (abscissas). You can use this argument to
             select the one you want. The default is 0.
         """
-        return self.sweeps[index]
+        if self.sweeps:
+            return self.sweeps[index]
 
     def get_signal(self, name):
         """
