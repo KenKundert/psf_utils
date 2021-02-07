@@ -8,8 +8,8 @@ PSF Utilities - Read Spectre Data Files
     :target: https://pypi.python.org/pypi/psf_utils/
 
 :Author: Ken Kundert
-:Version: 1.1.1
-:Released: 2021-02-03
+:Version: 1.1.2
+:Released: 2021-02-06
 
 
 What?
@@ -195,8 +195,8 @@ Releases
 --------
 
 **Latest development release**:
-    | Version: 1.1.1
-    | Released: 2021-02-03
+    | Version: 1.1.2
+    | Released: 2021-02-06
 
 **1.1 (2021-01-30)**:
     - Allow, but ignore, properties on traces.
