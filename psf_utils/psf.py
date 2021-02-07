@@ -105,7 +105,6 @@ class PSF:
         # 2. convert to Signal class
         # 3. create signals dictionary
         signals = {}
-        index = None
         if traces:
             traces, groups = traces
             for trace in traces:
@@ -128,9 +127,9 @@ class PSF:
                     n, t = v
                     joined_name = prefix + n
                     if 'complex' in t.kind:
-                        ordinate = np.array([complex(*get_value(v,i)) for v in vals])
+                        ordinate = np.array([complex(*get_value(v, i)) for v in vals])
                     else:
-                        ordinate = np.array([get_value(v,i) for v in vals])
+                        ordinate = np.array([get_value(v, i) for v in vals])
                     signal = Signal(
                         name = joined_name,
                         ordinate = ordinate,
@@ -141,8 +140,6 @@ class PSF:
                     )
                     signals[joined_name] = signal
                 del values[name]
-                if index is not None:
-                    index = None if index == Count else index - 1
         else:
             # no traces, this should be a DC op-point analysis dataset
             for name, value in values.items():
