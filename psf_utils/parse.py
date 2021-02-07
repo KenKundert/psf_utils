@@ -29,6 +29,10 @@ class Trace(Info):
     pass
 
 
+class Traces(Info):
+    pass
+
+
 class Value(Info):
     pass
 
@@ -110,6 +114,7 @@ reserved = {rw: rw for rw in [
     'TYPE',
     'SWEEP',
     'TRACE',
+    'GROUP',
     'VALUE',
     'FLOAT',
     'COMPLEX',
@@ -296,7 +301,33 @@ def p_sweep(p):
 
 def p_trace_section(p):
     "trace_section : TRACE traces"
-    p[0] = p[2]
+    # Partition out the groups from the traces.
+    # A group will have one entry in the list of traces, and it will have a
+    # corresponding entry in the groups directory.  The entry is also a
+    # dictionary that maps the member name to the member type.
+    traces = []
+    groups = {}
+    index = None
+    for trace in p[2]:
+        name = trace.name
+        try:
+            count = int(trace.type)
+            index = 0
+            group_name = name
+            groups[group_name] = {}
+            trace.type = 'GROUP'
+            traces.append(trace)
+            continue
+        except ValueError:
+            pass
+        if index is None:
+            traces.append(trace)
+        else:
+            groups[group_name][trace.name] = trace.type
+            index += 1
+            if index == count:
+                index = None
+    p[0] = (traces, groups)
 
 
 def p_traces(p):
@@ -314,6 +345,13 @@ def p_trace(p):
     "trace : named_value"
     name, type = p[1]
     p[0] = Trace(name=name, type=type)
+
+
+def p_group_trace(p):
+    "trace : string GROUP INTEGER"
+    name = p[1]
+    count = p[3]
+    p[0] = Trace(name=name, type=count)
 
 
 def p_trace_with_props(p):
@@ -335,56 +373,77 @@ def p_value_section(p):
 
 
 def p_values(p):
-    "values : values named_signal_value"
+    "values : values signal_value"
     p[1].append(p[2])
     p[0] = p[1]
 
 
 def p_values_last(p):
-    "values : named_signal_value"
+    "values : signal_value"
     p[0] = [p[1]]
 
 
 def p_named_signal_scalar(p):
-    "named_signal_value : string number"
+    """
+    signal_value : string numbers
+    """
     p[0] = (p[1], None, p[2])
 
 
-def p_named_signal_scalar_with_type(p):
-    "named_signal_value : string string number"
+def p_named_signal_with_type(p):
+    """
+    signal_value : string string numbers
+    """
     p[0] = (p[1], p[2], p[3])
 
 
-def p_named_signal_group(p):
-    "named_signal_value : string '(' numbers ')'"
-    p[0] = (p[1], None, tuple(p[3]))
-
-
 def p_integer_number(p):
-    "number : INTEGER"
+    "simple_number : INTEGER"
     p[0] = int(p[1])
 
 
 def p_real_number(p):
-    "number : REAL"
-    p[0] = float(p[1])
-
-
-def p_real_number_with_props(p):
-    "number : REAL prop"
     # props are redundant, so ignore them
+    """
+    simple_number : REAL
+                  | REAL prop
+    """
     p[0] = float(p[1])
 
 
-def p_numbers(p):
-    "numbers : numbers number"
+def p_simple_numbers(p):
+    "simple_numbers : simple_numbers simple_number"
     p[1].append(p[2])
     p[0] = p[1]
 
 
-def p_numbers_last(p):
-    "numbers : number"
+def p_simple_numbers_last(p):
+    "simple_numbers : simple_number"
     p[0] = [p[1]]
+
+
+def p_composite_number(p):
+    "composite_number : '(' simple_numbers ')'"
+    p[0] = tuple(p[2])
+
+
+def p_composite_numbers(p):
+    "composite_numbers : composite_numbers composite_number"
+    p[1].append(p[2])
+    p[0] = p[1]
+
+
+def p_composite_numbers_last(p):
+    "composite_numbers : composite_number"
+    p[0] = [p[1]]
+
+
+def p_numbers(p):
+    """
+    numbers : simple_numbers
+            | composite_numbers
+    """
+    p[0] = p[1]
 
 
 def p_end(p):

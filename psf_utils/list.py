@@ -52,7 +52,7 @@ def list_signals():
         if show_meta:
             nw = uw = kw = 0  # name width, units width, kind width
             data = []
-            for name in expand_args(psf.signals.keys(), args):
+            for name in expand_args(psf.signals.keys(), args, allow_diff=False):
                 if name not in psf.signals:
                     warn('not found.', culprit=name)
                 signal = psf.get_signal(name)
@@ -72,7 +72,7 @@ def list_signals():
             for name, units, kind, points in data:
                 display(f'    {name:<{nw}}  {units:<{uw}}  {kind:<{kw}}  ({points} points)')
         else:
-            signals = expand_args(psf.signals.keys(), args)
+            signals = expand_args(psf.signals.keys(), args, allow_diff=False)
             if not signals:
                 raise Error(f'{plural(args):no match/es}.', culprit=args)
             display(columns(signals))

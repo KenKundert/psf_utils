@@ -4,7 +4,7 @@ Read PSF File
 
 # Imports {{{1
 from .parse import ParsePSF, ParseError
-from inform import Error, Info, log, join, os_error
+from inform import Error, Info, join, log, os_error
 from shlib import to_path
 import numpy as np
 from quantiphy import Quantity
@@ -98,58 +98,54 @@ class PSF:
         if sweeps:
             for sweep in sweeps:
                 n = sweep.name
-                sweep.abscissa = np.array(values[n].values)
+                sweep.abscissa = np.array([v[0] for v in values[n].values])
 
         # process signals
         # 1. convert to numpy and delete the original list
         # 2. convert to Signal class
         # 3. create signals dictionary
         signals = {}
+        index = None
         if traces:
+            traces, groups = traces
             for trace in traces:
                 name = trace.name
-                type = types[trace.type]
+                type = types.get(trace.type, trace.type)
                 vals = values[name].values
-                if type.struct:
-                    for i, v in enumerate(type.struct.types.items()):
-                        n, t = v
-                        names = (name, n)
-                        joined_names = sep.join(names)
-                        if 'complex' in t.kind:
-                            ordinate = np.array([complex(*v[i]) for v in vals])
-                        else:
-                            ordinate = np.array(vals)
-                        signal = Signal(
-                            name = joined_names,
-                            names = names,
-                            ordinate = ordinate,
-                            type = t,
-                            access = t.name,
-                            units = t.units,
-                            meta = meta,
-                        )
-                        signals[joined_names] = signal
+                if type == 'GROUP':
+                    group = {k: types.get(v, v) for k, v in groups[name].items()}
+                    prefix = ''
+                    get_value = lambda v, i: v[i]
+                elif type.struct:
+                    group = type.struct.types
+                    prefix = name + ':'
+                    get_value = lambda v, i: v[0][i]
                 else:
-                    names = (name,)
-                    if 'complex' in type.kind:
-                        ordinate = np.array([complex(*v) for v in vals])
+                    group = {name: type}
+                    prefix = ''
+                    get_value = lambda v, i: v[i]
+                for i, v in enumerate(group.items()):
+                    n, t = v
+                    joined_name = prefix + n
+                    if 'complex' in t.kind:
+                        ordinate = np.array([complex(*get_value(v,i)) for v in vals])
                     else:
-                        ordinate = np.array(vals)
+                        ordinate = np.array([get_value(v,i) for v in vals])
                     signal = Signal(
-                        name = name,
-                        names = names,
+                        name = joined_name,
                         ordinate = ordinate,
-                        type = type,
-                        access = type.name,
-                        units = type.units,
+                        type = t,
+                        access = t.name,
+                        units = t.units,
                         meta = meta,
                     )
-                    signals[name] = signal
+                    signals[joined_name] = signal
                 del values[name]
+                if index is not None:
+                    index = None if index == Count else index - 1
         else:
             # no traces, this should be a DC op-point analysis dataset
             for name, value in values.items():
-                names = (name,)
                 type = types[value.type]
                 if 'complex' in type.kind:
                     # these should be DC values, so complex is not needed
@@ -157,8 +153,7 @@ class PSF:
                 assert len(value.values) == 1
                 signal = Signal(
                     name = name,
-                    names = names,
-                    ordinate = Quantity(value.values[0], type.units),
+                    ordinate = Quantity(value.values[0][0], type.units),
                     type = type,
                     access = type.name,
                     units = type.units,

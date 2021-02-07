@@ -31,6 +31,9 @@ differential signal. The two are accessed individually and the difference is
 plotted. So for example, out_p-out_n results in V(out_p, ount_n) being plotted.
 There may only be one dash in a signal, and signals with dashes must not contain
 glob characters.
+
+If the dataset is for a DC operating point, the values are scalars rather than
+waveforms and so are printed rather than plotted.
 """
 
 
@@ -107,10 +110,10 @@ def get_psf_filename(psf_file):
 
 
 # in_args() {{{2
-def expand_args(signals, args):
+def expand_args(signals, args, allow_diff=True):
     # special case args that contain -, they are considered differential signals
     # they should not include glob chars (*, ?)
-    selected = set(a for a in args if '-' in a)
+    selected = set(a for a in args if '-' in a) if allow_diff else set()
     for arg in args:
         selected.update(fnmatch.filter(signals, arg))
     return sorted(selected)

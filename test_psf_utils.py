@@ -7,73 +7,67 @@ from pytest import raises, approx
 
 
 def test_ac_lin():
-    try:
-        psf = PSF('samples/pnoise.raw/aclin.ac')
-        sweep = psf.get_sweep()
-        assert sweep.name == 'freq', 'sweep'
-        assert sweep.units == 'Hz', 'sweep'
-        assert len(sweep.abscissa) == 1001, 'sweep'
-        assert isinstance(sweep.abscissa[0], float), 'sweep'
+    psf = PSF('samples/pnoise.raw/aclin.ac')
+    sweep = psf.get_sweep()
+    assert sweep.name == 'freq', 'sweep'
+    assert sweep.units == 'Hz', 'sweep'
+    assert len(sweep.abscissa) == 1001, 'sweep'
+    assert isinstance(sweep.abscissa[0], float), 'sweep'
 
-        signals = {
-            'iRESref:p': ('A', 'complex double'),
-            'iRESva:p':  ('A', 'complex double'),
-            'noiref':    ('V', 'complex double'),
-            'noiva':     ('V', 'complex double'),
-            'top':       ('V', 'complex double'),
-            'topref':    ('V', 'complex double'),
-            'topva':     ('V', 'complex double'),
-            'VTOP:p':    ('A', 'complex double'),
-        }
-        for signal in psf.all_signals():
-            name = signal.name
-            assert name in signals, signal.name
-            units, kind = signals.pop(name)
-            assert units == signal.units, signal.name
-            assert kind == signal.type.kind, signal.name
-            if name == 'top':
-                assert isinstance(signal.ordinate[0], complex), signal.name
-                assert len(signal.ordinate) == 1001
-                assert max(signal.ordinate) == 1
-                assert min(signal.ordinate) == 1
-        assert not signals
-    except Error as e:
-        e.terminate()
+    signals = {
+        'iRESref:p': ('A', 'complex double'),
+        'iRESva:p':  ('A', 'complex double'),
+        'noiref':    ('V', 'complex double'),
+        'noiva':     ('V', 'complex double'),
+        'top':       ('V', 'complex double'),
+        'topref':    ('V', 'complex double'),
+        'topva':     ('V', 'complex double'),
+        'VTOP:p':    ('A', 'complex double'),
+    }
+    for signal in psf.all_signals():
+        name = signal.name
+        assert name in signals, signal.name
+        units, kind = signals.pop(name)
+        assert units == signal.units, signal.name
+        assert kind == signal.type.kind, signal.name
+        if name == 'top':
+            assert isinstance(signal.ordinate[0], complex), signal.name
+            assert len(signal.ordinate) == 1001
+            assert max(signal.ordinate) == 1
+            assert min(signal.ordinate) == 1
+    assert not signals
 
 
 def test_ac_log():
-    try:
-        psf = PSF('samples/pnoise.raw/aclog.ac')
-        sweep = psf.get_sweep()
-        assert sweep.name == 'freq', 'sweep'
-        assert sweep.units == 'Hz', 'sweep'
-        assert len(sweep.abscissa) == 61, 'sweep'
-        assert isinstance(sweep.abscissa[0], float), 'sweep'
+    psf = PSF('samples/pnoise.raw/aclog.ac')
+    sweep = psf.get_sweep()
+    assert sweep.name == 'freq', 'sweep'
+    assert sweep.units == 'Hz', 'sweep'
+    assert len(sweep.abscissa) == 61, 'sweep'
+    assert isinstance(sweep.abscissa[0], float), 'sweep'
 
-        signals = {
-            'iRESref:p': ('A', 'complex double'),
-            'iRESva:p':  ('A', 'complex double'),
-            'noiref':    ('V', 'complex double'),
-            'noiva':     ('V', 'complex double'),
-            'top':       ('V', 'complex double'),
-            'topref':    ('V', 'complex double'),
-            'topva':     ('V', 'complex double'),
-            'VTOP:p':    ('A', 'complex double'),
-        }
-        for signal in psf.all_signals():
-            name = signal.name
-            assert name in signals, signal.name
-            units, kind = signals.pop(name)
-            assert units == signal.units, signal.name
-            assert kind == signal.type.kind, signal.name
-            if name == 'top':
-                assert isinstance(signal.ordinate[0], complex), signal.name
-                assert len(signal.ordinate) == 61
-                assert max(signal.ordinate) == 1
-                assert min(signal.ordinate) == 1
-        assert not signals
-    except Error as e:
-        e.terminate()
+    signals = {
+        'iRESref:p': ('A', 'complex double'),
+        'iRESva:p':  ('A', 'complex double'),
+        'noiref':    ('V', 'complex double'),
+        'noiva':     ('V', 'complex double'),
+        'top':       ('V', 'complex double'),
+        'topref':    ('V', 'complex double'),
+        'topva':     ('V', 'complex double'),
+        'VTOP:p':    ('A', 'complex double'),
+    }
+    for signal in psf.all_signals():
+        name = signal.name
+        assert name in signals, signal.name
+        units, kind = signals.pop(name)
+        assert units == signal.units, signal.name
+        assert kind == signal.type.kind, signal.name
+        if name == 'top':
+            assert isinstance(signal.ordinate[0], complex), signal.name
+            assert len(signal.ordinate) == 61
+            assert max(signal.ordinate) == 1
+            assert min(signal.ordinate) == 1
+    assert not signals
 
 
 def test_noise():
@@ -246,6 +240,68 @@ def test_joop_banaan_dc():
         assert isinstance(signal.ordinate, float), signal.name
         assert signal.ordinate <= expected + 1e12
         assert signal.ordinate >= expected - 1e12
+    assert not signals
+
+
+def test_fracpole_dc():
+    psf = PSF('samples/fracpole.dc')
+    sweep = psf.get_sweep()
+    assert sweep == None, 'sweep'
+
+    signals = {
+        'z6':    ('V', 'float double', 0.00000),
+        'z2':    ('V', 'float double', 0.00000),
+        'FP6.1': ('V', 'float double', 0.00000),
+        'FP6.2': ('V', 'float double', 0.00000),
+        'FP6.3': ('V', 'float double', 0.00000),
+        'FP6.4': ('V', 'float double', 0.00000),
+        'FP6.5': ('V', 'float double', 0.00000),
+        'FP2.1': ('V', 'float double', 0.00000),
+        'FP2.2': ('V', 'float double', 0.00000),
+    }
+
+    for signal in psf.all_signals():
+        name = signal.name
+        assert name in signals, signal.name
+        units, kind, expected = signals.pop(name)
+        assert units == signal.units, signal.name
+        assert kind == signal.type.kind, signal.name
+        assert isinstance(signal.ordinate, float), signal.name
+        assert signal.ordinate <= expected + 1e12
+        assert signal.ordinate >= expected - 1e12
+    assert not signals
+
+
+def test_fracpole_ac():
+    psf = PSF('samples/fracpole.ac')
+    sweep = psf.get_sweep()
+    assert sweep.name == 'freq', 'sweep'
+    assert sweep.units == 'Hz', 'sweep'
+    assert len(sweep.abscissa) == 121, 'sweep'
+    assert isinstance(sweep.abscissa[0], float), 'sweep'
+
+    signals = {
+        'z6':    ('V', 'complex double'),
+        'z2':    ('V', 'complex double'),
+        'FP6.1': ('V', 'complex double'),
+        'FP6.2': ('V', 'complex double'),
+        'FP6.3': ('V', 'complex double'),
+        'FP6.4': ('V', 'complex double'),
+        'FP6.5': ('V', 'complex double'),
+        'FP2.1': ('V', 'complex double'),
+        'FP2.2': ('V', 'complex double'),
+    }
+    for signal in psf.all_signals():
+        name = signal.name
+        assert name in signals, signal.name
+        units, kind = signals.pop(name)
+        assert units == signal.units, signal.name
+        assert kind == signal.type.kind, signal.name
+        if name == 'top':
+            assert isinstance(signal.ordinate[0], complex), signal.name
+            assert len(signal.ordinate) == 1001
+            assert max(signal.ordinate) == 1
+            assert min(signal.ordinate) == 1
     assert not signals
 
 
