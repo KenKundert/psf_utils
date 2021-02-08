@@ -212,6 +212,10 @@ Releases
     | Version: 1.1.2
     | Released: 2021-02-06
 
+**1.2 (2021-01-07)**:
+    - Support PSF files that contain DC operating points.
+    - Support PSF files where values are given in a group.
+
 **1.1 (2021-01-30)**:
     - Allow, but ignore, properties on traces.
 
