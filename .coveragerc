@@ -1,0 +1,8 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    raise NotImplementedError
+
+[run]
+source = psf_utils
+omit = */.tox/* test_psf_utils.py
