@@ -1,6 +1,8 @@
 psf_utils/parser.out
 psf_utils/parsetab.py
 psf_utils/lextab.py
+samples/*.cache
+samples/*/*.cache
 
 # version info
 .bump.cfg
