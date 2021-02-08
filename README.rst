@@ -147,10 +147,24 @@ is a typical session::
 
     > plot-psf -s out.svg out     # send graph of out to svg file
 
+    # display signals in a PSF file from a DC operating point file:
+    > list-psf -f diffamp.raw/tran.dc
+    Using diffamp.raw/pnoise.pnoise.
+        in_n    in_p    out_n   out_p   Vdd     Vdd:p
+
+    # display the DC voltages
+    > plot-psf \*
+         V(in_n) = 47.678 µV
+         V(in_p) = 47.623 µV
+        V(out_n) = 876.16 µV
+        V(out_p) = 876.16 µV
+          V(Vdd) = 2.5 V
+        I(Vdd:p) = −10.05 µA
+
     # display signals in transient PSF file
     > list-psf -f diffamp.raw/tran.tran
     Using diffamp.raw/pnoise.pnoise.
-        in_n    in_p    out_n   out_p   Vdd
+        in_n    in_p    out_n   out_p   Vdd     Vdd:p
 
     # display differential output and differential input
     > plot-psf out_p-out_n in_p-in_n
