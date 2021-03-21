@@ -36,7 +36,7 @@ def unicode_units(u):
         for s, r in unicode_unit_maps:
             u = re.sub(s, r, u)
     else:
-       u = ''
+        u = ''
     return u
 
 
