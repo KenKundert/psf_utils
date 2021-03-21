@@ -212,6 +212,9 @@ Releases
     | Version: 1.2.1
     | Released: 2021-03-20
 
+**1.3 (2021-03-21)**:
+    - Improve support for DC operating points.
+
 **1.2 (2021-01-07)**:
     - Support PSF files that contain DC operating points.
     - Support PSF files where values are given in a group.
