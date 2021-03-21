@@ -27,12 +27,16 @@ class UnknownSignal(Error):
 unicode_unit_maps = [
     (r'sqrt\(([^)]+)\)', r'√\1'),
     (r'\^2', r'²'),
+    (r'Ohm', r'Ω'),
 ]
 
 
 def unicode_units(u):
-    for s, r in unicode_unit_maps:
-        u = re.sub(s, r, u)
+    if u:
+        for s, r in unicode_unit_maps:
+            u = re.sub(s, r, u)
+    else:
+       u = ''
     return u
 
 
@@ -143,20 +147,32 @@ class PSF:
         else:
             # no traces, this should be a DC op-point analysis dataset
             for name, value in values.items():
-                type = types[value.type]
-                if 'complex' in type.kind:
-                    # these should be DC values, so complex is not needed
-                    raise NotImplementedError
                 assert len(value.values) == 1
-                signal = Signal(
-                    name = name,
-                    ordinate = Quantity(value.values[0][0], type.units),
-                    type = type,
-                    access = type.name,
-                    units = type.units,
-                    meta = meta,
-                )
-                signals[name] = signal
+                type = types[value.type]
+                if type.struct:
+                    for t, v in zip(type.struct.types.values(), value.values[0][0]):
+                        n = f'{name}.{t.name}'
+                        v = Quantity(v, unicode_units(t.units))
+                        signal = Signal(
+                            name = n,
+                            ordinate = v,
+                            type = t,
+                            access = t.name,
+                            units = t.units,
+                            meta = meta,
+                        )
+                        signals[n] = signal
+                else:
+                    v = Quantity(value.values[0][0], unicode_units(type.units))
+                    signal = Signal(
+                        name = name,
+                        ordinate = v,
+                        type = type,
+                        access = type.name,
+                        units = type.units,
+                        meta = meta,
+                    )
+                    signals[name] = signal
         self.signals = signals
 
         if update_cache:

@@ -110,18 +110,21 @@ class TokenLocation(object):
 # Lexer {{{1
 # List of the token names
 reserved = {rw: rw for rw in [
-    'HEADER',
-    'TYPE',
-    'SWEEP',
-    'TRACE',
-    'GROUP',
-    'VALUE',
-    'FLOAT',
+    'BYTE',
     'COMPLEX',
     'DOUBLE',
-    'STRUCT',
-    'PROP',
     'END',
+    'FLOAT',
+    'GROUP',
+    'HEADER',
+    'INT',
+    'NAN',
+    'PROP',
+    'STRUCT',
+    'SWEEP',
+    'TRACE',
+    'TYPE',
+    'VALUE',
 ]}
 tokens = [
     'INTEGER',
@@ -136,6 +139,7 @@ literals = r'()'
 # Regular expressions that define numbers
 t_INTEGER = r"-?[0-9]+"
 t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
+t_NAN = r"nan|NaN"
 
 # Regular expression for a string
 t_STRING = r'"[^\\\n"]*"'
@@ -206,7 +210,10 @@ def p_integer_value(p):
 
 
 def p_real_value(p):
-    "value : REAL"
+    """
+    value : REAL
+          | NAN
+    """
     p[0] = float(p[1])
 
 
@@ -262,6 +269,8 @@ def p_kind(p):
         kind : FLOAT
              | DOUBLE
              | COMPLEX
+             | INT
+             | BYTE
              | struct
              | prop
     """
@@ -407,6 +416,8 @@ def p_real_number(p):
     """
     simple_number : REAL
                   | REAL prop
+                  | NAN
+                  | NAN prop
     """
     p[0] = float(p[1])
 
@@ -423,7 +434,10 @@ def p_simple_numbers_last(p):
 
 
 def p_composite_number(p):
-    "composite_number : '(' simple_numbers ')'"
+    """
+    composite_number : '(' simple_numbers ')'
+                     | '(' simple_numbers ')' prop
+    """
     p[0] = tuple(p[2])
 
 

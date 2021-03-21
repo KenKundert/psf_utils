@@ -31,6 +31,7 @@ saved_psf_file_filename = '.psf_file'
 kinds = {
     'float double': 'real',
     'float complex': 'complex',
+    'int byte': 'integer',
 }
 
 
@@ -65,12 +66,18 @@ def list_signals():
                 kind = kinds.get(kind, kind)
                 if len(kind) > kw:
                     kw = len(kind)
-                points = len(signal.ordinate)
+                try:
+                    points = len(signal.ordinate)
+                except TypeError:
+                    points = None
                 data.append((signal.name, units, kind, points))
             if not data:
                 raise Error(f'{plural(args):no match/es}.', culprit=args)
             for name, units, kind, points in data:
-                display(f'    {name:<{nw}}  {units:<{uw}}  {kind:<{kw}}  ({points} points)')
+                if points is None:
+                    display(f'    {name:<{nw}}  {units:<{uw}}  {kind}')
+                else:
+                    display(f'    {name:<{nw}}  {units:<{uw}}  {kind:<{kw}}  ({points} points)')
         else:
             signals = expand_args(psf.signals.keys(), args, allow_diff=False)
             if not signals:

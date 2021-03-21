@@ -355,6 +355,135 @@ def test_fracpole_ac_again():
             assert min(signal.ordinate) == 1
 
 
+def test_dc_oppoint():
+    psf = PSF('samples/dcOpInfo.info.psfascii')
+    signals = """
+        NM0.beff        A/V²  real
+        NM0.betaeff     A/V²  real
+        NM0.cbb         F     real
+        NM0.cbd         F     real
+        NM0.cbdbi       F     real
+        NM0.cbg         F     real
+        NM0.cbs         F     real
+        NM0.cbsbi       F     real
+        NM0.cdb         F     real
+        NM0.cdd         F     real
+        NM0.cddbi       F     real
+        NM0.cdg         F     real
+        NM0.cds         F     real
+        NM0.cgb         F     real
+        NM0.cgbovl      F     real
+        NM0.cgd         F     real
+        NM0.cgdbi       F     real
+        NM0.cgdovl      F     real
+        NM0.cgg         F     real
+        NM0.cggbi       F     real
+        NM0.cgs         F     real
+        NM0.cgsbi       F     real
+        NM0.cgsovl      F     real
+        NM0.cjd         F     real
+        NM0.cjs         F     real
+        NM0.csb         F     real
+        NM0.csd         F     real
+        NM0.csg         F     real
+        NM0.css         F     real
+        NM0.cssbi       F     real
+        NM0.ft          Hz    real
+        NM0.fug         Hz    real
+        NM0.gbd         S     real
+        NM0.gbs         S     real
+        NM0.gds         S     real
+        NM0.gm          S     real
+        NM0.gmb         S     real
+        NM0.gmbs        S     real
+        NM0.gmoverid    1/V   real
+        NM0.i1          A     real
+        NM0.i3          A     real
+        NM0.i4          A     real
+        NM0.ib          A     real
+        NM0.ibd         A     real
+        NM0.ibe         A     real
+        NM0.ibs         A     real
+        NM0.ibulk       A     real
+        NM0.id          A     real
+        NM0.idb         A     real
+        NM0.ide         A     real
+        NM0.ids         A     real
+        NM0.ig          A     real
+        NM0.igb         A     real
+        NM0.igcd        A     real
+        NM0.igcs        A     real
+        NM0.igd         A     real
+        NM0.ige         A     real
+        NM0.igidl       A     real
+        NM0.igisl       A     real
+        NM0.igs         A     real
+        NM0.is          A     real
+        NM0.isb         A     real
+        NM0.ise         A     real
+        NM0.isub        A     real
+        NM0.pwr         W     real
+        NM0.qb          Coul  real
+        NM0.qbd         Coul  real
+        NM0.qbi         Coul  real
+        NM0.qbs         Coul  real
+        NM0.qd          Coul  real
+        NM0.qdi         Coul  real
+        NM0.qg          Coul  real
+        NM0.qgi         Coul  real
+        NM0.qinv        Coul  real
+        NM0.qsi         Coul  real
+        NM0.qsrco       Coul  real
+        NM0.region            integer
+        NM0.reversed          integer
+        NM0.ron         Ω     real
+        NM0.rout        Ω     real
+        NM0.self_gain         real
+        NM0.tk          K     real
+        NM0.type              integer
+        NM0.ueff              real
+        NM0.vbs         V     real
+        NM0.vdb         V     real
+        NM0.vds         V     real
+        NM0.vdsat       V     real
+        NM0.vdsat_marg  V     real
+        NM0.vdss        V     real
+        NM0.vearly      V     real
+        NM0.vfbeff      V     real
+        NM0.vgb         V     real
+        NM0.vgd         V     real
+        NM0.vgs         V     real
+        NM0.vgsteff     V     real
+        NM0.vgt         V     real
+        NM0.vsat_marg   V     real
+        NM0.vsb         V     real
+        NM0.vth         V     real
+        NM0.vth_drive   V     real
+        V0.i            A     real
+        V0.pwr          W     real
+        V0.v            V     real
+        V1.i            A     real
+        V1.pwr          W     real
+        V1.v            V     real
+    """.strip()
+    for line in signals.splitlines():
+        components = line.split()
+        if len(components) == 3:
+            name, units, kind = components
+        else:
+            name, kind = components
+            units = ''
+        type_maps = dict(
+            real = 'float double',
+            complex = 'complex double',
+            integer = 'int byte',
+        )
+        signal = psf.get_signal(name)
+        assert name == signal.name, signal.name
+        assert units == PSF.units_to_unicode(signal.units), signal.name
+        assert type_maps[kind] == signal.type.kind, signal.name
+
+
 if __name__ == '__main__':
     # As a debugging aid allow the tests to be run on their own, outside pytest.
     # This makes it easier to see and interpret and textual output.
