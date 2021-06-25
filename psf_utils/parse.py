@@ -477,7 +477,7 @@ def p_error(p):
 class ParsePSF:
     def __init__(self):
         self.lexer = ply.lex.lex()
-        self.parser = ply.yacc.yacc()
+        self.parser = ply.yacc.yacc(write_tables=False, debug=False)
 
     def parse(self, filename, content):
         global Filename
