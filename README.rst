@@ -1,6 +1,9 @@
 PSF Utilities - Read Spectre Data Files
 =======================================
 
+.. image:: https://pepy.tech/badge/psf_utils/month
+    :target: https://pepy.tech/project/psf_utils
+
 .. image:: https://img.shields.io/pypi/v/psf_utils.svg
     :target: https://pypi.python.org/pypi/psf_utils
 
