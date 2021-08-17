@@ -22,6 +22,7 @@ setup(
     ]},
     install_requires = 'docopt inform>=1.19 matplotlib numpy ply quantiphy shlib'.split(),
     python_requires = '>=3.6',
+    zip_safe = True,
     keywords = 'cadence spectre PSF simulation'.split(),
     classifiers = [
         'Development Status :: 5 - Production/Stable',
