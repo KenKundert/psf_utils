@@ -20,7 +20,7 @@ setup(
         'list-psf = psf_utils.list:list_signals',
         'plot-psf = psf_utils.plot:plot_signals',
     ]},
-    install_requires = 'docopt inform>=1.19 matplotlib numpy ply==3.5 quantiphy shlib'.split(),
+    install_requires = 'docopt inform>=1.19 matplotlib numpy ply==3.4 quantiphy shlib'.split(),
     python_requires = '>=3.6',
     zip_safe = True,
     keywords = 'cadence spectre PSF simulation'.split(),
