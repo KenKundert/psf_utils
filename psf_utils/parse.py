@@ -142,7 +142,7 @@ t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
 t_NAN = r"nan|NaN"
 
 # Regular expression for a string
-t_STRING = r'"[^\\\n"]*"'
+t_STRING = r'"[^\n"]*"'
 
 
 # Identifiers
@@ -219,7 +219,7 @@ def p_real_value(p):
 
 def p_string(p):
     "string : STRING"
-    p[0] = p[1][1:-1]
+    p[0] = (p[1][1:-1]).replace('\\', '')
 
 
 def p_type_section(p):
