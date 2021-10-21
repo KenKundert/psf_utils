@@ -231,25 +231,27 @@ Releases
 **1.0 (2020-11-03)**:
     - Production release
 
-**0.7 (2020-09-23)**:
-    - Add ability to show individual points
-    - Improve the cursor values display
-    - Increase precision of both cursor values and axis labels
+.. hide the pre-production releases
 
-**0.6 (2020-04-16)**:
-    - modest refinements
+    **0.7 (2020-09-23)**:
+        - Add ability to show individual points
+        - Improve the cursor values display
+        - Increase precision of both cursor values and axis labels
 
-**0.5 (2020-01-08)**:
-    - beta release
+    **0.6 (2020-04-16)**:
+        - modest refinements
 
-**0.4 (2019-09-26)**:
-    - Allow glob patterns to be passed to both *list-psf* and *plot-psf*.
+    **0.5 (2020-01-08)**:
+        - beta release
 
-**0.3 (2019-09-25)**:
-    - Fix import errors in *plot-psf* command.
+    **0.4 (2019-09-26)**:
+        - Allow glob patterns to be passed to both *list-psf* and *plot-psf*.
 
-**0.2 (2019-09-25)**:
-    - Fix dependencies.
+    **0.3 (2019-09-25)**:
+        - Fix import errors in *plot-psf* command.
 
-**0.1 (2019-09-25)**:
-    - Initial version
+    **0.2 (2019-09-25)**:
+        - Fix dependencies.
+
+    **0.1 (2019-09-25)**:
+        - Initial version
