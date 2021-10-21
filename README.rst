@@ -11,8 +11,8 @@ PSF Utilities - Read Spectre Data Files
     :target: https://pypi.python.org/pypi/psf_utils/
 
 :Author: Ken Kundert
-:Version: 1.3.2
-:Released: 2021-10-20
+:Version: 1.4.0
+:Released: 2021-10-21
 
 
 What?
@@ -212,8 +212,8 @@ Releases
 --------
 
 **Latest development release**:
-    | Version: 1.3.2
-    | Released: 2021-10-20
+    | Version: 1.4.0
+    | Released: 2021-10-21
 
 **1.4 (2021-10-21)**:
     - Allow signal names to contain backslashes.
