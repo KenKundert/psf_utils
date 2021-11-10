@@ -32,6 +32,8 @@ kinds = {
     'float double': 'real',
     'float complex': 'complex',
     'int byte': 'integer',
+    'int long': 'integer',
+    'int': 'integer',
 }
 
 

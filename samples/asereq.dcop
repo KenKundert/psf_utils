@@ -1,0 +1,1632 @@
+HEADER
+"PSFversion" "1.00"
+"simulator" "spectre"
+"version" "18.1.0.077"
+"date" "7:13:00 PM, Tue Nov 9, 2021"
+"design" "// Generated for: spectre"
+"analysis type" "info"
+"analysis name" "dcOpInfo"
+"analysis description" "Circuit Information"
+"xVecSorted" "unknown"
+"tolerance.relative" 0.00100000
+"AnalysisName" "DC"
+"AnalysisType" "dcOp"
+"OpPointTemp.Value" 27.0000
+"OpPointTemp.Units" "C"
+TYPE
+"iprobe" STRUCT(
+"i" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "current through iprobe"
+)
+) PROP(
+"key" "inst"
+)
+"capacitor" STRUCT(
+"cap" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Capacitance at operating point"
+)
+) PROP(
+"key" "inst"
+)
+"isource" STRUCT(
+"i" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Current through the source"
+)
+"v" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Voltage across the source"
+)
+"pwr" FLOAT DOUBLE PROP(
+"units" "W"
+"description" "Power dissipation"
+)
+) PROP(
+"key" "inst"
+)
+"juncap200" STRUCT(
+"idsatsbot" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Total bottom saturation current"
+)
+"idsatssti" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Total STI-edge saturation current"
+)
+"idsatsgat" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Total gate-edge saturation current"
+)
+"cjosbot" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Total bottom capacity"
+)
+"cjossti" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Total STI-edge capacity"
+)
+"cjosgat" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Total gate-edge capacity"
+)
+"vbisbot" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "built-in voltage of the bottom junction"
+)
+"vbissti" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "built-in voltage of the STI-edge junction"
+)
+"vbisgat" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "built-in voltage of the gate-edge junction"
+)
+"vak" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Voltage between anode and cathode"
+)
+"cj" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Total source junction capacitance"
+)
+"ctotal" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Total source junction capacitance"
+)
+"lx5" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Total source junction capacitance"
+)
+"cjbot" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Junction capacitance (bottom component)"
+)
+"cjgat" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Junction capacitance (gate-edge component)"
+)
+"cjsti" FLOAT DOUBLE PROP(
+"units" "F"
+"description" "Junction capacitance (STI-edge component)"
+)
+"ij" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Total source junction current"
+)
+"ijbot" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Junction current (bottom component)"
+)
+"ijgat" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Junction current (gate-edge component)"
+)
+"ijsti" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Junction current (STI-edge component)"
+)
+"si" FLOAT DOUBLE PROP(
+"units" "A^2/Hz"
+"description" "Total junction current noise spectral density"
+)
+"diode_region" INT LONG PROP(
+"description" "DIODE region"
+)
+) PROP(
+"key" "inst"
+)
+"resistor" STRUCT(
+"v" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Voltage at operating point"
+)
+"i" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Current through the resistor"
+)
+"res" FLOAT DOUBLE PROP(
+"units" "Ohm"
+"description" "Resistance at operating point"
+)
+"pwr" FLOAT DOUBLE PROP(
+"units" "W"
+"description" "Power dissipation"
+)
+) PROP(
+"key" "inst"
+)
+"utsoi2" STRUCT(
+"typeop" FLOAT DOUBLE PROP(
+"units" ""
+"description" "MOSFET type"
+)
+"vth" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Threshold voltage including back bias and drain bias effects"
+)
+"vds" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Drain-Source DC voltage"
+)
+"vsb" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Source-Bulk DC voltage"
+)
+"vgs" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Gate-Source DC voltage"
+)
+"vth_drive" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Effective gate drive voltage including back bias and drain bias effects"
+)
+"vdsat" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Drain saturation voltage"
+)
+"vdsat_marg" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Saturation limit"
+)
+"ids" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "DC Channel current (excluding tunnel, GISL and GIDL currents)"
+)
+"id" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "Total DC drain current"
+)
+"ig" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "Total DC gate current"
+)
+"is" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "Total DC source current"
+)
+"ib" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "Total DC bulk current"
+)
+"igidl" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "DC GIDL current"
+)
+"igisl" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "DC GISL current"
+)
+"igs" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "DC gate-source leakage current"
+)
+"igd" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "DC gate-drain leakage current"
+)
+"idb" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "DC drain-bulk current"
+)
+"isb" FLOAT DOUBLE PROP(
+"units" "I"
+"description" "DC source-bulk current"
+)
+"gm" FLOAT DOUBLE PROP(
+"units" ""
+"description" "DC transconductance"
+)
+"gmb" FLOAT DOUBLE PROP(
+"units" ""
+"description" "DC bulk transconductance"
+)
+"gds" FLOAT DOUBLE PROP(
+"units" ""
+"description" "DC output conductance"
+)
+"cdd" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Drain capacitance"
+)
+"cdg" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Drain to gate transcapacitance"
+)
+"cdb" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Drain to bulk transcapacitance"
+)
+"cds" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Drain to source transcapacitance"
+)
+"cgd" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Gate to drain transcapacitance"
+)
+"cgg" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Gate capacitance"
+)
+"cgb" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Gate to bulk transcapacitance"
+)
+"cgs" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Gate to source transcapacitance"
+)
+"cbd" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Bulk to drain transcapacitance"
+)
+"cbg" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Bulk to gate transcapacitance"
+)
+"cbb" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Bulk capacitance"
+)
+"cbs" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Bulk to source transcapacitance"
+)
+"csd" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Source to drain transcapacitance"
+)
+"csg" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Source to gate transcapacitance"
+)
+"csb" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Source to bulk transcapacitance"
+)
+"css" FLOAT DOUBLE PROP(
+"units" "C"
+"description" "Source capacitance"
+)
+"tk" FLOAT DOUBLE PROP(
+"units" ""
+"description" "MOSFET device temperature"
+)
+"dtsh" FLOAT DOUBLE PROP(
+"units" ""
+"description" "Channel temperature elevation due to self-heating"
+)
+"self_gain" FLOAT DOUBLE PROP(
+"units" ""
+"description" "Self gain"
+)
+"rout" FLOAT DOUBLE PROP(
+"units" "R"
+"description" "Output resistance"
+)
+"vearly" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Equivalent early voltage"
+)
+"beff" FLOAT DOUBLE PROP(
+"units" ""
+"description" "Gain factor"
+)
+"ft" FLOAT DOUBLE PROP(
+"units" ""
+"description" "Unity gain frequency"
+)
+"rgate" FLOAT DOUBLE PROP(
+"units" "R"
+"description" "Gate resistance"
+)
+"gmoverid" FLOAT DOUBLE PROP(
+"units" ""
+"description" "Gm over Id"
+)
+"pwr" FLOAT DOUBLE PROP(
+"units" "W"
+"description" "Power dissipation"
+)
+"region" INT BYTE PROP(
+"description" "Estimated operating region. Spectre outputs number (0-4) in a rawfile"
+)
+) PROP(
+"key" "inst"
+)
+"vsource" STRUCT(
+"v" FLOAT DOUBLE PROP(
+"units" "V"
+"description" "Voltage across the source"
+)
+"i" FLOAT DOUBLE PROP(
+"units" "A"
+"description" "Current through the source"
+)
+"pwr" FLOAT DOUBLE PROP(
+"units" "W"
+"description" "Power dissipation"
+)
+) PROP(
+"key" "inst"
+)
+VALUE
+"M1.xdw:2" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M1.xdw:1" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M1:4" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M1:3" "iprobe" (
+-1.799999936816366e-03
+) PROP(
+"model" "iprobe"
+)
+"M1:2" "iprobe" (
+6.315244469627884e-11
+) PROP(
+"model" "iprobe"
+)
+"M1:1" "iprobe" (
+1.799999873663912e-03
+) PROP(
+"model" "iprobe"
+)
+"M2.xdw:2" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M2.xdw:1" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M2:4" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M2:3" "iprobe" (
+-1.793643424012481e-03
+) PROP(
+"model" "iprobe"
+)
+"M2:2" "iprobe" (
+6.318364317039795e-11
+) PROP(
+"model" "iprobe"
+)
+"M2:1" "iprobe" (
+1.793643360828828e-03
+) PROP(
+"model" "iprobe"
+)
+"M11.xdw:2" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M11.xdw:1" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M11:4" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M11:3" "iprobe" (
+-1.800000014936136e-03
+) PROP(
+"model" "iprobe"
+)
+"M11:2" "iprobe" (
+7.808372836463668e-11
+) PROP(
+"model" "iprobe"
+)
+"M11:1" "iprobe" (
+1.799999936852398e-03
+) PROP(
+"model" "iprobe"
+)
+"M21.xdw:2" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M21.xdw:1" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M21:4" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M21:3" "iprobe" (
+-1.795661135500369e-03
+) PROP(
+"model" "iprobe"
+)
+"M21:2" "iprobe" (
+7.823256560369026e-11
+) PROP(
+"model" "iprobe"
+)
+"M21:1" "iprobe" (
+1.795661057267794e-03
+) PROP(
+"model" "iprobe"
+)
+"M22.xdw:2" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M22.xdw:1" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M22:4" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M22:3" "iprobe" (
+-1.795661057267794e-03
+) PROP(
+"model" "iprobe"
+)
+"M22:2" "iprobe" (
+9.750768148932746e-11
+) PROP(
+"model" "iprobe"
+)
+"M22:1" "iprobe" (
+1.795660959760098e-03
+) PROP(
+"model" "iprobe"
+)
+"N0.xdw:2" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"N0.xdw:1" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"N0:4" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"N0:3" "iprobe" (
+-1.799999809323655e-03
+) PROP(
+"model" "iprobe"
+)
+"N0:2" "iprobe" (
+8.296057674746956e-11
+) PROP(
+"model" "iprobe"
+)
+"N0:1" "iprobe" (
+1.799999726363064e-03
+) PROP(
+"model" "iprobe"
+)
+"M12.xdw:2" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M12.xdw:1" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M12:4" "iprobe" (
+0.000000000000000e+00
+) PROP(
+"model" "iprobe"
+)
+"M12:3" "iprobe" (
+-1.799999936852398e-03
+) PROP(
+"model" "iprobe"
+)
+"M12:2" "iprobe" (
+9.316867800593857e-11
+) PROP(
+"model" "iprobe"
+)
+"M12:1" "iprobe" (
+1.799999843683706e-03
+) PROP(
+"model" "iprobe"
+)
+"M1.csdext" "capacitor" (
+4.556194125159643e-17
+) PROP(
+"model" "capacitor"
+)
+"M1.cfrolgd" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M1.cfrolgs" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M1.cgn" "capacitor" (
+4.004259175172384e-15
+) PROP(
+"model" "capacitor"
+)
+"M1.cfrowgd" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M1.cfrowgs" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M2.csdext" "capacitor" (
+4.556194125159643e-17
+) PROP(
+"model" "capacitor"
+)
+"M2.cfrolgd" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M2.cfrolgs" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M2.cgn" "capacitor" (
+4.004259175172384e-15
+) PROP(
+"model" "capacitor"
+)
+"M2.cfrowgd" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M2.cfrowgs" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M11.csdext" "capacitor" (
+4.556194125159643e-17
+) PROP(
+"model" "capacitor"
+)
+"M11.cfrolgd" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M11.cfrolgs" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M11.cgn" "capacitor" (
+4.004259175172384e-15
+) PROP(
+"model" "capacitor"
+)
+"M11.cfrowgd" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M11.cfrowgs" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M21.csdext" "capacitor" (
+4.556194125159643e-17
+) PROP(
+"model" "capacitor"
+)
+"M21.cfrolgd" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M21.cfrolgs" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M21.cgn" "capacitor" (
+4.004259175172384e-15
+) PROP(
+"model" "capacitor"
+)
+"M21.cfrowgd" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M21.cfrowgs" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M22.csdext" "capacitor" (
+4.556194125159643e-17
+) PROP(
+"model" "capacitor"
+)
+"M22.cfrolgd" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M22.cfrolgs" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M22.cgn" "capacitor" (
+4.004259175172384e-15
+) PROP(
+"model" "capacitor"
+)
+"M22.cfrowgd" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M22.cfrowgs" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"N0.csdext" "capacitor" (
+4.556194125159643e-17
+) PROP(
+"model" "capacitor"
+)
+"N0.cfrolgd" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"N0.cfrolgs" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"N0.cgn" "capacitor" (
+4.004259175172384e-15
+) PROP(
+"model" "capacitor"
+)
+"N0.cfrowgd" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"N0.cfrowgs" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M12.csdext" "capacitor" (
+4.556194125159643e-17
+) PROP(
+"model" "capacitor"
+)
+"M12.cfrolgd" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M12.cfrolgs" "capacitor" (
+2.551706675095307e-16
+) PROP(
+"model" "capacitor"
+)
+"M12.cgn" "capacitor" (
+4.004259175172384e-15
+) PROP(
+"model" "capacitor"
+)
+"M12.cfrowgd" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"M12.cfrowgs" "capacitor" (
+1.858726775520960e-15
+) PROP(
+"model" "capacitor"
+)
+"C2" "capacitor" (
+1.000000000000000e-06
+) PROP(
+"model" "capacitor"
+)
+"C1" "capacitor" (
+1.000000000000000e-06
+) PROP(
+"model" "capacitor"
+)
+"I2" "isource" (
+1.800000000000000e-03
+3.010782334960033e-01
+5.419408202928059e-04
+) PROP(
+"model" "isource"
+)
+"I1" "isource" (
+1.800000000000000e-03
+3.187101743289069e-01
+5.736783137920324e-04
+) PROP(
+"model" "isource"
+)
+"I10" "isource" (
+1.800000000000000e-03
+-3.325233987340082e-02
+-5.985421177212147e-05
+) PROP(
+"model" "isource"
+)
+"M1.xdw.d1" "juncap200" (
+2.238019750718027e-17
+2.638854752452214e-16
+0.000000000000000e+00
+2.619270346645004e-15
+9.422704620394871e-14
+0.000000000000000e+00
+3.756239780881615e-01
+7.145824846192783e-01
+9.981721374783981e-01
+0.000000000000000e+00
+9.806769498337489e-14
+9.806769498337489e-14
+9.806769498337489e-14
+2.652303304685738e-15
+0.000000000000000e+00
+9.541539167868915e-14
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0
+) PROP(
+"model" "diodenwx_loc"
+)
+"M2.xdw.d1" "juncap200" (
+2.238019750718027e-17
+2.638854752452214e-16
+0.000000000000000e+00
+2.619270346645004e-15
+9.422704620394871e-14
+0.000000000000000e+00
+3.756239780881615e-01
+7.145824846192783e-01
+9.981721374783981e-01
+0.000000000000000e+00
+9.806769498337489e-14
+9.806769498337489e-14
+9.806769498337489e-14
+2.652303304685738e-15
+0.000000000000000e+00
+9.541539167868915e-14
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0
+) PROP(
+"model" "diodenwx_loc"
+)
+"M11.xdw.d1" "juncap200" (
+2.238019750718027e-17
+2.638854752452214e-16
+0.000000000000000e+00
+2.619270346645004e-15
+9.422704620394871e-14
+0.000000000000000e+00
+3.756239780881615e-01
+7.145824846192783e-01
+9.981721374783981e-01
+0.000000000000000e+00
+9.806769498337489e-14
+9.806769498337489e-14
+9.806769498337489e-14
+2.652303304685738e-15
+0.000000000000000e+00
+9.541539167868915e-14
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0
+) PROP(
+"model" "diodenwx_loc"
+)
+"M21.xdw.d1" "juncap200" (
+2.238019750718027e-17
+2.638854752452214e-16
+0.000000000000000e+00
+2.619270346645004e-15
+9.422704620394871e-14
+0.000000000000000e+00
+3.756239780881615e-01
+7.145824846192783e-01
+9.981721374783981e-01
+0.000000000000000e+00
+9.806769498337489e-14
+9.806769498337489e-14
+9.806769498337489e-14
+2.652303304685738e-15
+0.000000000000000e+00
+9.541539167868915e-14
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0
+) PROP(
+"model" "diodenwx_loc"
+)
+"M22.xdw.d1" "juncap200" (
+2.238019750718027e-17
+2.638854752452214e-16
+0.000000000000000e+00
+2.619270346645004e-15
+9.422704620394871e-14
+0.000000000000000e+00
+3.756239780881615e-01
+7.145824846192783e-01
+9.981721374783981e-01
+0.000000000000000e+00
+9.806769498337489e-14
+9.806769498337489e-14
+9.806769498337489e-14
+2.652303304685738e-15
+0.000000000000000e+00
+9.541539167868915e-14
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0
+) PROP(
+"model" "diodenwx_loc"
+)
+"N0.xdw.d1" "juncap200" (
+2.238019750718027e-17
+2.638854752452214e-16
+0.000000000000000e+00
+2.619270346645004e-15
+9.422704620394871e-14
+0.000000000000000e+00
+3.756239780881615e-01
+7.145824846192783e-01
+9.981721374783981e-01
+0.000000000000000e+00
+9.806769498337489e-14
+9.806769498337489e-14
+9.806769498337489e-14
+2.652303304685738e-15
+0.000000000000000e+00
+9.541539167868915e-14
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0
+) PROP(
+"model" "diodenwx_loc"
+)
+"M12.xdw.d1" "juncap200" (
+2.238019750718027e-17
+2.638854752452214e-16
+0.000000000000000e+00
+2.619270346645004e-15
+9.422704620394871e-14
+0.000000000000000e+00
+3.756239780881615e-01
+7.145824846192783e-01
+9.981721374783981e-01
+0.000000000000000e+00
+9.806769498337489e-14
+9.806769498337489e-14
+9.806769498337489e-14
+2.652303304685738e-15
+0.000000000000000e+00
+9.541539167868915e-14
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+0
+) PROP(
+"model" "diodenwx_loc"
+)
+"M1.rb" "resistor" (
+0.000000000000000e+00
+0.000000000000000e+00
+1.030001534391112e+02
+0.000000000000000e+00
+) PROP(
+"model" "resistor"
+)
+"M1.rgn" "resistor" (
+5.857077045590131e-10
+6.315246376069921e-11
+9.274502840909090e+00
+3.698888458652539e-20
+) PROP(
+"model" "resistor"
+)
+"M1.rgvi" "resistor" (
+1.492954870840890e-09
+6.315245578672579e-11
+2.364048796269770e+01
+9.428376647235623e-20
+) PROP(
+"model" "resistor"
+)
+"M1.rgcs" "resistor" (
+1.188241727234640e-10
+6.315247940963580e-11
+1.881544063420158e+00
+7.504041121285569e-21
+) PROP(
+"model" "resistor"
+)
+"M2.rb" "resistor" (
+0.000000000000000e+00
+0.000000000000000e+00
+1.030001534391112e+02
+0.000000000000000e+00
+) PROP(
+"model" "resistor"
+)
+"M2.rgn" "resistor" (
+5.859970286792304e-10
+6.318365940807571e-11
+9.274502840909090e+00
+3.702543667421287e-20
+) PROP(
+"model" "resistor"
+)
+"M2.rgvi" "resistor" (
+1.493692503018451e-09
+6.318365785745821e-11
+2.364048796269770e+01
+9.437695605496818e-20
+) PROP(
+"model" "resistor"
+)
+"M2.rgcs" "resistor" (
+1.188827924991642e-10
+6.318363455334986e-11
+1.881544063420158e+00
+7.511446915948915e-21
+) PROP(
+"model" "resistor"
+)
+"M11.rb" "resistor" (
+0.000000000000000e+00
+0.000000000000000e+00
+1.030001534391112e+02
+0.000000000000000e+00
+) PROP(
+"model" "resistor"
+)
+"M11.rgn" "resistor" (
+7.241878208219532e-10
+7.808373486367578e-11
+9.274502840909090e+00
+5.654728979256454e-20
+) PROP(
+"model" "resistor"
+)
+"M11.rgvi" "resistor" (
+1.845937736000280e-09
+7.808374086495098e-11
+2.364048796269770e+01
+1.441377238306802e-19
+) PROP(
+"model" "resistor"
+)
+"M11.rgcs" "resistor" (
+1.469180332946962e-10
+7.808375905246535e-11
+1.881544063420158e+00
+1.147191231224514e-20
+) PROP(
+"model" "resistor"
+)
+"M21.rb" "resistor" (
+0.000000000000000e+00
+0.000000000000000e+00
+1.030001534391112e+02
+0.000000000000000e+00
+) PROP(
+"model" "resistor"
+)
+"M21.rgn" "resistor" (
+7.255682721307721e-10
+7.823257856263180e-11
+9.274502840909090e+00
+5.676307685202363e-20
+) PROP(
+"model" "resistor"
+)
+"M21.rgvi" "resistor" (
+1.849456365832225e-09
+7.823258000217591e-11
+2.364048796269770e+01
+1.446877431005031e-19
+) PROP(
+"model" "resistor"
+)
+"M21.rgcs" "resistor" (
+1.471980315415067e-10
+7.823257206846323e-11
+1.881544063420158e+00
+1.151568061090684e-20
+) PROP(
+"model" "resistor"
+)
+"M22.rb" "resistor" (
+0.000000000000000e+00
+0.000000000000000e+00
+1.030001534391112e+02
+0.000000000000000e+00
+) PROP(
+"model" "resistor"
+)
+"M22.rgn" "resistor" (
+9.043352733328902e-10
+9.750768195831907e-11
+9.274502840909090e+00
+8.817963621583300e-20
+) PROP(
+"model" "resistor"
+)
+"M22.rgvi" "resistor" (
+2.305129642721226e-09
+9.750770146362830e-11
+2.364048796269770e+01
+2.247678930374215e-19
+) PROP(
+"model" "resistor"
+)
+"M22.rgcs" "resistor" (
+1.834650209531219e-10
+9.750769302719924e-11
+1.881544063420158e+00
+1.788925094432569e-20
+) PROP(
+"model" "resistor"
+)
+"N0.rb" "resistor" (
+0.000000000000000e+00
+0.000000000000000e+00
+1.030001534391112e+02
+0.000000000000000e+00
+) PROP(
+"model" "resistor"
+)
+"N0.rgn" "resistor" (
+7.694180848005772e-10
+8.296057459885996e-11
+9.274502840909090e+00
+6.383136642181023e-20
+) PROP(
+"model" "resistor"
+)
+"N0.rgvi" "resistor" (
+1.961229179059387e-09
+8.296060479606039e-11
+2.364048796269770e+01
+1.627047588384478e-19
+) PROP(
+"model" "resistor"
+)
+"N0.rgcs" "resistor" (
+1.560938045486182e-10
+8.296048313898120e-11
+1.881544063420158e+00
+1.294961744035507e-20
+) PROP(
+"model" "resistor"
+)
+"M12.rb" "resistor" (
+0.000000000000000e+00
+0.000000000000000e+00
+1.030001534391112e+02
+0.000000000000000e+00
+) PROP(
+"model" "resistor"
+)
+"M12.rgn" "resistor" (
+8.640934634485120e-10
+9.316870977030326e-11
+9.274502840909090e+00
+8.050647311045056e-20
+) PROP(
+"model" "resistor"
+)
+"M12.rgvi" "resistor" (
+2.202553472940849e-09
+9.316869755041670e-11
+2.364048796269770e+01
+2.052090383590459e-19
+) PROP(
+"model" "resistor"
+)
+"M12.rgcs" "resistor" (
+1.753008849192383e-10
+9.316863119356709e-11
+1.881544063420158e+00
+1.633254349494647e-20
+) PROP(
+"model" "resistor"
+)
+"M1.m1" "utsoi2" (
+1.000000000000000e+00
+3.336884268231202e-01
+6.812898256710931e-01
+0.000000000000000e+00
+6.812898234736063e-01
+3.476013966504861e-01
+2.810288034296649e-01
+4.002610222414282e-01
+1.799999864032139e-03
+1.799999839599421e-03
+6.315245415107463e-11
+-1.799999902751875e-03
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+3.871973544604394e-11
+2.443271870503069e-11
+0.000000000000000e+00
+0.000000000000000e+00
+1.002271919469046e-02
+8.558225655490462e-04
+1.963784840472681e-04
+2.882240162817041e-15
+5.143960317460583e-15
+2.328927688891162e-15
+-4.590647843534704e-15
+7.456061666519492e-16
+1.412539266852066e-14
+1.820547142787501e-15
+1.155923935908122e-14
+2.029607486146726e-15
+1.759528020087652e-15
+6.581124762891003e-15
+2.791989256656624e-15
+1.070265100183658e-16
+7.221904330972430e-15
+2.431649931212340e-15
+9.760580772203136e-15
+3.001500000000000e+02
+0.000000000000000e+00
+5.103776639949010e+01
+5.092207554465595e+03
+9.165972781245031e+00
+2.979472878884899e-02
+1.129289174814893e+11
+0.000000000000000e+00
+5.568177826571894e+00
+1.226321619953809e-03
+2
+) PROP(
+"model" "M12.lvtnfet_rf"
+)
+"M2.m1" "utsoi2" (
+1.000000000000000e+00
+3.338475515845674e-01
+6.500000000000000e-01
+0.000000000000000e+00
+6.812898234725208e-01
+3.474422718879533e-01
+2.809394419134125e-01
+3.690605580865875e-01
+1.793643352779329e-03
+1.793643328328829e-03
+6.318365262519365e-11
+-1.793643391512481e-03
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+3.873315279208212e-11
+2.445049983311153e-11
+0.000000000000000e+00
+0.000000000000000e+00
+9.985312189017555e-03
+8.533593904962286e-04
+2.103193483547240e-04
+2.902415688590377e-15
+5.165717341449080e-15
+2.329327414451667e-15
+-4.592629067310370e-15
+7.668095704815772e-16
+1.414965029812128e-14
+1.819971586863634e-15
+1.156286914077607e-14
+2.029519962821661e-15
+1.760517679940322e-15
+6.581034112143181e-15
+2.790996469381198e-15
+1.060861552871391e-16
+7.223415276731879e-15
+2.431735110827880e-15
+9.761236542846899e-15
+3.001500000000000e+02
+0.000000000000000e+00
+4.747690722289780e+01
+4.754674298027031e+03
+8.528189833032743e+00
+2.971671298995280e-02
+1.123145632375736e+11
+0.000000000000000e+00
+5.567055629906676e+00
+1.165868206460118e-03
+2
+) PROP(
+"model" "M12.lvtnfet_rf"
+)
+"M11.m1" "utsoi2" (
+1.000000000000000e+00
+3.357478191225841e-01
+3.144809059719755e-01
+0.000000000000000e+00
+6.989217637869531e-01
+3.631739446643690e-01
+2.900245562776542e-01
+2.445634969432131e-02
+1.799999951481574e-03
+1.799999921128367e-03
+7.808373806412584e-11
+-1.799999999212105e-03
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+4.773053116925487e-11
+3.035320689487097e-11
+0.000000000000000e+00
+0.000000000000000e+00
+8.786351250238571e-03
+7.668600594606717e-04
+1.247052327722143e-03
+3.789147193918138e-15
+6.107972518194491e-15
+2.374482071201314e-15
+-4.693307395477667e-15
+1.830442284956648e-15
+1.536228164915941e-14
+1.761553289357406e-15
+1.177028607484535e-14
+2.076281059907127e-15
+1.728166930325892e-15
+6.583647505655780e-15
+2.779199515422761e-15
+-1.175761509456369e-16
+7.526142200639024e-15
+2.447612145097060e-15
+9.856178194790446e-15
+3.001500000000000e+02
+0.000000000000000e+00
+7.045695721756648e+00
+8.018909694243490e+02
+1.443403681717378e+00
+2.729437256572412e-02
+9.102757423365149e+10
+0.000000000000000e+00
+4.881306464019545e+00
+5.660656605203574e-04
+2
+) PROP(
+"model" "M12.lvtnfet_rf"
+)
+"M21.m1" "utsoi2" (
+1.000000000000000e+00
+3.357695641822773e-01
+3.110524186050883e-01
+0.000000000000000e+00
+6.989217637817741e-01
+3.631521995994967e-01
+2.900118536840594e-01
+2.104056492102885e-02
+1.795661072146500e-03
+1.795661041715188e-03
+7.823257530317986e-11
+-1.795661119947764e-03
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+4.780126373509341e-11
+3.043131156808645e-11
+0.000000000000000e+00
+0.000000000000000e+00
+8.745361769991508e-03
+7.636772159604850e-04
+1.284268352286968e-03
+3.815666349011831e-15
+6.128604486698219e-15
+2.375718824196757e-15
+-4.688656961883145e-15
+1.864115690861056e-15
+1.538847764076739e-14
+1.759961219778111e-15
+1.176440073012822e-14
+2.078348041249495e-15
+1.726875901190555e-15
+6.583745317777889e-15
+2.778521375337839e-15
+-1.267973830987203e-16
+7.532997252878615e-15
+2.448065273803022e-15
+9.854265143582917e-15
+3.001500000000000e+02
+0.000000000000000e+00
+6.809606227871424e+00
+7.786534630548549e+02
+1.398197688604220e+00
+2.723184070897822e-02
+9.044868422420654e+10
+0.000000000000000e+00
+4.870274270492648e+00
+5.585447646988911e-04
+2
+) PROP(
+"model" "M12.lvtnfet_rf"
+)
+"M22.m1" "utsoi2" (
+1.000000000000000e+00
+3.620013501556166e-01
+3.389475813949118e-01
+3.110524186050883e-01
+7.221999178753826e-01
+3.601985677197660e-01
+2.898825431744277e-01
+4.906503822048403e-02
+1.795660980395639e-03
+1.795660942812736e-03
+9.750769582858672e-11
+-1.795661040320432e-03
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+5.992479332105298e-11
+3.758290250753373e-11
+0.000000000000000e+00
+0.000000000000000e+00
+9.010391395149950e-03
+7.692744829198950e-04
+1.015359552467105e-03
+3.649914357387752e-15
+6.070291049110530e-15
+2.369383876046406e-15
+-4.789760567769184e-15
+1.652579130179460e-15
+1.538212323625686e-14
+1.769775558830711e-15
+1.195976854724669e-14
+2.063868358809284e-15
+1.740822307322333e-15
+6.586205506667863e-15
+2.781514840536247e-15
+-6.653313160099138e-17
+7.571009879824001e-15
+2.447046071790746e-15
+9.951522820013756e-15
+3.001500000000000e+02
+0.000000000000000e+00
+8.874089354117606e+00
+9.848727946373438e+02
+1.768497610969107e+00
+2.768027299350880e-02
+9.322824344240247e+10
+0.000000000000000e+00
+5.017869008742824e+00
+6.086350039917338e-04
+2
+) PROP(
+"model" "M12.lvtnfet_rf"
+)
+"N0.m1" "utsoi2" (
+1.000000000000000e+00
+3.612111238135877e-01
+7.082523398734009e-01
+3.250000000000000e-01
+7.082523369866598e-01
+3.470412131730721e-01
+2.823500930449981e-01
+4.259022468284028e-01
+1.799999722832884e-03
+1.799999690950420e-03
+8.296059108672434e-11
+-1.799999773911011e-03
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+5.107812718766105e-11
+3.188246389906329e-11
+0.000000000000000e+00
+0.000000000000000e+00
+1.006737393225277e-02
+8.425484291191752e-04
+1.923355802646714e-04
+2.880245152020723e-15
+5.229710214553209e-15
+2.332459765802734e-15
+-4.681924828335220e-15
+7.432120049059149e-16
+1.431783722010381e-14
+1.818026062269339e-15
+1.175659915292855e-14
+2.029826892502323e-15
+1.763115241964728e-15
+6.584699016824582e-15
+2.791756882357532e-15
+1.072062546124850e-16
+7.325011763585869e-15
+2.434213188752510e-15
+9.866431206950864e-15
+3.001500000000000e+02
+0.000000000000000e+00
+5.234275383888482e+01
+5.199246018983634e+03
+9.358641227345741e+00
+2.989099146013014e-02
+1.119074271233334e+11
+0.000000000000000e+00
+5.592986478201607e+00
+1.274854051644066e-03
+2
+) PROP(
+"model" "M12.lvtnfet_rf"
+)
+"M12.m1" "utsoi2" (
+1.000000000000000e+00
+3.620223663666799e-01
+3.844408605320212e-01
+3.144809059719755e-01
+7.187714306594775e-01
+3.567490642927976e-01
+2.879291562273564e-01
+9.651170430466482e-02
+1.799999860271183e-03
+1.799999824461686e-03
+9.316869234519717e-11
+-1.799999917630378e-03
+0.000000000000000e+00
+0.000000000000000e+00
+0.000000000000000e+00
+5.735919521225479e-11
+3.580949713294238e-11
+0.000000000000000e+00
+0.000000000000000e+00
+9.347668207293816e-03
+7.940388207931753e-04
+7.050098423896329e-04
+3.406366601270937e-15
+5.836862953295079e-15
+2.356806108054172e-15
+-4.787302460078315e-15
+1.350264943752727e-15
+1.507871109398053e-14
+1.786032155744351e-15
+1.194241399448345e-14
+2.047799112275747e-15
+1.752760351954308e-15
+6.585328341558155e-15
+2.784768877328100e-15
+8.302545242463195e-18
+7.489087788731138e-15
+2.442490077759632e-15
+9.939880411733232e-15
+3.001500000000000e+02
+0.000000000000000e+00
+1.325891873453832e+01
+1.418419913983750e+03
+2.553155596183709e+00
+2.828634102741647e-02
+9.866410943888097e+10
+0.000000000000000e+00
+5.193149510494736e+00
+6.919935484405320e-04
+2
+) PROP(
+"model" "M12.lvtnfet_rf"
+)
+"V0" "vsource" (
+1.000000000000000e+00
+-8.989304320588927e-03
+-8.989304320588927e-03
+) PROP(
+"model" "vsource"
+)
+"V4" "vsource" (
+3.250000000000000e-01
+1.799999809323655e-03
+5.849999380301878e-04
+) PROP(
+"model" "vsource"
+)
+"V2" "vsource" (
+3.500000000000000e-01
+1.795660959760098e-03
+6.284813359160342e-04
+) PROP(
+"model" "vsource"
+)
+"V1" "vsource" (
+3.500000000000000e-01
+1.793643360828828e-03
+6.277751762900899e-04
+) PROP(
+"model" "vsource"
+)
+END

@@ -118,6 +118,7 @@ reserved = {rw: rw for rw in [
     'GROUP',
     'HEADER',
     'INT',
+    'LONG',
     'NAN',
     'PROP',
     'STRUCT',
@@ -271,6 +272,7 @@ def p_kind(p):
              | COMPLEX
              | INT
              | BYTE
+             | LONG
              | struct
              | prop
     """
