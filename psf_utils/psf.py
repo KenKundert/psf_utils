@@ -5,7 +5,7 @@ Read PSF File
 # Imports {{{1
 from .parse import ParsePSF, ParseError
 from inform import Error, Info, join, log, os_error
-from shlib import to_path
+from pathlib import Path
 import numpy as np
 from quantiphy import Quantity
 try:
@@ -24,16 +24,22 @@ class UnknownSignal(Error):
     template = 'unknown signal: {}.'
 
 
-unicode_unit_maps = [
-    (r'sqrt\(([^)]+)\)', r'√\1'),
-    (r'\^2', r'²'),
-    (r'Ohm', r'Ω'),
-]
+unicode_unit_maps = {
+    r'sqrt\(([^)]+)\)': r'√\1',
+    r'\^2': '²',
+    r'\bOhm\b': 'Ω',
+
+    # the following are not unicode units, however Spectre often messes these
+    # up in the oppoint files.
+    r'\bR\b': 'Ω',
+    r'\bI\b': 'A',
+    r'\bC\b': 'F',
+}
 
 
 def unicode_units(u):
     if u:
-        for s, r in unicode_unit_maps:
+        for s, r in unicode_unit_maps.items():
             u = re.sub(s, r, u)
     else:
         u = ''
@@ -59,7 +65,7 @@ class PSF:
     """
 
     def __init__(self, filename, sep=':', use_cache=True, update_cache=True):
-        psf_filepath = to_path(filename)
+        psf_filepath = Path(filename)
         cache_filepath = psf_filepath.with_suffix(psf_filepath.suffix + '.cache')
 
         # read cache if desired and current
@@ -157,7 +163,6 @@ class PSF:
                             name = n,
                             ordinate = v,
                             type = t,
-                            access = t.name,
                             units = t.units,
                             meta = meta,
                         )

@@ -1,34 +1,48 @@
 # encoding: utf8
 
+# Imports {{{1
 from parametrize_from_file import parametrize, Namespace
 import pytest
 from functools import partial
 from voluptuous import Schema, Optional, Required
 from psf_utils import PSF
 from pathlib import Path
+from shlib import Run, rm
 
 
+# Utilities {{{1
 def name_from_dict_keys(cases):
     return [{**v, 'name': k} for k,v in cases.items()]
 
-parametrize_from_file = partial(parametrize, preprocess=name_from_dict_keys)
-
-with_quantiphy = Namespace('from quantiphy import Quantity')
-
-# Schema for test cases
-schema = Schema({
-    Required('name'): str,
-    Required('path'): str,
-    Required('expected'): {'sweep': {str:str}, 'signals': {str:{str:str}}},
-})
+# Globals {{{1
 type_maps = {
     'float double': float,
     'complex double': complex,
     'int byte': int,
     'int long': int,
 }
+parametrize_from_file = partial(parametrize, preprocess=name_from_dict_keys)
+with_quantiphy = Namespace('from quantiphy import Quantity')
 
-def run_test_case(test_name, psf_file, expected):
+# Schemas {{{1
+# Schema for API test cases
+api_test_schema = Schema({
+    Required('name'): str,
+    Required('path'): str,
+    Required('expected'): dict(sweep={str:str}, signals={str:{str:str}}),
+})
+
+# Schema for utilities test cases
+utils_test_schema = Schema({
+    Required('name'): str,
+    Required('command'): str,
+    Required('psf_file'): str,
+    Optional('arguments', default=''): str,
+    Optional('expected', default=''): str,
+})
+
+# run_api_test {{{1
+def run_api_test(test_name, psf_file, expected):
     # open the PSF file
     psf = PSF(psf_file)
     sweep = psf.get_sweep()
@@ -114,8 +128,9 @@ def run_test_case(test_name, psf_file, expected):
     # assure that all signals were checked
     assert not remaining
 
-@parametrize_from_file(schema=schema)
-def test_cases(name, path, expected):
+# test_api {{{1
+@parametrize_from_file(schema=api_test_schema)
+def test_api(name, path, expected):
     # fix up the path
     test_dir = Path(__file__).parent
     psf_file = test_dir/path
@@ -126,9 +141,31 @@ def test_cases(name, path, expected):
 
     # run test without cache
     assert not cache_file.exists()
-    run_test_case(name, psf_file, expected)
+    run_api_test(name, psf_file, expected)
 
     # run test again, this time the data should be cached
     print(str(cache_file))
     assert cache_file.exists()
-    run_test_case(name, psf_file, expected)
+    run_api_test(name, psf_file, expected)
+
+# test_utils {{{1
+@parametrize_from_file(schema=utils_test_schema)
+def test_utils(name, command, psf_file, arguments, expected):
+    # fix up the paths
+    test_dir = Path(__file__).parent
+    root_dir = test_dir.parent
+    psf_file = root_dir/psf_file
+    command = root_dir/command
+    svg_file = test_dir/'test_psf.svg'
+
+    # replace @ with svg_file in arguments
+    arguments = arguments.replace('@', str(svg_file))
+
+    # run test
+    cmd = [command, '-f', psf_file] + arguments.split()
+    process = Run(cmd, modes='sOEW')
+    assert process.stdout.rstrip() == expected.rstrip(), name
+    assert process.stderr == '', name
+
+    # remove svg_file if it was created
+    rm(svg_file)

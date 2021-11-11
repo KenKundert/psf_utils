@@ -235,6 +235,10 @@ Releases
 
 .. hide the pre-production releases
 
+    **0.8 (2021-11-11)**:
+        - Suppress access function names on members of PSF structures
+        - Correct invalid units produced by Spectre on oppoint files
+
     **0.7 (2020-09-23)**:
         - Add ability to show individual points
         - Improve the cursor values display

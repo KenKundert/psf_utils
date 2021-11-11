@@ -140,7 +140,7 @@ def plot_signals():
         sweep = psf.get_sweep()
         to_plot = expand_args(psf.signals.keys(), args)
 
-        # x_name = sweep.name
+        # Print scalars {{{2
         if not sweep:
             with Quantity.prefs(map_sf = Quantity.map_sf_to_greek, prec = print_prec):
                 to_print = []
@@ -158,11 +158,14 @@ def plot_signals():
                         units = psig.units
                         access = psig.access
                         y_data = Quantity(psig.ordinate - nsig.ordinate, units)
-                        name = f'{access}({psig.name},{nsig.name})'
+                        if access:
+                            name = f'{access}({psig.name},{nsig.name})'
+                        else:
+                            name = f'({psig.name} − {nsig.name})'
                     else:
                         sig = psf.get_signal(arg)
                         access = sig.access
-                        name = f'{access}({sig.name})'
+                        name = f'{access}({sig.name})' if access else sig.name
                         y_data = sig.ordinate
                     to_print.append((name, y_data))
                     width = max(width, len(name))
@@ -176,7 +179,7 @@ def plot_signals():
             lambda v, p: Quantity(v, x_units).render()
         )
 
-        # Process arguments {{{2
+        # Process arguments for plots {{{2
         waves = []
         y_units = set()
         for arg in to_plot:
@@ -260,5 +263,7 @@ def plot_signals():
             plt.show()
     except Error as e:
         e.terminate()
+    except OSError as e:
+        fatal(os_error(e))
     except KeyboardInterrupt:
         done()

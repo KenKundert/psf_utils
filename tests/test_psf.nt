@@ -1,5 +1,7 @@
-test_cases:
+# test_api {{{1
+test_api:
 
+    # aclin {{{2
     aclin:
         path: ../samples/pnoise.raw/aclin.ac
         expected:
@@ -51,6 +53,7 @@ test_cases:
                     min: -0.02
                     max: -0.02
 
+    # aclog {{{2
     aclog:
         path: ../samples/pnoise.raw/aclog.ac
         expected:
@@ -102,6 +105,7 @@ test_cases:
                     min: -0.02
                     max: -0.02
 
+    # TFM201610ALM {{{2
     TFM201610ALM:
         path: ../samples/TFM201610ALM.sp
         expected:
@@ -129,6 +133,7 @@ test_cases:
                     min: -1 - 1j
                     max: 1 + 1j
 
+    # noise {{{2
     noise:
         path: ../samples/pnoise.raw/noiref.noise
         expected:
@@ -175,6 +180,7 @@ test_cases:
                     max: 6e-06
                     min: 3e-10
 
+    # pnoise {{{2
     pnoise:
         path: ../samples/pnoise.raw/pnoiref.pnoise
         expected:
@@ -221,6 +227,7 @@ test_cases:
                     max: 6e-06
                     min: 3e-10
 
+    # pss_td {{{2
     pss_td:
         path: ../samples/pnoise.raw/pss.td.pss
         expected:
@@ -272,6 +279,7 @@ test_cases:
                     min: -0.002
                     max: 0.002
 
+    # joop_banaan_tran {{{2
     joop_banaan_tran:
         path: ../samples/joop-banaan.tran
         expected:
@@ -343,6 +351,7 @@ test_cases:
                     min: 0.35
                     max: 0.35
 
+    # joop_banaan_dc {{{2
     joop_banaan_dc:
         path: ../samples/joop-banaan.dc
         expected:
@@ -400,6 +409,7 @@ test_cases:
                     type: float double
                     value: 2.000000000000000e-01
 
+    # fracpole_dc {{{2
     fracpole_dc:
         path: ../samples/fracpole.dc
         expected:
@@ -441,6 +451,7 @@ test_cases:
                     type: float double
                     value: 0
 
+    # fracpole_ac {{{2
     fracpole_ac:
         path: ../samples/fracpole.ac
         expected:
@@ -479,6 +490,7 @@ test_cases:
                     units: V
                     type: complex double
 
+    # dcopinfo {{{2
     dcopinfo:
         path: ../samples/dcOpInfo.info.psfascii
         expected:
@@ -800,6 +812,7 @@ test_cases:
                     units: V
                     type: float double
 
+    # dan_zilla {{{2
     dan_zilla:
         path: ../samples/dan-zilla.psfascii
         expected:
@@ -1744,6 +1757,7 @@ test_cases:
                     units: V
                     type: float double
 
+    # asereq {{{2
     asereq:
         path: ../samples/asereq.dcop
         expected:
@@ -3848,4 +3862,863 @@ test_cases:
                     type: float double
                     min: 3.3
                     max: 3.3
+
+# test_utils {{{1
+test_utils:
+
+    # pnoise: list-psf {{{2
+    newel:
+        command: list-psf
+        psf_file: samples/pnoise.raw/pnoiva.pnoise
+        expected:
+            >     RESref:fn      RESva:flicker  Rref:rn        Rva:total
+            >     RESref:rn      RESva:thermal  Rref:total     out
+            >     RESref:total   RESva:total    Rva:rn
+
+    # pnoise: list-psf -l {{{2
+    cretin:
+        command: list-psf
+        psf_file: samples/pnoise.raw/pnoiva.pnoise
+        arguments: -l
+        expected:
+            >     RESref:fn      V²/Hz  real  (121 points)
+            >     RESref:rn      V²/Hz  real  (121 points)
+            >     RESref:total   V²/Hz  real  (121 points)
+            >     RESva:flicker  V²/Hz  real  (121 points)
+            >     RESva:thermal  V²/Hz  real  (121 points)
+            >     RESva:total    V²/Hz  real  (121 points)
+            >     Rref:rn        V²/Hz  real  (121 points)
+            >     Rref:total     V²/Hz  real  (121 points)
+            >     Rva:rn         V²/Hz  real  (121 points)
+            >     Rva:total      V²/Hz  real  (121 points)
+            >     out            V/√Hz  real  (121 points)
+
+    # pnoise: list-psf -l {{{2
+    tonnage:
+        command: list-psf
+        psf_file: samples/pnoise.raw/pnoiva.pnoise
+        arguments: -l RESva:*
+        expected:
+            >     RESva:flicker  V²/Hz  real  (121 points)
+            >     RESva:thermal  V²/Hz  real  (121 points)
+            >     RESva:total    V²/Hz  real  (121 points)
+
+    # fracpole.dc: list-psf {{{2
+    gangster:
+        command: list-psf
+        psf_file: samples/fracpole.dc
+        expected:     FP2.1  FP2.2  FP6.1  FP6.2  FP6.3  FP6.4  FP6.5  z2     z6
+
+    # fracpole.dc: list-psf -l {{{2
+    mediate:
+        command: list-psf
+        psf_file: samples/fracpole.dc
+        arguments: -l
+        expected:
+            >     FP2.1  V  real
+            >     FP2.2  V  real
+            >     FP6.1  V  real
+            >     FP6.2  V  real
+            >     FP6.3  V  real
+            >     FP6.4  V  real
+            >     FP6.5  V  real
+            >     z2     V  real
+            >     z6     V  real
+
+    # fracpole.dc: plot-psf * {{{2
+    dresser:
+        command: plot-psf
+        psf_file: samples/fracpole.dc
+        arguments: *
+        expected:
+            >     V(FP2.1) = 0 V
+            >     V(FP2.2) = 0 V
+            >     V(FP6.1) = 0 V
+            >     V(FP6.2) = 0 V
+            >     V(FP6.3) = 0 V
+            >     V(FP6.4) = 0 V
+            >     V(FP6.5) = 0 V
+            >        V(z2) = 0 V
+            >        V(z6) = 0 V
+
+    # fracpole.dc: plot-psf z6-z2 {{{2
+    clamor:
+        command: plot-psf
+        psf_file: samples/fracpole.dc
+        arguments: z6-z2
+        expected:     V(z6,z2) = 0 V
+
+    # fracpole.dc: plot-psf FP6.1,FP6.5 {{{2
+    romantic:
+        command: plot-psf
+        psf_file: samples/fracpole.dc
+        arguments: FP6.1-FP6.5
+        expected:     V(FP6.1,FP6.5) = 0 V
+
+    # fracpole.ac: plot-psf z6 {{{2
+    passport:
+        command: plot-psf
+        psf_file: samples/fracpole.ac
+        arguments: --svg @ z6
+
+    # fracpole.ac: plot-psf z6-z2 {{{2
+    miasma:
+        command: plot-psf
+        psf_file: samples/fracpole.ac
+        arguments: --svg @ z6-z2
+
+    # fracpole.ac: plot-psf -c FP6.1,FP6.5 {{{2
+    gaggle:
+        command: plot-psf
+        psf_file: samples/fracpole.ac
+        arguments: --svg @ -c FP6.1-FP6.5
+
+    # fracpole.ac: plot-psf -d -P z6 {{{2
+    upend:
+        command: plot-psf
+        psf_file: samples/fracpole.ac
+        arguments: --svg @ -d -P z6
+
+    # fracpole.ac: plot-psf -m -M z6 {{{2
+    cedar:
+        command: plot-psf
+        psf_file: samples/fracpole.ac
+        arguments: --svg @ -m -M z6
+
+    # fracpole.ac: plot-psf -p -t TITLE z6 {{{2
+    allergy:
+        command: plot-psf
+        psf_file: samples/fracpole.ac
+        arguments: --svg @ -p -t TITLE z6
+
+    # asereq: plot-psf * {{{2
+    bedsitter:
+        command: plot-psf
+        psf_file: samples/asereq.dcop
+        arguments: *
+        expected:
+            >                      C1.cap = 1 µF
+            >                      C2.cap = 1 µF
+            >                        I1.i = 1.8 mA
+            >                      I1.pwr = 573.68 µW
+            >                        I1.v = 318.71 mV
+            >                       I10.i = 1.8 mA
+            >                     I10.pwr = −59.854 µW
+            >                       I10.v = −33.252 mV
+            >                        I2.i = 1.8 mA
+            >                      I2.pwr = 541.94 µW
+            >                        I2.v = 301.08 mV
+            >              M1.cfrolgd.cap = 255.17 aF
+            >              M1.cfrolgs.cap = 255.17 aF
+            >              M1.cfrowgd.cap = 1.8587 fF
+            >              M1.cfrowgs.cap = 1.8587 fF
+            >                  M1.cgn.cap = 4.0043 fF
+            >               M1.csdext.cap = 45.562 aF
+            >                  M1.m1.beff = 29.795m
+            >                   M1.m1.cbb = 6.5811 fF
+            >                   M1.m1.cbd = 2.0296 fF
+            >                   M1.m1.cbg = 1.7595 fF
+            >                   M1.m1.cbs = 2.792 fF
+            >                   M1.m1.cdb = 2.3289 fF
+            >                   M1.m1.cdd = 2.8822 fF
+            >                   M1.m1.cdg = 5.144 fF
+            >                   M1.m1.cds = −4.5906 fF
+            >                   M1.m1.cgb = 1.8205 fF
+            >                   M1.m1.cgd = 745.61 aF
+            >                   M1.m1.cgg = 14.125 fF
+            >                   M1.m1.cgs = 11.559 fF
+            >                   M1.m1.csb = 2.4316 fF
+            >                   M1.m1.csd = 107.03 aF
+            >                   M1.m1.csg = 7.2219 fF
+            >                   M1.m1.css = 9.7606 fF
+            >                  M1.m1.dtsh = 0
+            >                    M1.m1.ft = 112.93G
+            >                   M1.m1.gds = 196.38µ
+            >                    M1.m1.gm = 10.023m
+            >                   M1.m1.gmb = 855.82µ
+            >              M1.m1.gmoverid = 5.5682
+            >                    M1.m1.ib = 0 A
+            >                    M1.m1.id = 1.8 mA
+            >                   M1.m1.idb = 0 A
+            >                   M1.m1.ids = 1.8 mA
+            >                    M1.m1.ig = 63.152 pA
+            >                   M1.m1.igd = 24.433 pA
+            >                 M1.m1.igidl = 0 A
+            >                 M1.m1.igisl = 0 A
+            >                   M1.m1.igs = 38.72 pA
+            >                    M1.m1.is = −1.8 mA
+            >                   M1.m1.isb = 0 A
+            >                   M1.m1.pwr = 1.2263 mW
+            >                M1.m1.region = 2
+            >                 M1.m1.rgate = 0 Ω
+            >                  M1.m1.rout = 5.0922 kΩ
+            >             M1.m1.self_gain = 51.038
+            >                    M1.m1.tk = 300.15
+            >                M1.m1.typeop = 1
+            >                   M1.m1.vds = 681.29 mV
+            >                 M1.m1.vdsat = 281.03 mV
+            >            M1.m1.vdsat_marg = 400.26 mV
+            >                M1.m1.vearly = 9.166 V
+            >                   M1.m1.vgs = 681.29 mV
+            >                   M1.m1.vsb = 0 V
+            >                   M1.m1.vth = 333.69 mV
+            >             M1.m1.vth_drive = 347.6 mV
+            >                     M1.rb.i = 0 A
+            >                   M1.rb.pwr = 0 W
+            >                   M1.rb.res = 103 Ω
+            >                     M1.rb.v = 0 V
+            >                   M1.rgcs.i = 63.152 pA
+            >                 M1.rgcs.pwr = 7.504 zW
+            >                 M1.rgcs.res = 1.8815 Ω
+            >                   M1.rgcs.v = 118.82 pV
+            >                    M1.rgn.i = 63.152 pA
+            >                  M1.rgn.pwr = 36.989 zW
+            >                  M1.rgn.res = 9.2745 Ω
+            >                    M1.rgn.v = 585.71 pV
+            >                   M1.rgvi.i = 63.152 pA
+            >                 M1.rgvi.pwr = 94.284 zW
+            >                 M1.rgvi.res = 23.64 Ω
+            >                   M1.rgvi.v = 1.493 nV
+            >                M1.xdw.d1.cj = 98.068 fF
+            >             M1.xdw.d1.cjbot = 2.6523 fF
+            >             M1.xdw.d1.cjgat = 0 F
+            >           M1.xdw.d1.cjosbot = 2.6193 fF
+            >           M1.xdw.d1.cjosgat = 0 F
+            >           M1.xdw.d1.cjossti = 94.227 fF
+            >             M1.xdw.d1.cjsti = 95.415 fF
+            >            M1.xdw.d1.ctotal = 98.068 fF
+            >      M1.xdw.d1.diode_region = 0
+            >         M1.xdw.d1.idsatsbot = 22.38 aA
+            >         M1.xdw.d1.idsatsgat = 0 A
+            >         M1.xdw.d1.idsatssti = 263.89 aA
+            >                M1.xdw.d1.ij = 0 A
+            >             M1.xdw.d1.ijbot = 0 A
+            >             M1.xdw.d1.ijgat = 0 A
+            >             M1.xdw.d1.ijsti = 0 A
+            >               M1.xdw.d1.lx5 = 98.068 fF
+            >                M1.xdw.d1.si = 0 A²/Hz
+            >               M1.xdw.d1.vak = 0 V
+            >           M1.xdw.d1.vbisbot = 375.62 mV
+            >           M1.xdw.d1.vbisgat = 998.17 mV
+            >           M1.xdw.d1.vbissti = 714.58 mV
+            >                  M1.xdw:1.i = 0 A
+            >                  M1.xdw:2.i = 0 A
+            >             M11.cfrolgd.cap = 255.17 aF
+            >             M11.cfrolgs.cap = 255.17 aF
+            >             M11.cfrowgd.cap = 1.8587 fF
+            >             M11.cfrowgs.cap = 1.8587 fF
+            >                 M11.cgn.cap = 4.0043 fF
+            >              M11.csdext.cap = 45.562 aF
+            >                 M11.m1.beff = 27.294m
+            >                  M11.m1.cbb = 6.5836 fF
+            >                  M11.m1.cbd = 2.0763 fF
+            >                  M11.m1.cbg = 1.7282 fF
+            >                  M11.m1.cbs = 2.7792 fF
+            >                  M11.m1.cdb = 2.3745 fF
+            >                  M11.m1.cdd = 3.7891 fF
+            >                  M11.m1.cdg = 6.108 fF
+            >                  M11.m1.cds = −4.6933 fF
+            >                  M11.m1.cgb = 1.7616 fF
+            >                  M11.m1.cgd = 1.8304 fF
+            >                  M11.m1.cgg = 15.362 fF
+            >                  M11.m1.cgs = 11.77 fF
+            >                  M11.m1.csb = 2.4476 fF
+            >                  M11.m1.csd = −117.58 aF
+            >                  M11.m1.csg = 7.5261 fF
+            >                  M11.m1.css = 9.8562 fF
+            >                 M11.m1.dtsh = 0
+            >                   M11.m1.ft = 91.028G
+            >                  M11.m1.gds = 1.2471m
+            >                   M11.m1.gm = 8.7864m
+            >                  M11.m1.gmb = 766.86µ
+            >             M11.m1.gmoverid = 4.8813
+            >                   M11.m1.ib = 0 A
+            >                   M11.m1.id = 1.8 mA
+            >                  M11.m1.idb = 0 A
+            >                  M11.m1.ids = 1.8 mA
+            >                   M11.m1.ig = 78.084 pA
+            >                  M11.m1.igd = 30.353 pA
+            >                M11.m1.igidl = 0 A
+            >                M11.m1.igisl = 0 A
+            >                  M11.m1.igs = 47.731 pA
+            >                   M11.m1.is = −1.8 mA
+            >                  M11.m1.isb = 0 A
+            >                  M11.m1.pwr = 566.07 µW
+            >               M11.m1.region = 2
+            >                M11.m1.rgate = 0 Ω
+            >                 M11.m1.rout = 801.89 Ω
+            >            M11.m1.self_gain = 7.0457
+            >                   M11.m1.tk = 300.15
+            >               M11.m1.typeop = 1
+            >                  M11.m1.vds = 314.48 mV
+            >                M11.m1.vdsat = 290.02 mV
+            >           M11.m1.vdsat_marg = 24.456 mV
+            >               M11.m1.vearly = 1.4434 V
+            >                  M11.m1.vgs = 698.92 mV
+            >                  M11.m1.vsb = 0 V
+            >                  M11.m1.vth = 335.75 mV
+            >            M11.m1.vth_drive = 363.17 mV
+            >                    M11.rb.i = 0 A
+            >                  M11.rb.pwr = 0 W
+            >                  M11.rb.res = 103 Ω
+            >                    M11.rb.v = 0 V
+            >                  M11.rgcs.i = 78.084 pA
+            >                M11.rgcs.pwr = 11.472 zW
+            >                M11.rgcs.res = 1.8815 Ω
+            >                  M11.rgcs.v = 146.92 pV
+            >                   M11.rgn.i = 78.084 pA
+            >                 M11.rgn.pwr = 56.547 zW
+            >                 M11.rgn.res = 9.2745 Ω
+            >                   M11.rgn.v = 724.19 pV
+            >                  M11.rgvi.i = 78.084 pA
+            >                M11.rgvi.pwr = 144.14 zW
+            >                M11.rgvi.res = 23.64 Ω
+            >                  M11.rgvi.v = 1.8459 nV
+            >               M11.xdw.d1.cj = 98.068 fF
+            >            M11.xdw.d1.cjbot = 2.6523 fF
+            >            M11.xdw.d1.cjgat = 0 F
+            >          M11.xdw.d1.cjosbot = 2.6193 fF
+            >          M11.xdw.d1.cjosgat = 0 F
+            >          M11.xdw.d1.cjossti = 94.227 fF
+            >            M11.xdw.d1.cjsti = 95.415 fF
+            >           M11.xdw.d1.ctotal = 98.068 fF
+            >     M11.xdw.d1.diode_region = 0
+            >        M11.xdw.d1.idsatsbot = 22.38 aA
+            >        M11.xdw.d1.idsatsgat = 0 A
+            >        M11.xdw.d1.idsatssti = 263.89 aA
+            >               M11.xdw.d1.ij = 0 A
+            >            M11.xdw.d1.ijbot = 0 A
+            >            M11.xdw.d1.ijgat = 0 A
+            >            M11.xdw.d1.ijsti = 0 A
+            >              M11.xdw.d1.lx5 = 98.068 fF
+            >               M11.xdw.d1.si = 0 A²/Hz
+            >              M11.xdw.d1.vak = 0 V
+            >          M11.xdw.d1.vbisbot = 375.62 mV
+            >          M11.xdw.d1.vbisgat = 998.17 mV
+            >          M11.xdw.d1.vbissti = 714.58 mV
+            >                 M11.xdw:1.i = 0 A
+            >                 M11.xdw:2.i = 0 A
+            >                     M11:1.i = 1.8 mA
+            >                     M11:2.i = 78.084 pA
+            >                     M11:3.i = −1.8 mA
+            >                     M11:4.i = 0 A
+            >             M12.cfrolgd.cap = 255.17 aF
+            >             M12.cfrolgs.cap = 255.17 aF
+            >             M12.cfrowgd.cap = 1.8587 fF
+            >             M12.cfrowgs.cap = 1.8587 fF
+            >                 M12.cgn.cap = 4.0043 fF
+            >              M12.csdext.cap = 45.562 aF
+            >                 M12.m1.beff = 28.286m
+            >                  M12.m1.cbb = 6.5853 fF
+            >                  M12.m1.cbd = 2.0478 fF
+            >                  M12.m1.cbg = 1.7528 fF
+            >                  M12.m1.cbs = 2.7848 fF
+            >                  M12.m1.cdb = 2.3568 fF
+            >                  M12.m1.cdd = 3.4064 fF
+            >                  M12.m1.cdg = 5.8369 fF
+            >                  M12.m1.cds = −4.7873 fF
+            >                  M12.m1.cgb = 1.786 fF
+            >                  M12.m1.cgd = 1.3503 fF
+            >                  M12.m1.cgg = 15.079 fF
+            >                  M12.m1.cgs = 11.942 fF
+            >                  M12.m1.csb = 2.4425 fF
+            >                  M12.m1.csd = 8.3025 aF
+            >                  M12.m1.csg = 7.4891 fF
+            >                  M12.m1.css = 9.9399 fF
+            >                 M12.m1.dtsh = 0
+            >                   M12.m1.ft = 98.664G
+            >                  M12.m1.gds = 705.01µ
+            >                   M12.m1.gm = 9.3477m
+            >                  M12.m1.gmb = 794.04µ
+            >             M12.m1.gmoverid = 5.1931
+            >                   M12.m1.ib = 0 A
+            >                   M12.m1.id = 1.8 mA
+            >                  M12.m1.idb = 0 A
+            >                  M12.m1.ids = 1.8 mA
+            >                   M12.m1.ig = 93.169 pA
+            >                  M12.m1.igd = 35.809 pA
+            >                M12.m1.igidl = 0 A
+            >                M12.m1.igisl = 0 A
+            >                  M12.m1.igs = 57.359 pA
+            >                   M12.m1.is = −1.8 mA
+            >                  M12.m1.isb = 0 A
+            >                  M12.m1.pwr = 691.99 µW
+            >               M12.m1.region = 2
+            >                M12.m1.rgate = 0 Ω
+            >                 M12.m1.rout = 1.4184 kΩ
+            >            M12.m1.self_gain = 13.259
+            >                   M12.m1.tk = 300.15
+            >               M12.m1.typeop = 1
+            >                  M12.m1.vds = 384.44 mV
+            >                M12.m1.vdsat = 287.93 mV
+            >           M12.m1.vdsat_marg = 96.512 mV
+            >               M12.m1.vearly = 2.5532 V
+            >                  M12.m1.vgs = 718.77 mV
+            >                  M12.m1.vsb = 314.48 mV
+            >                  M12.m1.vth = 362.02 mV
+            >            M12.m1.vth_drive = 356.75 mV
+            >                    M12.rb.i = 0 A
+            >                  M12.rb.pwr = 0 W
+            >                  M12.rb.res = 103 Ω
+            >                    M12.rb.v = 0 V
+            >                  M12.rgcs.i = 93.169 pA
+            >                M12.rgcs.pwr = 16.333 zW
+            >                M12.rgcs.res = 1.8815 Ω
+            >                  M12.rgcs.v = 175.3 pV
+            >                   M12.rgn.i = 93.169 pA
+            >                 M12.rgn.pwr = 80.506 zW
+            >                 M12.rgn.res = 9.2745 Ω
+            >                   M12.rgn.v = 864.09 pV
+            >                  M12.rgvi.i = 93.169 pA
+            >                M12.rgvi.pwr = 205.21 zW
+            >                M12.rgvi.res = 23.64 Ω
+            >                  M12.rgvi.v = 2.2026 nV
+            >               M12.xdw.d1.cj = 98.068 fF
+            >            M12.xdw.d1.cjbot = 2.6523 fF
+            >            M12.xdw.d1.cjgat = 0 F
+            >          M12.xdw.d1.cjosbot = 2.6193 fF
+            >          M12.xdw.d1.cjosgat = 0 F
+            >          M12.xdw.d1.cjossti = 94.227 fF
+            >            M12.xdw.d1.cjsti = 95.415 fF
+            >           M12.xdw.d1.ctotal = 98.068 fF
+            >     M12.xdw.d1.diode_region = 0
+            >        M12.xdw.d1.idsatsbot = 22.38 aA
+            >        M12.xdw.d1.idsatsgat = 0 A
+            >        M12.xdw.d1.idsatssti = 263.89 aA
+            >               M12.xdw.d1.ij = 0 A
+            >            M12.xdw.d1.ijbot = 0 A
+            >            M12.xdw.d1.ijgat = 0 A
+            >            M12.xdw.d1.ijsti = 0 A
+            >              M12.xdw.d1.lx5 = 98.068 fF
+            >               M12.xdw.d1.si = 0 A²/Hz
+            >              M12.xdw.d1.vak = 0 V
+            >          M12.xdw.d1.vbisbot = 375.62 mV
+            >          M12.xdw.d1.vbisgat = 998.17 mV
+            >          M12.xdw.d1.vbissti = 714.58 mV
+            >                 M12.xdw:1.i = 0 A
+            >                 M12.xdw:2.i = 0 A
+            >                     M12:1.i = 1.8 mA
+            >                     M12:2.i = 93.169 pA
+            >                     M12:3.i = −1.8 mA
+            >                     M12:4.i = 0 A
+            >                      M1:1.i = 1.8 mA
+            >                      M1:2.i = 63.152 pA
+            >                      M1:3.i = −1.8 mA
+            >                      M1:4.i = 0 A
+            >              M2.cfrolgd.cap = 255.17 aF
+            >              M2.cfrolgs.cap = 255.17 aF
+            >              M2.cfrowgd.cap = 1.8587 fF
+            >              M2.cfrowgs.cap = 1.8587 fF
+            >                  M2.cgn.cap = 4.0043 fF
+            >               M2.csdext.cap = 45.562 aF
+            >                  M2.m1.beff = 29.717m
+            >                   M2.m1.cbb = 6.581 fF
+            >                   M2.m1.cbd = 2.0295 fF
+            >                   M2.m1.cbg = 1.7605 fF
+            >                   M2.m1.cbs = 2.791 fF
+            >                   M2.m1.cdb = 2.3293 fF
+            >                   M2.m1.cdd = 2.9024 fF
+            >                   M2.m1.cdg = 5.1657 fF
+            >                   M2.m1.cds = −4.5926 fF
+            >                   M2.m1.cgb = 1.82 fF
+            >                   M2.m1.cgd = 766.81 aF
+            >                   M2.m1.cgg = 14.15 fF
+            >                   M2.m1.cgs = 11.563 fF
+            >                   M2.m1.csb = 2.4317 fF
+            >                   M2.m1.csd = 106.09 aF
+            >                   M2.m1.csg = 7.2234 fF
+            >                   M2.m1.css = 9.7612 fF
+            >                  M2.m1.dtsh = 0
+            >                    M2.m1.ft = 112.31G
+            >                   M2.m1.gds = 210.32µ
+            >                    M2.m1.gm = 9.9853m
+            >                   M2.m1.gmb = 853.36µ
+            >              M2.m1.gmoverid = 5.5671
+            >                    M2.m1.ib = 0 A
+            >                    M2.m1.id = 1.7936 mA
+            >                   M2.m1.idb = 0 A
+            >                   M2.m1.ids = 1.7936 mA
+            >                    M2.m1.ig = 63.184 pA
+            >                   M2.m1.igd = 24.45 pA
+            >                 M2.m1.igidl = 0 A
+            >                 M2.m1.igisl = 0 A
+            >                   M2.m1.igs = 38.733 pA
+            >                    M2.m1.is = −1.7936 mA
+            >                   M2.m1.isb = 0 A
+            >                   M2.m1.pwr = 1.1659 mW
+            >                M2.m1.region = 2
+            >                 M2.m1.rgate = 0 Ω
+            >                  M2.m1.rout = 4.7547 kΩ
+            >             M2.m1.self_gain = 47.477
+            >                    M2.m1.tk = 300.15
+            >                M2.m1.typeop = 1
+            >                   M2.m1.vds = 650 mV
+            >                 M2.m1.vdsat = 280.94 mV
+            >            M2.m1.vdsat_marg = 369.06 mV
+            >                M2.m1.vearly = 8.5282 V
+            >                   M2.m1.vgs = 681.29 mV
+            >                   M2.m1.vsb = 0 V
+            >                   M2.m1.vth = 333.85 mV
+            >             M2.m1.vth_drive = 347.44 mV
+            >                     M2.rb.i = 0 A
+            >                   M2.rb.pwr = 0 W
+            >                   M2.rb.res = 103 Ω
+            >                     M2.rb.v = 0 V
+            >                   M2.rgcs.i = 63.184 pA
+            >                 M2.rgcs.pwr = 7.5114 zW
+            >                 M2.rgcs.res = 1.8815 Ω
+            >                   M2.rgcs.v = 118.88 pV
+            >                    M2.rgn.i = 63.184 pA
+            >                  M2.rgn.pwr = 37.025 zW
+            >                  M2.rgn.res = 9.2745 Ω
+            >                    M2.rgn.v = 586 pV
+            >                   M2.rgvi.i = 63.184 pA
+            >                 M2.rgvi.pwr = 94.377 zW
+            >                 M2.rgvi.res = 23.64 Ω
+            >                   M2.rgvi.v = 1.4937 nV
+            >                M2.xdw.d1.cj = 98.068 fF
+            >             M2.xdw.d1.cjbot = 2.6523 fF
+            >             M2.xdw.d1.cjgat = 0 F
+            >           M2.xdw.d1.cjosbot = 2.6193 fF
+            >           M2.xdw.d1.cjosgat = 0 F
+            >           M2.xdw.d1.cjossti = 94.227 fF
+            >             M2.xdw.d1.cjsti = 95.415 fF
+            >            M2.xdw.d1.ctotal = 98.068 fF
+            >      M2.xdw.d1.diode_region = 0
+            >         M2.xdw.d1.idsatsbot = 22.38 aA
+            >         M2.xdw.d1.idsatsgat = 0 A
+            >         M2.xdw.d1.idsatssti = 263.89 aA
+            >                M2.xdw.d1.ij = 0 A
+            >             M2.xdw.d1.ijbot = 0 A
+            >             M2.xdw.d1.ijgat = 0 A
+            >             M2.xdw.d1.ijsti = 0 A
+            >               M2.xdw.d1.lx5 = 98.068 fF
+            >                M2.xdw.d1.si = 0 A²/Hz
+            >               M2.xdw.d1.vak = 0 V
+            >           M2.xdw.d1.vbisbot = 375.62 mV
+            >           M2.xdw.d1.vbisgat = 998.17 mV
+            >           M2.xdw.d1.vbissti = 714.58 mV
+            >                  M2.xdw:1.i = 0 A
+            >                  M2.xdw:2.i = 0 A
+            >             M21.cfrolgd.cap = 255.17 aF
+            >             M21.cfrolgs.cap = 255.17 aF
+            >             M21.cfrowgd.cap = 1.8587 fF
+            >             M21.cfrowgs.cap = 1.8587 fF
+            >                 M21.cgn.cap = 4.0043 fF
+            >              M21.csdext.cap = 45.562 aF
+            >                 M21.m1.beff = 27.232m
+            >                  M21.m1.cbb = 6.5837 fF
+            >                  M21.m1.cbd = 2.0783 fF
+            >                  M21.m1.cbg = 1.7269 fF
+            >                  M21.m1.cbs = 2.7785 fF
+            >                  M21.m1.cdb = 2.3757 fF
+            >                  M21.m1.cdd = 3.8157 fF
+            >                  M21.m1.cdg = 6.1286 fF
+            >                  M21.m1.cds = −4.6887 fF
+            >                  M21.m1.cgb = 1.76 fF
+            >                  M21.m1.cgd = 1.8641 fF
+            >                  M21.m1.cgg = 15.388 fF
+            >                  M21.m1.cgs = 11.764 fF
+            >                  M21.m1.csb = 2.4481 fF
+            >                  M21.m1.csd = −126.8 aF
+            >                  M21.m1.csg = 7.533 fF
+            >                  M21.m1.css = 9.8543 fF
+            >                 M21.m1.dtsh = 0
+            >                   M21.m1.ft = 90.449G
+            >                  M21.m1.gds = 1.2843m
+            >                   M21.m1.gm = 8.7454m
+            >                  M21.m1.gmb = 763.68µ
+            >             M21.m1.gmoverid = 4.8703
+            >                   M21.m1.ib = 0 A
+            >                   M21.m1.id = 1.7957 mA
+            >                  M21.m1.idb = 0 A
+            >                  M21.m1.ids = 1.7957 mA
+            >                   M21.m1.ig = 78.233 pA
+            >                  M21.m1.igd = 30.431 pA
+            >                M21.m1.igidl = 0 A
+            >                M21.m1.igisl = 0 A
+            >                  M21.m1.igs = 47.801 pA
+            >                   M21.m1.is = −1.7957 mA
+            >                  M21.m1.isb = 0 A
+            >                  M21.m1.pwr = 558.54 µW
+            >               M21.m1.region = 2
+            >                M21.m1.rgate = 0 Ω
+            >                 M21.m1.rout = 778.65 Ω
+            >            M21.m1.self_gain = 6.8096
+            >                   M21.m1.tk = 300.15
+            >               M21.m1.typeop = 1
+            >                  M21.m1.vds = 311.05 mV
+            >                M21.m1.vdsat = 290.01 mV
+            >           M21.m1.vdsat_marg = 21.041 mV
+            >               M21.m1.vearly = 1.3982 V
+            >                  M21.m1.vgs = 698.92 mV
+            >                  M21.m1.vsb = 0 V
+            >                  M21.m1.vth = 335.77 mV
+            >            M21.m1.vth_drive = 363.15 mV
+            >                    M21.rb.i = 0 A
+            >                  M21.rb.pwr = 0 W
+            >                  M21.rb.res = 103 Ω
+            >                    M21.rb.v = 0 V
+            >                  M21.rgcs.i = 78.233 pA
+            >                M21.rgcs.pwr = 11.516 zW
+            >                M21.rgcs.res = 1.8815 Ω
+            >                  M21.rgcs.v = 147.2 pV
+            >                   M21.rgn.i = 78.233 pA
+            >                 M21.rgn.pwr = 56.763 zW
+            >                 M21.rgn.res = 9.2745 Ω
+            >                   M21.rgn.v = 725.57 pV
+            >                  M21.rgvi.i = 78.233 pA
+            >                M21.rgvi.pwr = 144.69 zW
+            >                M21.rgvi.res = 23.64 Ω
+            >                  M21.rgvi.v = 1.8495 nV
+            >               M21.xdw.d1.cj = 98.068 fF
+            >            M21.xdw.d1.cjbot = 2.6523 fF
+            >            M21.xdw.d1.cjgat = 0 F
+            >          M21.xdw.d1.cjosbot = 2.6193 fF
+            >          M21.xdw.d1.cjosgat = 0 F
+            >          M21.xdw.d1.cjossti = 94.227 fF
+            >            M21.xdw.d1.cjsti = 95.415 fF
+            >           M21.xdw.d1.ctotal = 98.068 fF
+            >     M21.xdw.d1.diode_region = 0
+            >        M21.xdw.d1.idsatsbot = 22.38 aA
+            >        M21.xdw.d1.idsatsgat = 0 A
+            >        M21.xdw.d1.idsatssti = 263.89 aA
+            >               M21.xdw.d1.ij = 0 A
+            >            M21.xdw.d1.ijbot = 0 A
+            >            M21.xdw.d1.ijgat = 0 A
+            >            M21.xdw.d1.ijsti = 0 A
+            >              M21.xdw.d1.lx5 = 98.068 fF
+            >               M21.xdw.d1.si = 0 A²/Hz
+            >              M21.xdw.d1.vak = 0 V
+            >          M21.xdw.d1.vbisbot = 375.62 mV
+            >          M21.xdw.d1.vbisgat = 998.17 mV
+            >          M21.xdw.d1.vbissti = 714.58 mV
+            >                 M21.xdw:1.i = 0 A
+            >                 M21.xdw:2.i = 0 A
+            >                     M21:1.i = 1.7957 mA
+            >                     M21:2.i = 78.233 pA
+            >                     M21:3.i = −1.7957 mA
+            >                     M21:4.i = 0 A
+            >             M22.cfrolgd.cap = 255.17 aF
+            >             M22.cfrolgs.cap = 255.17 aF
+            >             M22.cfrowgd.cap = 1.8587 fF
+            >             M22.cfrowgs.cap = 1.8587 fF
+            >                 M22.cgn.cap = 4.0043 fF
+            >              M22.csdext.cap = 45.562 aF
+            >                 M22.m1.beff = 27.68m
+            >                  M22.m1.cbb = 6.5862 fF
+            >                  M22.m1.cbd = 2.0639 fF
+            >                  M22.m1.cbg = 1.7408 fF
+            >                  M22.m1.cbs = 2.7815 fF
+            >                  M22.m1.cdb = 2.3694 fF
+            >                  M22.m1.cdd = 3.6499 fF
+            >                  M22.m1.cdg = 6.0703 fF
+            >                  M22.m1.cds = −4.7898 fF
+            >                  M22.m1.cgb = 1.7698 fF
+            >                  M22.m1.cgd = 1.6526 fF
+            >                  M22.m1.cgg = 15.382 fF
+            >                  M22.m1.cgs = 11.96 fF
+            >                  M22.m1.csb = 2.447 fF
+            >                  M22.m1.csd = −66.533 aF
+            >                  M22.m1.csg = 7.571 fF
+            >                  M22.m1.css = 9.9515 fF
+            >                 M22.m1.dtsh = 0
+            >                   M22.m1.ft = 93.228G
+            >                  M22.m1.gds = 1.0154m
+            >                   M22.m1.gm = 9.0104m
+            >                  M22.m1.gmb = 769.27µ
+            >             M22.m1.gmoverid = 5.0179
+            >                   M22.m1.ib = 0 A
+            >                   M22.m1.id = 1.7957 mA
+            >                  M22.m1.idb = 0 A
+            >                  M22.m1.ids = 1.7957 mA
+            >                   M22.m1.ig = 97.508 pA
+            >                  M22.m1.igd = 37.583 pA
+            >                M22.m1.igidl = 0 A
+            >                M22.m1.igisl = 0 A
+            >                  M22.m1.igs = 59.925 pA
+            >                   M22.m1.is = −1.7957 mA
+            >                  M22.m1.isb = 0 A
+            >                  M22.m1.pwr = 608.64 µW
+            >               M22.m1.region = 2
+            >                M22.m1.rgate = 0 Ω
+            >                 M22.m1.rout = 984.87 Ω
+            >            M22.m1.self_gain = 8.8741
+            >                   M22.m1.tk = 300.15
+            >               M22.m1.typeop = 1
+            >                  M22.m1.vds = 338.95 mV
+            >                M22.m1.vdsat = 289.88 mV
+            >           M22.m1.vdsat_marg = 49.065 mV
+            >               M22.m1.vearly = 1.7685 V
+            >                  M22.m1.vgs = 722.2 mV
+            >                  M22.m1.vsb = 311.05 mV
+            >                  M22.m1.vth = 362 mV
+            >            M22.m1.vth_drive = 360.2 mV
+            >                    M22.rb.i = 0 A
+            >                  M22.rb.pwr = 0 W
+            >                  M22.rb.res = 103 Ω
+            >                    M22.rb.v = 0 V
+            >                  M22.rgcs.i = 97.508 pA
+            >                M22.rgcs.pwr = 17.889 zW
+            >                M22.rgcs.res = 1.8815 Ω
+            >                  M22.rgcs.v = 183.47 pV
+            >                   M22.rgn.i = 97.508 pA
+            >                 M22.rgn.pwr = 88.18 zW
+            >                 M22.rgn.res = 9.2745 Ω
+            >                   M22.rgn.v = 904.34 pV
+            >                  M22.rgvi.i = 97.508 pA
+            >                M22.rgvi.pwr = 224.77 zW
+            >                M22.rgvi.res = 23.64 Ω
+            >                  M22.rgvi.v = 2.3051 nV
+            >               M22.xdw.d1.cj = 98.068 fF
+            >            M22.xdw.d1.cjbot = 2.6523 fF
+            >            M22.xdw.d1.cjgat = 0 F
+            >          M22.xdw.d1.cjosbot = 2.6193 fF
+            >          M22.xdw.d1.cjosgat = 0 F
+            >          M22.xdw.d1.cjossti = 94.227 fF
+            >            M22.xdw.d1.cjsti = 95.415 fF
+            >           M22.xdw.d1.ctotal = 98.068 fF
+            >     M22.xdw.d1.diode_region = 0
+            >        M22.xdw.d1.idsatsbot = 22.38 aA
+            >        M22.xdw.d1.idsatsgat = 0 A
+            >        M22.xdw.d1.idsatssti = 263.89 aA
+            >               M22.xdw.d1.ij = 0 A
+            >            M22.xdw.d1.ijbot = 0 A
+            >            M22.xdw.d1.ijgat = 0 A
+            >            M22.xdw.d1.ijsti = 0 A
+            >              M22.xdw.d1.lx5 = 98.068 fF
+            >               M22.xdw.d1.si = 0 A²/Hz
+            >              M22.xdw.d1.vak = 0 V
+            >          M22.xdw.d1.vbisbot = 375.62 mV
+            >          M22.xdw.d1.vbisgat = 998.17 mV
+            >          M22.xdw.d1.vbissti = 714.58 mV
+            >                 M22.xdw:1.i = 0 A
+            >                 M22.xdw:2.i = 0 A
+            >                     M22:1.i = 1.7957 mA
+            >                     M22:2.i = 97.508 pA
+            >                     M22:3.i = −1.7957 mA
+            >                     M22:4.i = 0 A
+            >                      M2:1.i = 1.7936 mA
+            >                      M2:2.i = 63.184 pA
+            >                      M2:3.i = −1.7936 mA
+            >                      M2:4.i = 0 A
+            >              N0.cfrolgd.cap = 255.17 aF
+            >              N0.cfrolgs.cap = 255.17 aF
+            >              N0.cfrowgd.cap = 1.8587 fF
+            >              N0.cfrowgs.cap = 1.8587 fF
+            >                  N0.cgn.cap = 4.0043 fF
+            >               N0.csdext.cap = 45.562 aF
+            >                  N0.m1.beff = 29.891m
+            >                   N0.m1.cbb = 6.5847 fF
+            >                   N0.m1.cbd = 2.0298 fF
+            >                   N0.m1.cbg = 1.7631 fF
+            >                   N0.m1.cbs = 2.7918 fF
+            >                   N0.m1.cdb = 2.3325 fF
+            >                   N0.m1.cdd = 2.8802 fF
+            >                   N0.m1.cdg = 5.2297 fF
+            >                   N0.m1.cds = −4.6819 fF
+            >                   N0.m1.cgb = 1.818 fF
+            >                   N0.m1.cgd = 743.21 aF
+            >                   N0.m1.cgg = 14.318 fF
+            >                   N0.m1.cgs = 11.757 fF
+            >                   N0.m1.csb = 2.4342 fF
+            >                   N0.m1.csd = 107.21 aF
+            >                   N0.m1.csg = 7.325 fF
+            >                   N0.m1.css = 9.8664 fF
+            >                  N0.m1.dtsh = 0
+            >                    N0.m1.ft = 111.91G
+            >                   N0.m1.gds = 192.34µ
+            >                    N0.m1.gm = 10.067m
+            >                   N0.m1.gmb = 842.55µ
+            >              N0.m1.gmoverid = 5.593
+            >                    N0.m1.ib = 0 A
+            >                    N0.m1.id = 1.8 mA
+            >                   N0.m1.idb = 0 A
+            >                   N0.m1.ids = 1.8 mA
+            >                    N0.m1.ig = 82.961 pA
+            >                   N0.m1.igd = 31.882 pA
+            >                 N0.m1.igidl = 0 A
+            >                 N0.m1.igisl = 0 A
+            >                   N0.m1.igs = 51.078 pA
+            >                    N0.m1.is = −1.8 mA
+            >                   N0.m1.isb = 0 A
+            >                   N0.m1.pwr = 1.2749 mW
+            >                N0.m1.region = 2
+            >                 N0.m1.rgate = 0 Ω
+            >                  N0.m1.rout = 5.1992 kΩ
+            >             N0.m1.self_gain = 52.343
+            >                    N0.m1.tk = 300.15
+            >                N0.m1.typeop = 1
+            >                   N0.m1.vds = 708.25 mV
+            >                 N0.m1.vdsat = 282.35 mV
+            >            N0.m1.vdsat_marg = 425.9 mV
+            >                N0.m1.vearly = 9.3586 V
+            >                   N0.m1.vgs = 708.25 mV
+            >                   N0.m1.vsb = 325 mV
+            >                   N0.m1.vth = 361.21 mV
+            >             N0.m1.vth_drive = 347.04 mV
+            >                     N0.rb.i = 0 A
+            >                   N0.rb.pwr = 0 W
+            >                   N0.rb.res = 103 Ω
+            >                     N0.rb.v = 0 V
+            >                   N0.rgcs.i = 82.96 pA
+            >                 N0.rgcs.pwr = 12.95 zW
+            >                 N0.rgcs.res = 1.8815 Ω
+            >                   N0.rgcs.v = 156.09 pV
+            >                    N0.rgn.i = 82.961 pA
+            >                  N0.rgn.pwr = 63.831 zW
+            >                  N0.rgn.res = 9.2745 Ω
+            >                    N0.rgn.v = 769.42 pV
+            >                   N0.rgvi.i = 82.961 pA
+            >                 N0.rgvi.pwr = 162.7 zW
+            >                 N0.rgvi.res = 23.64 Ω
+            >                   N0.rgvi.v = 1.9612 nV
+            >                N0.xdw.d1.cj = 98.068 fF
+            >             N0.xdw.d1.cjbot = 2.6523 fF
+            >             N0.xdw.d1.cjgat = 0 F
+            >           N0.xdw.d1.cjosbot = 2.6193 fF
+            >           N0.xdw.d1.cjosgat = 0 F
+            >           N0.xdw.d1.cjossti = 94.227 fF
+            >             N0.xdw.d1.cjsti = 95.415 fF
+            >            N0.xdw.d1.ctotal = 98.068 fF
+            >      N0.xdw.d1.diode_region = 0
+            >         N0.xdw.d1.idsatsbot = 22.38 aA
+            >         N0.xdw.d1.idsatsgat = 0 A
+            >         N0.xdw.d1.idsatssti = 263.89 aA
+            >                N0.xdw.d1.ij = 0 A
+            >             N0.xdw.d1.ijbot = 0 A
+            >             N0.xdw.d1.ijgat = 0 A
+            >             N0.xdw.d1.ijsti = 0 A
+            >               N0.xdw.d1.lx5 = 98.068 fF
+            >                N0.xdw.d1.si = 0 A²/Hz
+            >               N0.xdw.d1.vak = 0 V
+            >           N0.xdw.d1.vbisbot = 375.62 mV
+            >           N0.xdw.d1.vbisgat = 998.17 mV
+            >           N0.xdw.d1.vbissti = 714.58 mV
+            >                  N0.xdw:1.i = 0 A
+            >                  N0.xdw:2.i = 0 A
+            >                      N0:1.i = 1.8 mA
+            >                      N0:2.i = 82.961 pA
+            >                      N0:3.i = −1.8 mA
+            >                      N0:4.i = 0 A
+            >                        V0.i = −8.9893 mA
+            >                      V0.pwr = −8.9893 mW
+            >                        V0.v = 1 V
+            >                        V1.i = 1.7936 mA
+            >                      V1.pwr = 627.78 µW
+            >                        V1.v = 350 mV
+            >                        V2.i = 1.7957 mA
+            >                      V2.pwr = 628.48 µW
+            >                        V2.v = 350 mV
+            >                        V4.i = 1.8 mA
+            >                      V4.pwr = 585 µW
+            >                        V4.v = 325 mV
+
+    # asereq: plot-psf N0:1.i-N0:2.i {{{2
+    aviator:
+        command: plot-psf
+        psf_file: samples/asereq.dcop
+        arguments: N0:1.i-N0:2.i
+        expected:     (N0:1.i − N0:2.i) = 1.8 mA
+
 

@@ -27,7 +27,6 @@ setup(
         numpy
         ply==3.4
         quantiphy
-        shlib
     """.split(),
     python_requires = '>=3.6',
     zip_safe = True,
