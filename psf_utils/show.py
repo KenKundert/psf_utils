@@ -1,39 +1,39 @@
 # Usage {{{1
 """
-Plot Signals
+Show Signals
+
+Signals may either be waveforms or single points.
+Waveforms are plotted and single points are printed.
 
 Usage:
-    plot-psf [options] <signal>...
+    show-psf [options] <signal>...
 
 Options:
     -c, --no-cache                ignore, then regenerate, the cache
     -f <path>, --psf-file <path>  PSF file
-    -d, --db                      plot the magnitude of the signals in dB
-    -m, --mag                     plot the magnitude of the signals
-    -p, --ph                      plot the phase of the signals
-    -s <file>, --svg <file>       produce plot as SVG file rather than display it
+    -d, --db                      show the magnitude of the signals in dB
+    -m, --mag                     show the magnitude of the signals
+    -p, --ph                      show the phase of the signals
+    -s <file>, --svg <file>       produce graph as SVG file rather than display it
     -t <title>, --title <title>   title
     -M, --mark-points             place marker on each point
     -P, --just-points             do not connect points with lines (implies -M)
 
 The PSF file need only be given if it differs from the one used previously.
 
-Reading large ASCII data files is slow, so plot-psf reads the PSF file once,
+Reading large ASCII data files is slow, so show-psf reads the PSF file once,
 then pickles the data and writes it to disk. On subsequent runs the pickled data
 is used if the pickle file is newer that the corresponding PSF file.
 
-A signal may contain glob characters. For examples, R1:* plots all signals that
+A signal may contain glob characters. For examples, R1:* shows all signals that
 start with R1:.
 
 If a signal as specified on the command line contains a dash, it is split into
 two pieces, each of which are considered signals that are components of a
 differential signal. The two are accessed individually and the difference is
-plotted. So for example, out_p-out_n results in V(out_p, ount_n) being plotted.
+shown. So for example, out_p-out_n results in V(out_p, ount_n) being shown.
 There may only be one dash in a signal, and signals with dashes must not contain
 glob characters.
-
-If the dataset is for a DC operating point, the values are scalars rather than
-waveforms and so are printed rather than plotted.
 """
 
 
@@ -64,7 +64,7 @@ Quantity.set_prefs(
 )
 warnings.filterwarnings('ignore', category=FutureWarning)
 saved_psf_file_filename = '.psf_file'
-saved_arguments_filename = '.psf_plot_args'
+saved_arguments_filename = '.psf_show_args'
 operators = '+ - * /'.split()
 signal_kinds = dict(V='V', A='I', s='t', Hz='f')
 
@@ -119,8 +119,8 @@ def expand_args(signals, args, allow_diff=True):
     return sorted(selected)
 
 
-# plot_signals() {{{1
-def plot_signals():
+# show_signals() {{{1
+def show_signals():
     try:
         # process command line {{{2
         cmdline = docopt(__doc__, argv=get_argv())
@@ -138,14 +138,14 @@ def plot_signals():
         # Open PSF file {{{2
         psf = PSF(psf_file, sep=':', use_cache=use_cache)
         sweep = psf.get_sweep()
-        to_plot = expand_args(psf.signals.keys(), args)
+        to_show = expand_args(psf.signals.keys(), args)
 
         # Print scalars {{{2
         if not sweep:
             with Quantity.prefs(map_sf = Quantity.map_sf_to_greek, prec = print_prec):
                 to_print = []
                 width = 0
-                for arg in to_plot:
+                for arg in to_show:
                     pair = arg.split('-')
                     if len(pair) == 2:
                         psig = psf.get_signal(pair[0])
@@ -179,10 +179,10 @@ def plot_signals():
             lambda v, p: Quantity(v, x_units).render()
         )
 
-        # Process arguments for plots {{{2
+        # Process arguments for graphs {{{2
         waves = []
         y_units = set()
-        for arg in to_plot:
+        for arg in to_show:
             pair = arg.split('-')
             if len(pair) == 2:
                 psig = psf.get_signal(pair[0])
@@ -235,7 +235,7 @@ def plot_signals():
                 y = Quantity(y, units).render(prec=cursor_prec)
             )
 
-        # Generate the plot {{{2
+        # Generate the graph {{{2
         if svg_file:
             matplotlib.use('SVG')
         figure, axes = plt.subplots(len(y_units), 1, sharex=True, squeeze=False)

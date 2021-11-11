@@ -3925,9 +3925,9 @@ test_utils:
             >     z2     V  real
             >     z6     V  real
 
-    # fracpole.dc: plot-psf * {{{2
+    # fracpole.dc: show-psf * {{{2
     dresser:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.dc
         arguments: *
         expected:
@@ -3941,59 +3941,59 @@ test_utils:
             >        V(z2) = 0 V
             >        V(z6) = 0 V
 
-    # fracpole.dc: plot-psf z6-z2 {{{2
+    # fracpole.dc: show-psf z6-z2 {{{2
     clamor:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.dc
         arguments: z6-z2
         expected:     V(z6,z2) = 0 V
 
-    # fracpole.dc: plot-psf FP6.1,FP6.5 {{{2
+    # fracpole.dc: show-psf FP6.1,FP6.5 {{{2
     romantic:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.dc
         arguments: FP6.1-FP6.5
         expected:     V(FP6.1,FP6.5) = 0 V
 
-    # fracpole.ac: plot-psf z6 {{{2
+    # fracpole.ac: show-psf z6 {{{2
     passport:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.ac
         arguments: --svg @ z6
 
-    # fracpole.ac: plot-psf z6-z2 {{{2
+    # fracpole.ac: show-psf z6-z2 {{{2
     miasma:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.ac
         arguments: --svg @ z6-z2
 
-    # fracpole.ac: plot-psf -c FP6.1,FP6.5 {{{2
+    # fracpole.ac: show-psf -c FP6.1,FP6.5 {{{2
     gaggle:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.ac
         arguments: --svg @ -c FP6.1-FP6.5
 
-    # fracpole.ac: plot-psf -d -P z6 {{{2
+    # fracpole.ac: show-psf -d -P z6 {{{2
     upend:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.ac
         arguments: --svg @ -d -P z6
 
-    # fracpole.ac: plot-psf -m -M z6 {{{2
+    # fracpole.ac: show-psf -m -M z6 {{{2
     cedar:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.ac
         arguments: --svg @ -m -M z6
 
-    # fracpole.ac: plot-psf -p -t TITLE z6 {{{2
+    # fracpole.ac: show-psf -p -t TITLE z6 {{{2
     allergy:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/fracpole.ac
         arguments: --svg @ -p -t TITLE z6
 
-    # asereq: plot-psf * {{{2
+    # asereq: show-psf * {{{2
     bedsitter:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/asereq.dcop
         arguments: *
         expected:
@@ -4714,9 +4714,9 @@ test_utils:
             >                      V4.pwr = 585 µW
             >                        V4.v = 325 mV
 
-    # asereq: plot-psf N0:1.i-N0:2.i {{{2
+    # asereq: show-psf N0:1.i-N0:2.i {{{2
     aviator:
-        command: plot-psf
+        command: show-psf
         psf_file: samples/asereq.dcop
         arguments: N0:1.i-N0:2.i
         expected:     (N0:1.i − N0:2.i) = 1.8 mA

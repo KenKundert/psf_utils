@@ -19,7 +19,7 @@ is used if the pickle file is newer that the corresponding PSF file.
 """
 
 # Imports {{{1
-from .plot import expand_args, get_psf_filename
+from .show import expand_args, get_psf_filename
 from .psf import PSF
 from docopt import docopt
 from inform import Error, columns, display, plural, warn

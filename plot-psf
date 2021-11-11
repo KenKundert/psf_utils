@@ -1,6 +1,0 @@
-#!/usr/bin/env python3
-# local version of plot-psf used for debugging and testing purposes.
-# this version does not get installed.
-
-from psf_utils.plot import plot_signals
-plot_signals()

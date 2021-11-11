@@ -18,7 +18,7 @@ setup(
     packages = 'psf_utils'.split(),
     entry_points = {'console_scripts': [
         'list-psf = psf_utils.list:list_signals',
-        'plot-psf = psf_utils.plot:plot_signals',
+        'show-psf = psf_utils.show:show_signals',
     ]},
     install_requires = """
         docopt
