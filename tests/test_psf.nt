@@ -1,0 +1,3851 @@
+test_cases:
+
+    aclin:
+        path: ../samples/pnoise.raw/aclin.ac
+        expected:
+            sweep:
+                name: freq
+                units: Hz
+                length: 1001
+                type: float double
+                grid: linear
+            signals:
+                iRESref:p:
+                    units: A
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                iRESva:p:
+                    units: A
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                noiref:
+                    units: V
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                noiva:
+                    units: V
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                top:
+                    units: V
+                    type: complex double
+                    min: 1
+                    max: 1
+                topref:
+                    units: V
+                    type: complex double
+                    min: 1
+                    max: 1
+                topva:
+                    units: V
+                    type: complex double
+                    min: 1
+                    max: 1
+                VTOP:p:
+                    units: A
+                    type: complex double
+                    min: -0.02
+                    max: -0.02
+
+    aclog:
+        path: ../samples/pnoise.raw/aclog.ac
+        expected:
+            sweep:
+                name: freq
+                units: Hz
+                length: 61
+                type: float double
+                grid: logarithmic
+            signals:
+                iRESref:p:
+                    units: A
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                iRESva:p:
+                    units: A
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                noiref:
+                    units: V
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                noiva:
+                    units: V
+                    type: complex double
+                    min: 0.01
+                    max: 0.01
+                top:
+                    units: V
+                    type: complex double
+                    min: 1
+                    max: 1
+                topref:
+                    units: V
+                    type: complex double
+                    min: 1
+                    max: 1
+                topva:
+                    units: V
+                    type: complex double
+                    min: 1
+                    max: 1
+                VTOP:p:
+                    units: A
+                    type: complex double
+                    min: -0.02
+                    max: -0.02
+
+    TFM201610ALM:
+        path: ../samples/TFM201610ALM.sp
+        expected:
+            sweep:
+                name: freq
+                units: Hz
+                length: 701
+                type: float double
+                grid: n/a
+            signals:
+                s11:
+                    type: complex double
+                    min: -1 - 1j
+                    max: 1 + 1j
+                s21:
+                    type: complex double
+                    min: -1 - 1j
+                    max: 1 + 1j
+                s12:
+                    type: complex double
+                    min: -1 - 1j
+                    max: 1 + 1j
+                s22:
+                    type: complex double
+                    min: -1 - 1j
+                    max: 1 + 1j
+
+    noise:
+        path: ../samples/pnoise.raw/noiref.noise
+        expected:
+            sweep:
+                name: freq
+                units: Hz
+                length: 121
+                type: float double
+                grid: logarithmic
+            signals:
+                RESref:fn:
+                    units: V^2/Hz
+                    type: float double
+                RESref:rn:
+                    units: V^2/Hz
+                    type: float double
+                RESref:total:
+                    units: V^2/Hz
+                    type: float double
+                RESva:flicker:
+                    units: V^2/Hz
+                    type: float double
+                RESva:thermal:
+                    units: V^2/Hz
+                    type: float double
+                RESva:total:
+                    units: V^2/Hz
+                    type: float double
+                Rref:rn:
+                    units: V^2/Hz
+                    type: float double
+                Rref:total:
+                    units: V^2/Hz
+                    type: float double
+                Rva:rn:
+                    units: V^2/Hz
+                    type: float double
+                Rva:total:
+                    units: V^2/Hz
+                    type: float double
+                out:
+                    units: V/sqrt(Hz)
+                    type: float double
+                    max: 6e-06
+                    min: 3e-10
+
+    pnoise:
+        path: ../samples/pnoise.raw/pnoiref.pnoise
+        expected:
+            sweep:
+                name: freq
+                units: Hz
+                length: 121
+                type: float double
+                grid: logarithmic
+            signals:
+                RESref:fn:
+                    units: V^2/Hz
+                    type: float double
+                RESref:rn:
+                    units: V^2/Hz
+                    type: float double
+                RESref:total:
+                    units: V^2/Hz
+                    type: float double
+                RESva:flicker:
+                    units: V^2/Hz
+                    type: float double
+                RESva:thermal:
+                    units: V^2/Hz
+                    type: float double
+                RESva:total:
+                    units: V^2/Hz
+                    type: float double
+                Rref:rn:
+                    units: V^2/Hz
+                    type: float double
+                Rref:total:
+                    units: V^2/Hz
+                    type: float double
+                Rva:rn:
+                    units: V^2/Hz
+                    type: float double
+                Rva:total:
+                    units: V^2/Hz
+                    type: float double
+                out:
+                    units: V/sqrt(Hz)
+                    type: float double
+                    max: 6e-06
+                    min: 3e-10
+
+    pss_td:
+        path: ../samples/pnoise.raw/pss.td.pss
+        expected:
+            sweep:
+                name: time
+                units: s
+                length: 1601
+                type: float double
+                grid: linear
+            signals:
+                iRESref:p:
+                    units: A
+                    type: float double
+                    min: -0.001
+                    max: 0.001
+                iRESva:p:
+                    units: A
+                    type: float double
+                    min: -0.001
+                    max: 0.001
+                noiref:
+                    units: V
+                    type: float double
+                    min: -0.001
+                    max: 0.001
+                noiva:
+                    units: V
+                    type: float double
+                    min: -0.001
+                    max: 0.001
+                top:
+                    units: V
+                    type: float double
+                    min: -0.1
+                    max: 0.1
+                topref:
+                    units: V
+                    type: float double
+                    min: -0.1
+                    max: 0.1
+                topva:
+                    units: V
+                    type: float double
+                    min: -0.1
+                    max: 0.1
+                VTOP:p:
+                    units: A
+                    type: float double
+                    min: -0.002
+                    max: 0.002
+
+    joop_banaan_tran:
+        path: ../samples/joop-banaan.tran
+        expected:
+            sweep:
+                name: time
+                units: s
+                length: 55
+                type: float double
+                grid: linear
+            signals:
+                I2.comp_out_pre:
+                    units: V
+                    type: float double
+                    min: 1.10e-06
+                    max: 4.18e-06
+                I2.diff_cm:
+                    units: V
+                    type: float double
+                    min: 0.411
+                    max: 0.412
+                I2.diff_out_left:
+                    units: V
+                    type: float double
+                    min: 0.789
+                    max: 0.8
+                I2.diff_out_right:
+                    units: V
+                    type: float double
+                    min: 0.799
+                    max: 0.8
+                I2.pup2:
+                    units: V
+                    type: float double
+                    min: 2.79e-07
+                    max: 7.1e-07
+                I2.pup_b:
+                    units: V
+                    type: float double
+                    min: 0.799
+                    max: 0.81
+                V1:p:
+                    units: A
+                    type: float double
+                    min: -4e-6
+                    max: -2.9e-6
+                ibias:
+                    units: V
+                    type: float double
+                    min: 0.358
+                    max: 0.359
+                out:
+                    units: V
+                    type: float double
+                    min: 1.45e-07
+                    max: 2.4e-07
+                pup:
+                    units: V
+                    type: float double
+                    min: 0
+                    max: 0.1
+                vinp:
+                    units: V
+                    type: float double
+                    min: 0.79
+                    max: 0.8
+                vref_o:
+                    units: V
+                    type: float double
+                    min: 0.35
+                    max: 0.35
+
+    joop_banaan_dc:
+        path: ../samples/joop-banaan.dc
+        expected:
+            signals:
+                I2.Idiffpair:in:
+                    units: A
+                    type: float double
+                    value: 4.767791259200037e-08
+                I2.comp_out_pre:
+                    units: V
+                    type: float double
+                    value: 1.106383385957654e-06
+                I2.diff_cm:
+                    units: V
+                    type: float double
+                    value: 8.761644386176266e-04
+                I2.diff_out_left:
+                    units: V
+                    type: float double
+                    value: 7.998743518479743e-01
+                I2.diff_out_right:
+                    units: V
+                    type: float double
+                    value: 7.998743518480765e-01
+                I2.pup2:
+                    units: V
+                    type: float double
+                    value: 2.795768876173348e-07
+                I2.pup_b:
+                    units: V
+                    type: float double
+                    value: 7.999982644672001e-01
+                Vsupply800m:p:
+                    units: A
+                    type: float double
+                    value: -1.050027794352513e-06
+                ibias:
+                    units: V
+                    type: float double
+                    value: 3.588155366237979e-01
+                out:
+                    units: V
+                    type: float double
+                    value: 1.737370212928399e-07
+                pup:
+                    units: V
+                    type: float double
+                    value: 0.000000000000000e+00
+                vinp:
+                    units: V
+                    type: float double
+                    value: 2.000000000000000e-01
+                vref_o:
+                    units: V
+                    type: float double
+                    value: 2.000000000000000e-01
+
+    fracpole_dc:
+        path: ../samples/fracpole.dc
+        expected:
+            signals:
+                z6:
+                    units: V
+                    type: float double
+                    value: 0
+                z2:
+                    units: V
+                    type: float double
+                    value: 0
+                FP6.1:
+                    units: V
+                    type: float double
+                    value: 0
+                FP6.2:
+                    units: V
+                    type: float double
+                    value: 0
+                FP6.3:
+                    units: V
+                    type: float double
+                    value: 0
+                FP6.4:
+                    units: V
+                    type: float double
+                    value: 0
+                FP6.5:
+                    units: V
+                    type: float double
+                    value: 0
+                FP2.1:
+                    units: V
+                    type: float double
+                    value: 0
+                FP2.2:
+                    units: V
+                    type: float double
+                    value: 0
+
+    fracpole_ac:
+        path: ../samples/fracpole.ac
+        expected:
+            sweep:
+                name: freq
+                units: Hz
+                length: 121
+                type: float double
+                grid: logarithmic
+            signals:
+                z6:
+                    units: V
+                    type: complex double
+                z2:
+                    units: V
+                    type: complex double
+                FP6.1:
+                    units: V
+                    type: complex double
+                FP6.2:
+                    units: V
+                    type: complex double
+                FP6.3:
+                    units: V
+                    type: complex double
+                FP6.4:
+                    units: V
+                    type: complex double
+                FP6.5:
+                    units: V
+                    type: complex double
+                FP2.1:
+                    units: V
+                    type: complex double
+                FP2.2:
+                    units: V
+                    type: complex double
+
+    dcopinfo:
+        path: ../samples/dcOpInfo.info.psfascii
+        expected:
+            signals:
+                NM0.beff:
+                    units: A/V^2
+                    type: float double
+                NM0.betaeff:
+                    units: A/V^2
+                    type: float double
+                NM0.cbb:
+                    units: F
+                    type: float double
+                NM0.cbd:
+                    units: F
+                    type: float double
+                NM0.cbdbi:
+                    units: F
+                    type: float double
+                NM0.cbg:
+                    units: F
+                    type: float double
+                NM0.cbs:
+                    units: F
+                    type: float double
+                NM0.cbsbi:
+                    units: F
+                    type: float double
+                NM0.cdb:
+                    units: F
+                    type: float double
+                NM0.cdd:
+                    units: F
+                    type: float double
+                NM0.cddbi:
+                    units: F
+                    type: float double
+                NM0.cdg:
+                    units: F
+                    type: float double
+                NM0.cds:
+                    units: F
+                    type: float double
+                NM0.cgb:
+                    units: F
+                    type: float double
+                NM0.cgbovl:
+                    units: F
+                    type: float double
+                NM0.cgd:
+                    units: F
+                    type: float double
+                NM0.cgdbi:
+                    units: F
+                    type: float double
+                NM0.cgdovl:
+                    units: F
+                    type: float double
+                NM0.cgg:
+                    units: F
+                    type: float double
+                NM0.cggbi:
+                    units: F
+                    type: float double
+                NM0.cgs:
+                    units: F
+                    type: float double
+                NM0.cgsbi:
+                    units: F
+                    type: float double
+                NM0.cgsovl:
+                    units: F
+                    type: float double
+                NM0.cjd:
+                    units: F
+                    type: float double
+                NM0.cjs:
+                    units: F
+                    type: float double
+                NM0.csb:
+                    units: F
+                    type: float double
+                NM0.csd:
+                    units: F
+                    type: float double
+                NM0.csg:
+                    units: F
+                    type: float double
+                NM0.css:
+                    units: F
+                    type: float double
+                NM0.cssbi:
+                    units: F
+                    type: float double
+                NM0.ft:
+                    units: Hz
+                    type: float double
+                NM0.fug:
+                    units: Hz
+                    type: float double
+                NM0.gbd:
+                    units: S
+                    type: float double
+                NM0.gbs:
+                    units: S
+                    type: float double
+                NM0.gds:
+                    units: S
+                    type: float double
+                NM0.gm:
+                    units: S
+                    type: float double
+                NM0.gmb:
+                    units: S
+                    type: float double
+                NM0.gmbs:
+                    units: S
+                    type: float double
+                NM0.gmoverid:
+                    units: 1/V
+                    type: float double
+                NM0.i1:
+                    units: A
+                    type: float double
+                NM0.i3:
+                    units: A
+                    type: float double
+                NM0.i4:
+                    units: A
+                    type: float double
+                NM0.ib:
+                    units: A
+                    type: float double
+                NM0.ibd:
+                    units: A
+                    type: float double
+                NM0.ibe:
+                    units: A
+                    type: float double
+                NM0.ibs:
+                    units: A
+                    type: float double
+                NM0.ibulk:
+                    units: A
+                    type: float double
+                NM0.id:
+                    units: A
+                    type: float double
+                NM0.idb:
+                    units: A
+                    type: float double
+                NM0.ide:
+                    units: A
+                    type: float double
+                NM0.ids:
+                    units: A
+                    type: float double
+                NM0.ig:
+                    units: A
+                    type: float double
+                NM0.igb:
+                    units: A
+                    type: float double
+                NM0.igcd:
+                    units: A
+                    type: float double
+                NM0.igcs:
+                    units: A
+                    type: float double
+                NM0.igd:
+                    units: A
+                    type: float double
+                NM0.ige:
+                    units: A
+                    type: float double
+                NM0.igidl:
+                    units: A
+                    type: float double
+                NM0.igisl:
+                    units: A
+                    type: float double
+                NM0.igs:
+                    units: A
+                    type: float double
+                NM0.is:
+                    units: A
+                    type: float double
+                NM0.isb:
+                    units: A
+                    type: float double
+                NM0.ise:
+                    units: A
+                    type: float double
+                NM0.isub:
+                    units: A
+                    type: float double
+                NM0.pwr:
+                    units: W
+                    type: float double
+                NM0.qb:
+                    units: Coul
+                    type: float double
+                NM0.qbd:
+                    units: Coul
+                    type: float double
+                NM0.qbi:
+                    units: Coul
+                    type: float double
+                NM0.qbs:
+                    units: Coul
+                    type: float double
+                NM0.qd:
+                    units: Coul
+                    type: float double
+                NM0.qdi:
+                    units: Coul
+                    type: float double
+                NM0.qg:
+                    units: Coul
+                    type: float double
+                NM0.qgi:
+                    units: Coul
+                    type: float double
+                NM0.qinv:
+                    units: Coul
+                    type: float double
+                NM0.qsi:
+                    units: Coul
+                    type: float double
+                NM0.qsrco:
+                    units: Coul
+                    type: float double
+                NM0.region:
+                    type: int byte
+                NM0.reversed:
+                    type: int byte
+                NM0.ron:
+                    units: Ohm
+                    type: float double
+                NM0.rout:
+                    units: Ohm
+                    type: float double
+                NM0.self_gain:
+                    type: float double
+                NM0.tk:
+                    units: K
+                    type: float double
+                NM0.type:
+                    type: int byte
+                NM0.ueff:
+                    type: float double
+                NM0.vbs:
+                    units: V
+                    type: float double
+                NM0.vdb:
+                    units: V
+                    type: float double
+                NM0.vds:
+                    units: V
+                    type: float double
+                NM0.vdsat:
+                    units: V
+                    type: float double
+                NM0.vdsat_marg:
+                    units: V
+                    type: float double
+                NM0.vdss:
+                    units: V
+                    type: float double
+                NM0.vearly:
+                    units: V
+                    type: float double
+                NM0.vfbeff:
+                    units: V
+                    type: float double
+                NM0.vgb:
+                    units: V
+                    type: float double
+                NM0.vgd:
+                    units: V
+                    type: float double
+                NM0.vgs:
+                    units: V
+                    type: float double
+                NM0.vgsteff:
+                    units: V
+                    type: float double
+                NM0.vgt:
+                    units: V
+                    type: float double
+                NM0.vsat_marg:
+                    units: V
+                    type: float double
+                NM0.vsb:
+                    units: V
+                    type: float double
+                NM0.vth:
+                    units: V
+                    type: float double
+                NM0.vth_drive:
+                    units: V
+                    type: float double
+                V0.i:
+                    units: A
+                    type: float double
+                V0.pwr:
+                    units: W
+                    type: float double
+                V0.v:
+                    units: V
+                    type: float double
+                V1.i:
+                    units: A
+                    type: float double
+                V1.pwr:
+                    units: W
+                    type: float double
+                V1.v:
+                    units: V
+                    type: float double
+
+    dan_zilla:
+        path: ../samples/dan-zilla.psfascii
+        expected:
+            sweep:
+                name: time
+                units: s
+                length: 65
+                type: float double
+                grid: linear
+            signals:
+                Dout<0>:
+                    units: V
+                    type: float double
+                Dout<10>:
+                    units: V
+                    type: float double
+                Dout<11>:
+                    units: V
+                    type: float double
+                Dout<1>:
+                    units: V
+                    type: float double
+                Dout<2>:
+                    units: V
+                    type: float double
+                Dout<3>:
+                    units: V
+                    type: float double
+                Dout<4>:
+                    units: V
+                    type: float double
+                Dout<5>:
+                    units: V
+                    type: float double
+                Dout<6>:
+                    units: V
+                    type: float double
+                Dout<7>:
+                    units: V
+                    type: float double
+                Dout<8>:
+                    units: V
+                    type: float double
+                Dout<9>:
+                    units: V
+                    type: float double
+                I43.I0.net9:
+                    units: V
+                    type: float double
+                I43.I2.net9:
+                    units: V
+                    type: float double
+                I64.I2.net11:
+                    units: V
+                    type: float double
+                I64.I3.net11:
+                    units: V
+                    type: float double
+                I64.I5.net11:
+                    units: V
+                    type: float double
+                I64.I6.net11:
+                    units: V
+                    type: float double
+                I64.V0:p:
+                    units: A
+                    type: float double
+                I64.net02:
+                    units: V
+                    type: float double
+                I64.net03:
+                    units: V
+                    type: float double
+                I64.net9:
+                    units: V
+                    type: float double
+                I68.I0.net9:
+                    units: V
+                    type: float double
+                I68.I1.net9:
+                    units: V
+                    type: float double
+                I68.I10.net9:
+                    units: V
+                    type: float double
+                I68.I11.net9:
+                    units: V
+                    type: float double
+                I68.I12.net9:
+                    units: V
+                    type: float double
+                I68.I13.net9:
+                    units: V
+                    type: float double
+                I68.I14.net9:
+                    units: V
+                    type: float double
+                I68.I15.net9:
+                    units: V
+                    type: float double
+                I68.I16.net9:
+                    units: V
+                    type: float double
+                I68.I17.net9:
+                    units: V
+                    type: float double
+                I68.I2.net9:
+                    units: V
+                    type: float double
+                I68.I3.net9:
+                    units: V
+                    type: float double
+                I68.I30.net9:
+                    units: V
+                    type: float double
+                I68.I31.net9:
+                    units: V
+                    type: float double
+                I68.I32.net9:
+                    units: V
+                    type: float double
+                I68.I33.net9:
+                    units: V
+                    type: float double
+                I68.I4.net9:
+                    units: V
+                    type: float double
+                I68.I5.net9:
+                    units: V
+                    type: float double
+                I68.I6.net9:
+                    units: V
+                    type: float double
+                I68.I7.net9:
+                    units: V
+                    type: float double
+                I68.I8.net9:
+                    units: V
+                    type: float double
+                I68.I9.net9:
+                    units: V
+                    type: float double
+                I68.net1:
+                    units: V
+                    type: float double
+                I68.net15:
+                    units: V
+                    type: float double
+                I68.net16:
+                    units: V
+                    type: float double
+                I68.net17:
+                    units: V
+                    type: float double
+                I68.net18:
+                    units: V
+                    type: float double
+                I68.net19:
+                    units: V
+                    type: float double
+                I68.net2:
+                    units: V
+                    type: float double
+                I68.net20:
+                    units: V
+                    type: float double
+                I68.net21:
+                    units: V
+                    type: float double
+                I68.net22:
+                    units: V
+                    type: float double
+                I68.net23:
+                    units: V
+                    type: float double
+                I70.I5<0>.net11:
+                    units: V
+                    type: float double
+                I70.I5<10>.net11:
+                    units: V
+                    type: float double
+                I70.I5<11>.net11:
+                    units: V
+                    type: float double
+                I70.I5<1>.net11:
+                    units: V
+                    type: float double
+                I70.I5<2>.net11:
+                    units: V
+                    type: float double
+                I70.I5<3>.net11:
+                    units: V
+                    type: float double
+                I70.I5<4>.net11:
+                    units: V
+                    type: float double
+                I70.I5<5>.net11:
+                    units: V
+                    type: float double
+                I70.I5<6>.net11:
+                    units: V
+                    type: float double
+                I70.I5<7>.net11:
+                    units: V
+                    type: float double
+                I70.I5<8>.net11:
+                    units: V
+                    type: float double
+                I70.I5<9>.net11:
+                    units: V
+                    type: float double
+                I70.I6<0>.net11:
+                    units: V
+                    type: float double
+                I70.I6<10>.net11:
+                    units: V
+                    type: float double
+                I70.I6<11>.net11:
+                    units: V
+                    type: float double
+                I70.I6<1>.net11:
+                    units: V
+                    type: float double
+                I70.I6<2>.net11:
+                    units: V
+                    type: float double
+                I70.I6<3>.net11:
+                    units: V
+                    type: float double
+                I70.I6<4>.net11:
+                    units: V
+                    type: float double
+                I70.I6<5>.net11:
+                    units: V
+                    type: float double
+                I70.I6<6>.net11:
+                    units: V
+                    type: float double
+                I70.I6<7>.net11:
+                    units: V
+                    type: float double
+                I70.I6<8>.net11:
+                    units: V
+                    type: float double
+                I70.I6<9>.net11:
+                    units: V
+                    type: float double
+                I70.I7<0>.net11:
+                    units: V
+                    type: float double
+                I70.I7<10>.net11:
+                    units: V
+                    type: float double
+                I70.I7<11>.net11:
+                    units: V
+                    type: float double
+                I70.I7<1>.net11:
+                    units: V
+                    type: float double
+                I70.I7<2>.net11:
+                    units: V
+                    type: float double
+                I70.I7<3>.net11:
+                    units: V
+                    type: float double
+                I70.I7<4>.net11:
+                    units: V
+                    type: float double
+                I70.I7<5>.net11:
+                    units: V
+                    type: float double
+                I70.I7<6>.net11:
+                    units: V
+                    type: float double
+                I70.I7<7>.net11:
+                    units: V
+                    type: float double
+                I70.I7<8>.net11:
+                    units: V
+                    type: float double
+                I70.I7<9>.net11:
+                    units: V
+                    type: float double
+                I70.net1<0>:
+                    units: V
+                    type: float double
+                I70.net1<10>:
+                    units: V
+                    type: float double
+                I70.net1<11>:
+                    units: V
+                    type: float double
+                I70.net1<1>:
+                    units: V
+                    type: float double
+                I70.net1<2>:
+                    units: V
+                    type: float double
+                I70.net1<3>:
+                    units: V
+                    type: float double
+                I70.net1<4>:
+                    units: V
+                    type: float double
+                I70.net1<5>:
+                    units: V
+                    type: float double
+                I70.net1<6>:
+                    units: V
+                    type: float double
+                I70.net1<7>:
+                    units: V
+                    type: float double
+                I70.net1<8>:
+                    units: V
+                    type: float double
+                I70.net1<9>:
+                    units: V
+                    type: float double
+                I70.net2<0>:
+                    units: V
+                    type: float double
+                I70.net2<10>:
+                    units: V
+                    type: float double
+                I70.net2<11>:
+                    units: V
+                    type: float double
+                I70.net2<1>:
+                    units: V
+                    type: float double
+                I70.net2<2>:
+                    units: V
+                    type: float double
+                I70.net2<3>:
+                    units: V
+                    type: float double
+                I70.net2<4>:
+                    units: V
+                    type: float double
+                I70.net2<5>:
+                    units: V
+                    type: float double
+                I70.net2<6>:
+                    units: V
+                    type: float double
+                I70.net2<7>:
+                    units: V
+                    type: float double
+                I70.net2<8>:
+                    units: V
+                    type: float double
+                I70.net2<9>:
+                    units: V
+                    type: float double
+                I70.net3<0>:
+                    units: V
+                    type: float double
+                I70.net3<10>:
+                    units: V
+                    type: float double
+                I70.net3<11>:
+                    units: V
+                    type: float double
+                I70.net3<1>:
+                    units: V
+                    type: float double
+                I70.net3<2>:
+                    units: V
+                    type: float double
+                I70.net3<3>:
+                    units: V
+                    type: float double
+                I70.net3<4>:
+                    units: V
+                    type: float double
+                I70.net3<5>:
+                    units: V
+                    type: float double
+                I70.net3<6>:
+                    units: V
+                    type: float double
+                I70.net3<7>:
+                    units: V
+                    type: float double
+                I70.net3<8>:
+                    units: V
+                    type: float double
+                I70.net3<9>:
+                    units: V
+                    type: float double
+                I71.I1.net9:
+                    units: V
+                    type: float double
+                I71.I10.net9:
+                    units: V
+                    type: float double
+                I71.I11.net9:
+                    units: V
+                    type: float double
+                I71.I12.net9:
+                    units: V
+                    type: float double
+                I71.I13.net9:
+                    units: V
+                    type: float double
+                I71.I14.net9:
+                    units: V
+                    type: float double
+                I71.I15.net9:
+                    units: V
+                    type: float double
+                I71.I16.net9:
+                    units: V
+                    type: float double
+                I71.I17.net9:
+                    units: V
+                    type: float double
+                I71.I2.net9:
+                    units: V
+                    type: float double
+                I71.I3.net9:
+                    units: V
+                    type: float double
+                I71.I30.net9:
+                    units: V
+                    type: float double
+                I71.I31.net9:
+                    units: V
+                    type: float double
+                I71.I32.net9:
+                    units: V
+                    type: float double
+                I71.I33.net9:
+                    units: V
+                    type: float double
+                I71.I4.net9:
+                    units: V
+                    type: float double
+                I71.I5.net9:
+                    units: V
+                    type: float double
+                I71.I6.net9:
+                    units: V
+                    type: float double
+                I71.I7.net9:
+                    units: V
+                    type: float double
+                I71.I8.net9:
+                    units: V
+                    type: float double
+                I71.I9.net9:
+                    units: V
+                    type: float double
+                I71.net1:
+                    units: V
+                    type: float double
+                I71.net15:
+                    units: V
+                    type: float double
+                I71.net16:
+                    units: V
+                    type: float double
+                I71.net17:
+                    units: V
+                    type: float double
+                I71.net18:
+                    units: V
+                    type: float double
+                I71.net19:
+                    units: V
+                    type: float double
+                I71.net2:
+                    units: V
+                    type: float double
+                I71.net20:
+                    units: V
+                    type: float double
+                I71.net21:
+                    units: V
+                    type: float double
+                I71.net22:
+                    units: V
+                    type: float double
+                I72.I0.net9:
+                    units: V
+                    type: float double
+                I72.I1.net9:
+                    units: V
+                    type: float double
+                I72.I10.net9:
+                    units: V
+                    type: float double
+                I72.I11.net9:
+                    units: V
+                    type: float double
+                I72.I12.net9:
+                    units: V
+                    type: float double
+                I72.I13.net9:
+                    units: V
+                    type: float double
+                I72.I14.net9:
+                    units: V
+                    type: float double
+                I72.I15.net9:
+                    units: V
+                    type: float double
+                I72.I16.net9:
+                    units: V
+                    type: float double
+                I72.I17.net9:
+                    units: V
+                    type: float double
+                I72.I2.net9:
+                    units: V
+                    type: float double
+                I72.I3.net9:
+                    units: V
+                    type: float double
+                I72.I30.net9:
+                    units: V
+                    type: float double
+                I72.I31.net9:
+                    units: V
+                    type: float double
+                I72.I32.net9:
+                    units: V
+                    type: float double
+                I72.I33.net9:
+                    units: V
+                    type: float double
+                I72.I4.net9:
+                    units: V
+                    type: float double
+                I72.I5.net9:
+                    units: V
+                    type: float double
+                I72.I6.net9:
+                    units: V
+                    type: float double
+                I72.I7.net9:
+                    units: V
+                    type: float double
+                I72.I8.net9:
+                    units: V
+                    type: float double
+                I72.I9.net9:
+                    units: V
+                    type: float double
+                I72.net1:
+                    units: V
+                    type: float double
+                I72.net15:
+                    units: V
+                    type: float double
+                I72.net16:
+                    units: V
+                    type: float double
+                I72.net17:
+                    units: V
+                    type: float double
+                I72.net18:
+                    units: V
+                    type: float double
+                I72.net19:
+                    units: V
+                    type: float double
+                I72.net2:
+                    units: V
+                    type: float double
+                I72.net20:
+                    units: V
+                    type: float double
+                I72.net21:
+                    units: V
+                    type: float double
+                I72.net22:
+                    units: V
+                    type: float double
+                I72.net23:
+                    units: V
+                    type: float double
+                I73.I1.net9:
+                    units: V
+                    type: float double
+                I73.I10.net9:
+                    units: V
+                    type: float double
+                I73.I11.net9:
+                    units: V
+                    type: float double
+                I73.I12.net9:
+                    units: V
+                    type: float double
+                I73.I13.net9:
+                    units: V
+                    type: float double
+                I73.I14.net9:
+                    units: V
+                    type: float double
+                I73.I15.net9:
+                    units: V
+                    type: float double
+                I73.I16.net9:
+                    units: V
+                    type: float double
+                I73.I17.net9:
+                    units: V
+                    type: float double
+                I73.I2.net9:
+                    units: V
+                    type: float double
+                I73.I3.net9:
+                    units: V
+                    type: float double
+                I73.I30.net9:
+                    units: V
+                    type: float double
+                I73.I31.net9:
+                    units: V
+                    type: float double
+                I73.I32.net9:
+                    units: V
+                    type: float double
+                I73.I33.net9:
+                    units: V
+                    type: float double
+                I73.I4.net9:
+                    units: V
+                    type: float double
+                I73.I5.net9:
+                    units: V
+                    type: float double
+                I73.I6.net9:
+                    units: V
+                    type: float double
+                I73.I7.net9:
+                    units: V
+                    type: float double
+                I73.I8.net9:
+                    units: V
+                    type: float double
+                I73.I9.net9:
+                    units: V
+                    type: float double
+                I73.net1:
+                    units: V
+                    type: float double
+                I73.net15:
+                    units: V
+                    type: float double
+                I73.net16:
+                    units: V
+                    type: float double
+                I73.net17:
+                    units: V
+                    type: float double
+                I73.net18:
+                    units: V
+                    type: float double
+                I73.net19:
+                    units: V
+                    type: float double
+                I73.net2:
+                    units: V
+                    type: float double
+                I73.net20:
+                    units: V
+                    type: float double
+                I73.net21:
+                    units: V
+                    type: float double
+                I73.net22:
+                    units: V
+                    type: float double
+                V0:p:
+                    units: A
+                    type: float double
+                V1:p:
+                    units: A
+                    type: float double
+                V2:p:
+                    units: A
+                    type: float double
+                V3:p:
+                    units: A
+                    type: float double
+                V6:p:
+                    units: A
+                    type: float double
+                V7:p:
+                    units: A
+                    type: float double
+                conM<0>:
+                    units: V
+                    type: float double
+                conM<10>:
+                    units: V
+                    type: float double
+                conM<11>:
+                    units: V
+                    type: float double
+                conM<1>:
+                    units: V
+                    type: float double
+                conM<2>:
+                    units: V
+                    type: float double
+                conM<3>:
+                    units: V
+                    type: float double
+                conM<4>:
+                    units: V
+                    type: float double
+                conM<5>:
+                    units: V
+                    type: float double
+                conM<6>:
+                    units: V
+                    type: float double
+                conM<7>:
+                    units: V
+                    type: float double
+                conM<8>:
+                    units: V
+                    type: float double
+                conM<9>:
+                    units: V
+                    type: float double
+                conP<0>:
+                    units: V
+                    type: float double
+                conP<10>:
+                    units: V
+                    type: float double
+                conP<11>:
+                    units: V
+                    type: float double
+                conP<1>:
+                    units: V
+                    type: float double
+                conP<2>:
+                    units: V
+                    type: float double
+                conP<3>:
+                    units: V
+                    type: float double
+                conP<4>:
+                    units: V
+                    type: float double
+                conP<5>:
+                    units: V
+                    type: float double
+                conP<6>:
+                    units: V
+                    type: float double
+                conP<7>:
+                    units: V
+                    type: float double
+                conP<8>:
+                    units: V
+                    type: float double
+                conP<9>:
+                    units: V
+                    type: float double
+                net1<0>:
+                    units: V
+                    type: float double
+                net1<10>:
+                    units: V
+                    type: float double
+                net1<1>:
+                    units: V
+                    type: float double
+                net1<2>:
+                    units: V
+                    type: float double
+                net1<3>:
+                    units: V
+                    type: float double
+                net1<4>:
+                    units: V
+                    type: float double
+                net1<5>:
+                    units: V
+                    type: float double
+                net1<6>:
+                    units: V
+                    type: float double
+                net1<7>:
+                    units: V
+                    type: float double
+                net1<8>:
+                    units: V
+                    type: float double
+                net1<9>:
+                    units: V
+                    type: float double
+                net2<0>:
+                    units: V
+                    type: float double
+                net2<10>:
+                    units: V
+                    type: float double
+                net2<1>:
+                    units: V
+                    type: float double
+                net2<2>:
+                    units: V
+                    type: float double
+                net2<3>:
+                    units: V
+                    type: float double
+                net2<4>:
+                    units: V
+                    type: float double
+                net2<5>:
+                    units: V
+                    type: float double
+                net2<6>:
+                    units: V
+                    type: float double
+                net2<7>:
+                    units: V
+                    type: float double
+                net2<8>:
+                    units: V
+                    type: float double
+                net2<9>:
+                    units: V
+                    type: float double
+                net4<0>:
+                    units: V
+                    type: float double
+                net4<10>:
+                    units: V
+                    type: float double
+                net4<1>:
+                    units: V
+                    type: float double
+                net4<2>:
+                    units: V
+                    type: float double
+                net4<3>:
+                    units: V
+                    type: float double
+                net4<4>:
+                    units: V
+                    type: float double
+                net4<5>:
+                    units: V
+                    type: float double
+                net4<6>:
+                    units: V
+                    type: float double
+                net4<7>:
+                    units: V
+                    type: float double
+                net4<8>:
+                    units: V
+                    type: float double
+                net4<9>:
+                    units: V
+                    type: float double
+                net7<0>:
+                    units: V
+                    type: float double
+                net7<10>:
+                    units: V
+                    type: float double
+                net7<1>:
+                    units: V
+                    type: float double
+                net7<2>:
+                    units: V
+                    type: float double
+                net7<3>:
+                    units: V
+                    type: float double
+                net7<4>:
+                    units: V
+                    type: float double
+                net7<5>:
+                    units: V
+                    type: float double
+                net7<6>:
+                    units: V
+                    type: float double
+                net7<7>:
+                    units: V
+                    type: float double
+                net7<8>:
+                    units: V
+                    type: float double
+                net7<9>:
+                    units: V
+                    type: float double
+                phiC:
+                    units: V
+                    type: float double
+                phiS:
+                    units: V
+                    type: float double
+                phi_ext:
+                    units: V
+                    type: float double
+                vdd:
+                    units: V
+                    type: float double
+                vic:
+                    units: V
+                    type: float double
+                vid:
+                    units: V
+                    type: float double
+                vim:
+                    units: V
+                    type: float double
+                vimth:
+                    units: V
+                    type: float double
+                vip:
+                    units: V
+                    type: float double
+                vipth:
+                    units: V
+                    type: float double
+                vod:
+                    units: V
+                    type: float double
+                voutm:
+                    units: V
+                    type: float double
+                voutp:
+                    units: V
+                    type: float double
+                vref:
+                    units: V
+                    type: float double
+                vss:
+                    units: V
+                    type: float double
+
+    asereq:
+        path: ../samples/asereq.dcop
+        expected:
+            signals:
+                C1.cap:
+                    units: F
+                    type: float double
+                C2.cap:
+                    units: F
+                    type: float double
+                I1.i:
+                    units: A
+                    type: float double
+                I1.pwr:
+                    units: W
+                    type: float double
+                I1.v:
+                    units: V
+                    type: float double
+                I10.i:
+                    units: A
+                    type: float double
+                I10.pwr:
+                    units: W
+                    type: float double
+                I10.v:
+                    units: V
+                    type: float double
+                I2.i:
+                    units: A
+                    type: float double
+                I2.pwr:
+                    units: W
+                    type: float double
+                I2.v:
+                    units: V
+                    type: float double
+                M1.cfrolgd.cap:
+                    units: F
+                    type: float double
+                M1.cfrolgs.cap:
+                    units: F
+                    type: float double
+                M1.cfrowgd.cap:
+                    units: F
+                    type: float double
+                M1.cfrowgs.cap:
+                    units: F
+                    type: float double
+                M1.cgn.cap:
+                    units: F
+                    type: float double
+                M1.csdext.cap:
+                    units: F
+                    type: float double
+                M1.m1.beff:
+                    type: float double
+                M1.m1.cbb:
+                    units: C
+                    type: float double
+                M1.m1.cbd:
+                    units: C
+                    type: float double
+                M1.m1.cbg:
+                    units: C
+                    type: float double
+                M1.m1.cbs:
+                    units: C
+                    type: float double
+                M1.m1.cdb:
+                    units: C
+                    type: float double
+                M1.m1.cdd:
+                    units: C
+                    type: float double
+                M1.m1.cdg:
+                    units: C
+                    type: float double
+                M1.m1.cds:
+                    units: C
+                    type: float double
+                M1.m1.cgb:
+                    units: C
+                    type: float double
+                M1.m1.cgd:
+                    units: C
+                    type: float double
+                M1.m1.cgg:
+                    units: C
+                    type: float double
+                M1.m1.cgs:
+                    units: C
+                    type: float double
+                M1.m1.csb:
+                    units: C
+                    type: float double
+                M1.m1.csd:
+                    units: C
+                    type: float double
+                M1.m1.csg:
+                    units: C
+                    type: float double
+                M1.m1.css:
+                    units: C
+                    type: float double
+                M1.m1.dtsh:
+                    type: float double
+                M1.m1.ft:
+                    type: float double
+                M1.m1.gds:
+                    type: float double
+                M1.m1.gm:
+                    type: float double
+                M1.m1.gmb:
+                    type: float double
+                M1.m1.gmoverid:
+                    type: float double
+                M1.m1.ib:
+                    units: I
+                    type: float double
+                M1.m1.id:
+                    units: I
+                    type: float double
+                M1.m1.idb:
+                    units: I
+                    type: float double
+                M1.m1.ids:
+                    units: I
+                    type: float double
+                M1.m1.ig:
+                    units: I
+                    type: float double
+                M1.m1.igd:
+                    units: I
+                    type: float double
+                M1.m1.igidl:
+                    units: I
+                    type: float double
+                M1.m1.igisl:
+                    units: I
+                    type: float double
+                M1.m1.igs:
+                    units: I
+                    type: float double
+                M1.m1.is:
+                    units: I
+                    type: float double
+                M1.m1.isb:
+                    units: I
+                    type: float double
+                M1.m1.pwr:
+                    units: W
+                    type: float double
+                M1.m1.region:
+                    type: int byte
+                M1.m1.rgate:
+                    units: R
+                    type: float double
+                M1.m1.rout:
+                    units: R
+                    type: float double
+                M1.m1.self_gain:
+                    type: float double
+                M1.m1.tk:
+                    type: float double
+                M1.m1.typeop:
+                    type: float double
+                M1.m1.vds:
+                    units: V
+                    type: float double
+                M1.m1.vdsat:
+                    units: V
+                    type: float double
+                M1.m1.vdsat_marg:
+                    units: V
+                    type: float double
+                M1.m1.vearly:
+                    units: V
+                    type: float double
+                M1.m1.vgs:
+                    units: V
+                    type: float double
+                M1.m1.vsb:
+                    units: V
+                    type: float double
+                M1.m1.vth:
+                    units: V
+                    type: float double
+                M1.m1.vth_drive:
+                    units: V
+                    type: float double
+                M1.rb.i:
+                    units: A
+                    type: float double
+                M1.rb.pwr:
+                    units: W
+                    type: float double
+                M1.rb.res:
+                    units: Ohm
+                    type: float double
+                M1.rb.v:
+                    units: V
+                    type: float double
+                M1.rgcs.i:
+                    units: A
+                    type: float double
+                M1.rgcs.pwr:
+                    units: W
+                    type: float double
+                M1.rgcs.res:
+                    units: Ohm
+                    type: float double
+                M1.rgcs.v:
+                    units: V
+                    type: float double
+                M1.rgn.i:
+                    units: A
+                    type: float double
+                M1.rgn.pwr:
+                    units: W
+                    type: float double
+                M1.rgn.res:
+                    units: Ohm
+                    type: float double
+                M1.rgn.v:
+                    units: V
+                    type: float double
+                M1.rgvi.i:
+                    units: A
+                    type: float double
+                M1.rgvi.pwr:
+                    units: W
+                    type: float double
+                M1.rgvi.res:
+                    units: Ohm
+                    type: float double
+                M1.rgvi.v:
+                    units: V
+                    type: float double
+                M1.xdw.d1.cj:
+                    units: F
+                    type: float double
+                M1.xdw.d1.cjbot:
+                    units: F
+                    type: float double
+                M1.xdw.d1.cjgat:
+                    units: F
+                    type: float double
+                M1.xdw.d1.cjosbot:
+                    units: F
+                    type: float double
+                M1.xdw.d1.cjosgat:
+                    units: F
+                    type: float double
+                M1.xdw.d1.cjossti:
+                    units: F
+                    type: float double
+                M1.xdw.d1.cjsti:
+                    units: F
+                    type: float double
+                M1.xdw.d1.ctotal:
+                    units: F
+                    type: float double
+                M1.xdw.d1.diode_region:
+                    type: int long
+                M1.xdw.d1.idsatsbot:
+                    units: A
+                    type: float double
+                M1.xdw.d1.idsatsgat:
+                    units: A
+                    type: float double
+                M1.xdw.d1.idsatssti:
+                    units: A
+                    type: float double
+                M1.xdw.d1.ij:
+                    units: A
+                    type: float double
+                M1.xdw.d1.ijbot:
+                    units: A
+                    type: float double
+                M1.xdw.d1.ijgat:
+                    units: A
+                    type: float double
+                M1.xdw.d1.ijsti:
+                    units: A
+                    type: float double
+                M1.xdw.d1.lx5:
+                    units: F
+                    type: float double
+                M1.xdw.d1.si:
+                    units: A^2/Hz
+                    type: float double
+                M1.xdw.d1.vak:
+                    units: V
+                    type: float double
+                M1.xdw.d1.vbisbot:
+                    units: V
+                    type: float double
+                M1.xdw.d1.vbisgat:
+                    units: V
+                    type: float double
+                M1.xdw.d1.vbissti:
+                    units: V
+                    type: float double
+                M1.xdw:1.i:
+                    units: A
+                    type: float double
+                M1.xdw:2.i:
+                    units: A
+                    type: float double
+                M11.cfrolgd.cap:
+                    units: F
+                    type: float double
+                M11.cfrolgs.cap:
+                    units: F
+                    type: float double
+                M11.cfrowgd.cap:
+                    units: F
+                    type: float double
+                M11.cfrowgs.cap:
+                    units: F
+                    type: float double
+                M11.cgn.cap:
+                    units: F
+                    type: float double
+                M11.csdext.cap:
+                    units: F
+                    type: float double
+                M11.m1.beff:
+                    type: float double
+                M11.m1.cbb:
+                    units: C
+                    type: float double
+                M11.m1.cbd:
+                    units: C
+                    type: float double
+                M11.m1.cbg:
+                    units: C
+                    type: float double
+                M11.m1.cbs:
+                    units: C
+                    type: float double
+                M11.m1.cdb:
+                    units: C
+                    type: float double
+                M11.m1.cdd:
+                    units: C
+                    type: float double
+                M11.m1.cdg:
+                    units: C
+                    type: float double
+                M11.m1.cds:
+                    units: C
+                    type: float double
+                M11.m1.cgb:
+                    units: C
+                    type: float double
+                M11.m1.cgd:
+                    units: C
+                    type: float double
+                M11.m1.cgg:
+                    units: C
+                    type: float double
+                M11.m1.cgs:
+                    units: C
+                    type: float double
+                M11.m1.csb:
+                    units: C
+                    type: float double
+                M11.m1.csd:
+                    units: C
+                    type: float double
+                M11.m1.csg:
+                    units: C
+                    type: float double
+                M11.m1.css:
+                    units: C
+                    type: float double
+                M11.m1.dtsh:
+                    type: float double
+                M11.m1.ft:
+                    type: float double
+                M11.m1.gds:
+                    type: float double
+                M11.m1.gm:
+                    type: float double
+                M11.m1.gmb:
+                    type: float double
+                M11.m1.gmoverid:
+                    type: float double
+                M11.m1.ib:
+                    units: I
+                    type: float double
+                M11.m1.id:
+                    units: I
+                    type: float double
+                M11.m1.idb:
+                    units: I
+                    type: float double
+                M11.m1.ids:
+                    units: I
+                    type: float double
+                M11.m1.ig:
+                    units: I
+                    type: float double
+                M11.m1.igd:
+                    units: I
+                    type: float double
+                M11.m1.igidl:
+                    units: I
+                    type: float double
+                M11.m1.igisl:
+                    units: I
+                    type: float double
+                M11.m1.igs:
+                    units: I
+                    type: float double
+                M11.m1.is:
+                    units: I
+                    type: float double
+                M11.m1.isb:
+                    units: I
+                    type: float double
+                M11.m1.pwr:
+                    units: W
+                    type: float double
+                M11.m1.region:
+                    type: int byte
+                M11.m1.rgate:
+                    units: R
+                    type: float double
+                M11.m1.rout:
+                    units: R
+                    type: float double
+                M11.m1.self_gain:
+                    type: float double
+                M11.m1.tk:
+                    type: float double
+                M11.m1.typeop:
+                    type: float double
+                M11.m1.vds:
+                    units: V
+                    type: float double
+                M11.m1.vdsat:
+                    units: V
+                    type: float double
+                M11.m1.vdsat_marg:
+                    units: V
+                    type: float double
+                M11.m1.vearly:
+                    units: V
+                    type: float double
+                M11.m1.vgs:
+                    units: V
+                    type: float double
+                M11.m1.vsb:
+                    units: V
+                    type: float double
+                M11.m1.vth:
+                    units: V
+                    type: float double
+                M11.m1.vth_drive:
+                    units: V
+                    type: float double
+                M11.rb.i:
+                    units: A
+                    type: float double
+                M11.rb.pwr:
+                    units: W
+                    type: float double
+                M11.rb.res:
+                    units: Ohm
+                    type: float double
+                M11.rb.v:
+                    units: V
+                    type: float double
+                M11.rgcs.i:
+                    units: A
+                    type: float double
+                M11.rgcs.pwr:
+                    units: W
+                    type: float double
+                M11.rgcs.res:
+                    units: Ohm
+                    type: float double
+                M11.rgcs.v:
+                    units: V
+                    type: float double
+                M11.rgn.i:
+                    units: A
+                    type: float double
+                M11.rgn.pwr:
+                    units: W
+                    type: float double
+                M11.rgn.res:
+                    units: Ohm
+                    type: float double
+                M11.rgn.v:
+                    units: V
+                    type: float double
+                M11.rgvi.i:
+                    units: A
+                    type: float double
+                M11.rgvi.pwr:
+                    units: W
+                    type: float double
+                M11.rgvi.res:
+                    units: Ohm
+                    type: float double
+                M11.rgvi.v:
+                    units: V
+                    type: float double
+                M11.xdw.d1.cj:
+                    units: F
+                    type: float double
+                M11.xdw.d1.cjbot:
+                    units: F
+                    type: float double
+                M11.xdw.d1.cjgat:
+                    units: F
+                    type: float double
+                M11.xdw.d1.cjosbot:
+                    units: F
+                    type: float double
+                M11.xdw.d1.cjosgat:
+                    units: F
+                    type: float double
+                M11.xdw.d1.cjossti:
+                    units: F
+                    type: float double
+                M11.xdw.d1.cjsti:
+                    units: F
+                    type: float double
+                M11.xdw.d1.ctotal:
+                    units: F
+                    type: float double
+                M11.xdw.d1.diode_region:
+                    type: int long
+                M11.xdw.d1.idsatsbot:
+                    units: A
+                    type: float double
+                M11.xdw.d1.idsatsgat:
+                    units: A
+                    type: float double
+                M11.xdw.d1.idsatssti:
+                    units: A
+                    type: float double
+                M11.xdw.d1.ij:
+                    units: A
+                    type: float double
+                M11.xdw.d1.ijbot:
+                    units: A
+                    type: float double
+                M11.xdw.d1.ijgat:
+                    units: A
+                    type: float double
+                M11.xdw.d1.ijsti:
+                    units: A
+                    type: float double
+                M11.xdw.d1.lx5:
+                    units: F
+                    type: float double
+                M11.xdw.d1.si:
+                    units: A^2/Hz
+                    type: float double
+                M11.xdw.d1.vak:
+                    units: V
+                    type: float double
+                M11.xdw.d1.vbisbot:
+                    units: V
+                    type: float double
+                M11.xdw.d1.vbisgat:
+                    units: V
+                    type: float double
+                M11.xdw.d1.vbissti:
+                    units: V
+                    type: float double
+                M11.xdw:1.i:
+                    units: A
+                    type: float double
+                M11.xdw:2.i:
+                    units: A
+                    type: float double
+                M11:1.i:
+                    units: A
+                    type: float double
+                M11:2.i:
+                    units: A
+                    type: float double
+                M11:3.i:
+                    units: A
+                    type: float double
+                M11:4.i:
+                    units: A
+                    type: float double
+                M12.cfrolgd.cap:
+                    units: F
+                    type: float double
+                M12.cfrolgs.cap:
+                    units: F
+                    type: float double
+                M12.cfrowgd.cap:
+                    units: F
+                    type: float double
+                M12.cfrowgs.cap:
+                    units: F
+                    type: float double
+                M12.cgn.cap:
+                    units: F
+                    type: float double
+                M12.csdext.cap:
+                    units: F
+                    type: float double
+                M12.m1.beff:
+                    type: float double
+                M12.m1.cbb:
+                    units: C
+                    type: float double
+                M12.m1.cbd:
+                    units: C
+                    type: float double
+                M12.m1.cbg:
+                    units: C
+                    type: float double
+                M12.m1.cbs:
+                    units: C
+                    type: float double
+                M12.m1.cdb:
+                    units: C
+                    type: float double
+                M12.m1.cdd:
+                    units: C
+                    type: float double
+                M12.m1.cdg:
+                    units: C
+                    type: float double
+                M12.m1.cds:
+                    units: C
+                    type: float double
+                M12.m1.cgb:
+                    units: C
+                    type: float double
+                M12.m1.cgd:
+                    units: C
+                    type: float double
+                M12.m1.cgg:
+                    units: C
+                    type: float double
+                M12.m1.cgs:
+                    units: C
+                    type: float double
+                M12.m1.csb:
+                    units: C
+                    type: float double
+                M12.m1.csd:
+                    units: C
+                    type: float double
+                M12.m1.csg:
+                    units: C
+                    type: float double
+                M12.m1.css:
+                    units: C
+                    type: float double
+                M12.m1.dtsh:
+                    type: float double
+                M12.m1.ft:
+                    type: float double
+                M12.m1.gds:
+                    type: float double
+                M12.m1.gm:
+                    type: float double
+                M12.m1.gmb:
+                    type: float double
+                M12.m1.gmoverid:
+                    type: float double
+                M12.m1.ib:
+                    units: I
+                    type: float double
+                M12.m1.id:
+                    units: I
+                    type: float double
+                M12.m1.idb:
+                    units: I
+                    type: float double
+                M12.m1.ids:
+                    units: I
+                    type: float double
+                M12.m1.ig:
+                    units: I
+                    type: float double
+                M12.m1.igd:
+                    units: I
+                    type: float double
+                M12.m1.igidl:
+                    units: I
+                    type: float double
+                M12.m1.igisl:
+                    units: I
+                    type: float double
+                M12.m1.igs:
+                    units: I
+                    type: float double
+                M12.m1.is:
+                    units: I
+                    type: float double
+                M12.m1.isb:
+                    units: I
+                    type: float double
+                M12.m1.pwr:
+                    units: W
+                    type: float double
+                M12.m1.region:
+                    type: int byte
+                M12.m1.rgate:
+                    units: R
+                    type: float double
+                M12.m1.rout:
+                    units: R
+                    type: float double
+                M12.m1.self_gain:
+                    type: float double
+                M12.m1.tk:
+                    type: float double
+                M12.m1.typeop:
+                    type: float double
+                M12.m1.vds:
+                    units: V
+                    type: float double
+                M12.m1.vdsat:
+                    units: V
+                    type: float double
+                M12.m1.vdsat_marg:
+                    units: V
+                    type: float double
+                M12.m1.vearly:
+                    units: V
+                    type: float double
+                M12.m1.vgs:
+                    units: V
+                    type: float double
+                M12.m1.vsb:
+                    units: V
+                    type: float double
+                M12.m1.vth:
+                    units: V
+                    type: float double
+                M12.m1.vth_drive:
+                    units: V
+                    type: float double
+                M12.rb.i:
+                    units: A
+                    type: float double
+                M12.rb.pwr:
+                    units: W
+                    type: float double
+                M12.rb.res:
+                    units: Ohm
+                    type: float double
+                M12.rb.v:
+                    units: V
+                    type: float double
+                M12.rgcs.i:
+                    units: A
+                    type: float double
+                M12.rgcs.pwr:
+                    units: W
+                    type: float double
+                M12.rgcs.res:
+                    units: Ohm
+                    type: float double
+                M12.rgcs.v:
+                    units: V
+                    type: float double
+                M12.rgn.i:
+                    units: A
+                    type: float double
+                M12.rgn.pwr:
+                    units: W
+                    type: float double
+                M12.rgn.res:
+                    units: Ohm
+                    type: float double
+                M12.rgn.v:
+                    units: V
+                    type: float double
+                M12.rgvi.i:
+                    units: A
+                    type: float double
+                M12.rgvi.pwr:
+                    units: W
+                    type: float double
+                M12.rgvi.res:
+                    units: Ohm
+                    type: float double
+                M12.rgvi.v:
+                    units: V
+                    type: float double
+                M12.xdw.d1.cj:
+                    units: F
+                    type: float double
+                M12.xdw.d1.cjbot:
+                    units: F
+                    type: float double
+                M12.xdw.d1.cjgat:
+                    units: F
+                    type: float double
+                M12.xdw.d1.cjosbot:
+                    units: F
+                    type: float double
+                M12.xdw.d1.cjosgat:
+                    units: F
+                    type: float double
+                M12.xdw.d1.cjossti:
+                    units: F
+                    type: float double
+                M12.xdw.d1.cjsti:
+                    units: F
+                    type: float double
+                M12.xdw.d1.ctotal:
+                    units: F
+                    type: float double
+                M12.xdw.d1.diode_region:
+                    type: int long
+                M12.xdw.d1.idsatsbot:
+                    units: A
+                    type: float double
+                M12.xdw.d1.idsatsgat:
+                    units: A
+                    type: float double
+                M12.xdw.d1.idsatssti:
+                    units: A
+                    type: float double
+                M12.xdw.d1.ij:
+                    units: A
+                    type: float double
+                M12.xdw.d1.ijbot:
+                    units: A
+                    type: float double
+                M12.xdw.d1.ijgat:
+                    units: A
+                    type: float double
+                M12.xdw.d1.ijsti:
+                    units: A
+                    type: float double
+                M12.xdw.d1.lx5:
+                    units: F
+                    type: float double
+                M12.xdw.d1.si:
+                    units: A^2/Hz
+                    type: float double
+                M12.xdw.d1.vak:
+                    units: V
+                    type: float double
+                M12.xdw.d1.vbisbot:
+                    units: V
+                    type: float double
+                M12.xdw.d1.vbisgat:
+                    units: V
+                    type: float double
+                M12.xdw.d1.vbissti:
+                    units: V
+                    type: float double
+                M12.xdw:1.i:
+                    units: A
+                    type: float double
+                M12.xdw:2.i:
+                    units: A
+                    type: float double
+                M12:1.i:
+                    units: A
+                    type: float double
+                M12:2.i:
+                    units: A
+                    type: float double
+                M12:3.i:
+                    units: A
+                    type: float double
+                M12:4.i:
+                    units: A
+                    type: float double
+                M1:1.i:
+                    units: A
+                    type: float double
+                M1:2.i:
+                    units: A
+                    type: float double
+                M1:3.i:
+                    units: A
+                    type: float double
+                M1:4.i:
+                    units: A
+                    type: float double
+                M2.cfrolgd.cap:
+                    units: F
+                    type: float double
+                M2.cfrolgs.cap:
+                    units: F
+                    type: float double
+                M2.cfrowgd.cap:
+                    units: F
+                    type: float double
+                M2.cfrowgs.cap:
+                    units: F
+                    type: float double
+                M2.cgn.cap:
+                    units: F
+                    type: float double
+                M2.csdext.cap:
+                    units: F
+                    type: float double
+                M2.m1.beff:
+                    type: float double
+                M2.m1.cbb:
+                    units: C
+                    type: float double
+                M2.m1.cbd:
+                    units: C
+                    type: float double
+                M2.m1.cbg:
+                    units: C
+                    type: float double
+                M2.m1.cbs:
+                    units: C
+                    type: float double
+                M2.m1.cdb:
+                    units: C
+                    type: float double
+                M2.m1.cdd:
+                    units: C
+                    type: float double
+                M2.m1.cdg:
+                    units: C
+                    type: float double
+                M2.m1.cds:
+                    units: C
+                    type: float double
+                M2.m1.cgb:
+                    units: C
+                    type: float double
+                M2.m1.cgd:
+                    units: C
+                    type: float double
+                M2.m1.cgg:
+                    units: C
+                    type: float double
+                M2.m1.cgs:
+                    units: C
+                    type: float double
+                M2.m1.csb:
+                    units: C
+                    type: float double
+                M2.m1.csd:
+                    units: C
+                    type: float double
+                M2.m1.csg:
+                    units: C
+                    type: float double
+                M2.m1.css:
+                    units: C
+                    type: float double
+                M2.m1.dtsh:
+                    type: float double
+                M2.m1.ft:
+                    type: float double
+                M2.m1.gds:
+                    type: float double
+                M2.m1.gm:
+                    type: float double
+                M2.m1.gmb:
+                    type: float double
+                M2.m1.gmoverid:
+                    type: float double
+                M2.m1.ib:
+                    units: I
+                    type: float double
+                M2.m1.id:
+                    units: I
+                    type: float double
+                M2.m1.idb:
+                    units: I
+                    type: float double
+                M2.m1.ids:
+                    units: I
+                    type: float double
+                M2.m1.ig:
+                    units: I
+                    type: float double
+                M2.m1.igd:
+                    units: I
+                    type: float double
+                M2.m1.igidl:
+                    units: I
+                    type: float double
+                M2.m1.igisl:
+                    units: I
+                    type: float double
+                M2.m1.igs:
+                    units: I
+                    type: float double
+                M2.m1.is:
+                    units: I
+                    type: float double
+                M2.m1.isb:
+                    units: I
+                    type: float double
+                M2.m1.pwr:
+                    units: W
+                    type: float double
+                M2.m1.region:
+                    type: int byte
+                M2.m1.rgate:
+                    units: R
+                    type: float double
+                M2.m1.rout:
+                    units: R
+                    type: float double
+                M2.m1.self_gain:
+                    type: float double
+                M2.m1.tk:
+                    type: float double
+                M2.m1.typeop:
+                    type: float double
+                M2.m1.vds:
+                    units: V
+                    type: float double
+                M2.m1.vdsat:
+                    units: V
+                    type: float double
+                M2.m1.vdsat_marg:
+                    units: V
+                    type: float double
+                M2.m1.vearly:
+                    units: V
+                    type: float double
+                M2.m1.vgs:
+                    units: V
+                    type: float double
+                M2.m1.vsb:
+                    units: V
+                    type: float double
+                M2.m1.vth:
+                    units: V
+                    type: float double
+                M2.m1.vth_drive:
+                    units: V
+                    type: float double
+                M2.rb.i:
+                    units: A
+                    type: float double
+                M2.rb.pwr:
+                    units: W
+                    type: float double
+                M2.rb.res:
+                    units: Ohm
+                    type: float double
+                M2.rb.v:
+                    units: V
+                    type: float double
+                M2.rgcs.i:
+                    units: A
+                    type: float double
+                M2.rgcs.pwr:
+                    units: W
+                    type: float double
+                M2.rgcs.res:
+                    units: Ohm
+                    type: float double
+                M2.rgcs.v:
+                    units: V
+                    type: float double
+                M2.rgn.i:
+                    units: A
+                    type: float double
+                M2.rgn.pwr:
+                    units: W
+                    type: float double
+                M2.rgn.res:
+                    units: Ohm
+                    type: float double
+                M2.rgn.v:
+                    units: V
+                    type: float double
+                M2.rgvi.i:
+                    units: A
+                    type: float double
+                M2.rgvi.pwr:
+                    units: W
+                    type: float double
+                M2.rgvi.res:
+                    units: Ohm
+                    type: float double
+                M2.rgvi.v:
+                    units: V
+                    type: float double
+                M2.xdw.d1.cj:
+                    units: F
+                    type: float double
+                M2.xdw.d1.cjbot:
+                    units: F
+                    type: float double
+                M2.xdw.d1.cjgat:
+                    units: F
+                    type: float double
+                M2.xdw.d1.cjosbot:
+                    units: F
+                    type: float double
+                M2.xdw.d1.cjosgat:
+                    units: F
+                    type: float double
+                M2.xdw.d1.cjossti:
+                    units: F
+                    type: float double
+                M2.xdw.d1.cjsti:
+                    units: F
+                    type: float double
+                M2.xdw.d1.ctotal:
+                    units: F
+                    type: float double
+                M2.xdw.d1.diode_region:
+                    type: int long
+                M2.xdw.d1.idsatsbot:
+                    units: A
+                    type: float double
+                M2.xdw.d1.idsatsgat:
+                    units: A
+                    type: float double
+                M2.xdw.d1.idsatssti:
+                    units: A
+                    type: float double
+                M2.xdw.d1.ij:
+                    units: A
+                    type: float double
+                M2.xdw.d1.ijbot:
+                    units: A
+                    type: float double
+                M2.xdw.d1.ijgat:
+                    units: A
+                    type: float double
+                M2.xdw.d1.ijsti:
+                    units: A
+                    type: float double
+                M2.xdw.d1.lx5:
+                    units: F
+                    type: float double
+                M2.xdw.d1.si:
+                    units: A^2/Hz
+                    type: float double
+                M2.xdw.d1.vak:
+                    units: V
+                    type: float double
+                M2.xdw.d1.vbisbot:
+                    units: V
+                    type: float double
+                M2.xdw.d1.vbisgat:
+                    units: V
+                    type: float double
+                M2.xdw.d1.vbissti:
+                    units: V
+                    type: float double
+                M2.xdw:1.i:
+                    units: A
+                    type: float double
+                M2.xdw:2.i:
+                    units: A
+                    type: float double
+                M21.cfrolgd.cap:
+                    units: F
+                    type: float double
+                M21.cfrolgs.cap:
+                    units: F
+                    type: float double
+                M21.cfrowgd.cap:
+                    units: F
+                    type: float double
+                M21.cfrowgs.cap:
+                    units: F
+                    type: float double
+                M21.cgn.cap:
+                    units: F
+                    type: float double
+                M21.csdext.cap:
+                    units: F
+                    type: float double
+                M21.m1.beff:
+                    type: float double
+                M21.m1.cbb:
+                    units: C
+                    type: float double
+                M21.m1.cbd:
+                    units: C
+                    type: float double
+                M21.m1.cbg:
+                    units: C
+                    type: float double
+                M21.m1.cbs:
+                    units: C
+                    type: float double
+                M21.m1.cdb:
+                    units: C
+                    type: float double
+                M21.m1.cdd:
+                    units: C
+                    type: float double
+                M21.m1.cdg:
+                    units: C
+                    type: float double
+                M21.m1.cds:
+                    units: C
+                    type: float double
+                M21.m1.cgb:
+                    units: C
+                    type: float double
+                M21.m1.cgd:
+                    units: C
+                    type: float double
+                M21.m1.cgg:
+                    units: C
+                    type: float double
+                M21.m1.cgs:
+                    units: C
+                    type: float double
+                M21.m1.csb:
+                    units: C
+                    type: float double
+                M21.m1.csd:
+                    units: C
+                    type: float double
+                M21.m1.csg:
+                    units: C
+                    type: float double
+                M21.m1.css:
+                    units: C
+                    type: float double
+                M21.m1.dtsh:
+                    type: float double
+                M21.m1.ft:
+                    type: float double
+                M21.m1.gds:
+                    type: float double
+                M21.m1.gm:
+                    type: float double
+                M21.m1.gmb:
+                    type: float double
+                M21.m1.gmoverid:
+                    type: float double
+                M21.m1.ib:
+                    units: I
+                    type: float double
+                M21.m1.id:
+                    units: I
+                    type: float double
+                M21.m1.idb:
+                    units: I
+                    type: float double
+                M21.m1.ids:
+                    units: I
+                    type: float double
+                M21.m1.ig:
+                    units: I
+                    type: float double
+                M21.m1.igd:
+                    units: I
+                    type: float double
+                M21.m1.igidl:
+                    units: I
+                    type: float double
+                M21.m1.igisl:
+                    units: I
+                    type: float double
+                M21.m1.igs:
+                    units: I
+                    type: float double
+                M21.m1.is:
+                    units: I
+                    type: float double
+                M21.m1.isb:
+                    units: I
+                    type: float double
+                M21.m1.pwr:
+                    units: W
+                    type: float double
+                M21.m1.region:
+                    type: int byte
+                M21.m1.rgate:
+                    units: R
+                    type: float double
+                M21.m1.rout:
+                    units: R
+                    type: float double
+                M21.m1.self_gain:
+                    type: float double
+                M21.m1.tk:
+                    type: float double
+                M21.m1.typeop:
+                    type: float double
+                M21.m1.vds:
+                    units: V
+                    type: float double
+                M21.m1.vdsat:
+                    units: V
+                    type: float double
+                M21.m1.vdsat_marg:
+                    units: V
+                    type: float double
+                M21.m1.vearly:
+                    units: V
+                    type: float double
+                M21.m1.vgs:
+                    units: V
+                    type: float double
+                M21.m1.vsb:
+                    units: V
+                    type: float double
+                M21.m1.vth:
+                    units: V
+                    type: float double
+                M21.m1.vth_drive:
+                    units: V
+                    type: float double
+                M21.rb.i:
+                    units: A
+                    type: float double
+                M21.rb.pwr:
+                    units: W
+                    type: float double
+                M21.rb.res:
+                    units: Ohm
+                    type: float double
+                M21.rb.v:
+                    units: V
+                    type: float double
+                M21.rgcs.i:
+                    units: A
+                    type: float double
+                M21.rgcs.pwr:
+                    units: W
+                    type: float double
+                M21.rgcs.res:
+                    units: Ohm
+                    type: float double
+                M21.rgcs.v:
+                    units: V
+                    type: float double
+                M21.rgn.i:
+                    units: A
+                    type: float double
+                M21.rgn.pwr:
+                    units: W
+                    type: float double
+                M21.rgn.res:
+                    units: Ohm
+                    type: float double
+                M21.rgn.v:
+                    units: V
+                    type: float double
+                M21.rgvi.i:
+                    units: A
+                    type: float double
+                M21.rgvi.pwr:
+                    units: W
+                    type: float double
+                M21.rgvi.res:
+                    units: Ohm
+                    type: float double
+                M21.rgvi.v:
+                    units: V
+                    type: float double
+                M21.xdw.d1.cj:
+                    units: F
+                    type: float double
+                M21.xdw.d1.cjbot:
+                    units: F
+                    type: float double
+                M21.xdw.d1.cjgat:
+                    units: F
+                    type: float double
+                M21.xdw.d1.cjosbot:
+                    units: F
+                    type: float double
+                M21.xdw.d1.cjosgat:
+                    units: F
+                    type: float double
+                M21.xdw.d1.cjossti:
+                    units: F
+                    type: float double
+                M21.xdw.d1.cjsti:
+                    units: F
+                    type: float double
+                M21.xdw.d1.ctotal:
+                    units: F
+                    type: float double
+                M21.xdw.d1.diode_region:
+                    type: int long
+                M21.xdw.d1.idsatsbot:
+                    units: A
+                    type: float double
+                M21.xdw.d1.idsatsgat:
+                    units: A
+                    type: float double
+                M21.xdw.d1.idsatssti:
+                    units: A
+                    type: float double
+                M21.xdw.d1.ij:
+                    units: A
+                    type: float double
+                M21.xdw.d1.ijbot:
+                    units: A
+                    type: float double
+                M21.xdw.d1.ijgat:
+                    units: A
+                    type: float double
+                M21.xdw.d1.ijsti:
+                    units: A
+                    type: float double
+                M21.xdw.d1.lx5:
+                    units: F
+                    type: float double
+                M21.xdw.d1.si:
+                    units: A^2/Hz
+                    type: float double
+                M21.xdw.d1.vak:
+                    units: V
+                    type: float double
+                M21.xdw.d1.vbisbot:
+                    units: V
+                    type: float double
+                M21.xdw.d1.vbisgat:
+                    units: V
+                    type: float double
+                M21.xdw.d1.vbissti:
+                    units: V
+                    type: float double
+                M21.xdw:1.i:
+                    units: A
+                    type: float double
+                M21.xdw:2.i:
+                    units: A
+                    type: float double
+                M21:1.i:
+                    units: A
+                    type: float double
+                M21:2.i:
+                    units: A
+                    type: float double
+                M21:3.i:
+                    units: A
+                    type: float double
+                M21:4.i:
+                    units: A
+                    type: float double
+                M22.cfrolgd.cap:
+                    units: F
+                    type: float double
+                M22.cfrolgs.cap:
+                    units: F
+                    type: float double
+                M22.cfrowgd.cap:
+                    units: F
+                    type: float double
+                M22.cfrowgs.cap:
+                    units: F
+                    type: float double
+                M22.cgn.cap:
+                    units: F
+                    type: float double
+                M22.csdext.cap:
+                    units: F
+                    type: float double
+                M22.m1.beff:
+                    type: float double
+                M22.m1.cbb:
+                    units: C
+                    type: float double
+                M22.m1.cbd:
+                    units: C
+                    type: float double
+                M22.m1.cbg:
+                    units: C
+                    type: float double
+                M22.m1.cbs:
+                    units: C
+                    type: float double
+                M22.m1.cdb:
+                    units: C
+                    type: float double
+                M22.m1.cdd:
+                    units: C
+                    type: float double
+                M22.m1.cdg:
+                    units: C
+                    type: float double
+                M22.m1.cds:
+                    units: C
+                    type: float double
+                M22.m1.cgb:
+                    units: C
+                    type: float double
+                M22.m1.cgd:
+                    units: C
+                    type: float double
+                M22.m1.cgg:
+                    units: C
+                    type: float double
+                M22.m1.cgs:
+                    units: C
+                    type: float double
+                M22.m1.csb:
+                    units: C
+                    type: float double
+                M22.m1.csd:
+                    units: C
+                    type: float double
+                M22.m1.csg:
+                    units: C
+                    type: float double
+                M22.m1.css:
+                    units: C
+                    type: float double
+                M22.m1.dtsh:
+                    type: float double
+                M22.m1.ft:
+                    type: float double
+                M22.m1.gds:
+                    type: float double
+                M22.m1.gm:
+                    type: float double
+                M22.m1.gmb:
+                    type: float double
+                M22.m1.gmoverid:
+                    type: float double
+                M22.m1.ib:
+                    units: I
+                    type: float double
+                M22.m1.id:
+                    units: I
+                    type: float double
+                M22.m1.idb:
+                    units: I
+                    type: float double
+                M22.m1.ids:
+                    units: I
+                    type: float double
+                M22.m1.ig:
+                    units: I
+                    type: float double
+                M22.m1.igd:
+                    units: I
+                    type: float double
+                M22.m1.igidl:
+                    units: I
+                    type: float double
+                M22.m1.igisl:
+                    units: I
+                    type: float double
+                M22.m1.igs:
+                    units: I
+                    type: float double
+                M22.m1.is:
+                    units: I
+                    type: float double
+                M22.m1.isb:
+                    units: I
+                    type: float double
+                M22.m1.pwr:
+                    units: W
+                    type: float double
+                M22.m1.region:
+                    type: int byte
+                M22.m1.rgate:
+                    units: R
+                    type: float double
+                M22.m1.rout:
+                    units: R
+                    type: float double
+                M22.m1.self_gain:
+                    type: float double
+                M22.m1.tk:
+                    type: float double
+                M22.m1.typeop:
+                    type: float double
+                M22.m1.vds:
+                    units: V
+                    type: float double
+                M22.m1.vdsat:
+                    units: V
+                    type: float double
+                M22.m1.vdsat_marg:
+                    units: V
+                    type: float double
+                M22.m1.vearly:
+                    units: V
+                    type: float double
+                M22.m1.vgs:
+                    units: V
+                    type: float double
+                M22.m1.vsb:
+                    units: V
+                    type: float double
+                M22.m1.vth:
+                    units: V
+                    type: float double
+                M22.m1.vth_drive:
+                    units: V
+                    type: float double
+                M22.rb.i:
+                    units: A
+                    type: float double
+                M22.rb.pwr:
+                    units: W
+                    type: float double
+                M22.rb.res:
+                    units: Ohm
+                    type: float double
+                M22.rb.v:
+                    units: V
+                    type: float double
+                M22.rgcs.i:
+                    units: A
+                    type: float double
+                M22.rgcs.pwr:
+                    units: W
+                    type: float double
+                M22.rgcs.res:
+                    units: Ohm
+                    type: float double
+                M22.rgcs.v:
+                    units: V
+                    type: float double
+                M22.rgn.i:
+                    units: A
+                    type: float double
+                M22.rgn.pwr:
+                    units: W
+                    type: float double
+                M22.rgn.res:
+                    units: Ohm
+                    type: float double
+                M22.rgn.v:
+                    units: V
+                    type: float double
+                M22.rgvi.i:
+                    units: A
+                    type: float double
+                M22.rgvi.pwr:
+                    units: W
+                    type: float double
+                M22.rgvi.res:
+                    units: Ohm
+                    type: float double
+                M22.rgvi.v:
+                    units: V
+                    type: float double
+                M22.xdw.d1.cj:
+                    units: F
+                    type: float double
+                M22.xdw.d1.cjbot:
+                    units: F
+                    type: float double
+                M22.xdw.d1.cjgat:
+                    units: F
+                    type: float double
+                M22.xdw.d1.cjosbot:
+                    units: F
+                    type: float double
+                M22.xdw.d1.cjosgat:
+                    units: F
+                    type: float double
+                M22.xdw.d1.cjossti:
+                    units: F
+                    type: float double
+                M22.xdw.d1.cjsti:
+                    units: F
+                    type: float double
+                M22.xdw.d1.ctotal:
+                    units: F
+                    type: float double
+                M22.xdw.d1.diode_region:
+                    type: int long
+                M22.xdw.d1.idsatsbot:
+                    units: A
+                    type: float double
+                M22.xdw.d1.idsatsgat:
+                    units: A
+                    type: float double
+                M22.xdw.d1.idsatssti:
+                    units: A
+                    type: float double
+                M22.xdw.d1.ij:
+                    units: A
+                    type: float double
+                M22.xdw.d1.ijbot:
+                    units: A
+                    type: float double
+                M22.xdw.d1.ijgat:
+                    units: A
+                    type: float double
+                M22.xdw.d1.ijsti:
+                    units: A
+                    type: float double
+                M22.xdw.d1.lx5:
+                    units: F
+                    type: float double
+                M22.xdw.d1.si:
+                    units: A^2/Hz
+                    type: float double
+                M22.xdw.d1.vak:
+                    units: V
+                    type: float double
+                M22.xdw.d1.vbisbot:
+                    units: V
+                    type: float double
+                M22.xdw.d1.vbisgat:
+                    units: V
+                    type: float double
+                M22.xdw.d1.vbissti:
+                    units: V
+                    type: float double
+                M22.xdw:1.i:
+                    units: A
+                    type: float double
+                M22.xdw:2.i:
+                    units: A
+                    type: float double
+                M22:1.i:
+                    units: A
+                    type: float double
+                M22:2.i:
+                    units: A
+                    type: float double
+                M22:3.i:
+                    units: A
+                    type: float double
+                M22:4.i:
+                    units: A
+                    type: float double
+                M2:1.i:
+                    units: A
+                    type: float double
+                M2:2.i:
+                    units: A
+                    type: float double
+                M2:3.i:
+                    units: A
+                    type: float double
+                M2:4.i:
+                    units: A
+                    type: float double
+                N0.cfrolgd.cap:
+                    units: F
+                    type: float double
+                N0.cfrolgs.cap:
+                    units: F
+                    type: float double
+                N0.cfrowgd.cap:
+                    units: F
+                    type: float double
+                N0.cfrowgs.cap:
+                    units: F
+                    type: float double
+                N0.cgn.cap:
+                    units: F
+                    type: float double
+                N0.csdext.cap:
+                    units: F
+                    type: float double
+                N0.m1.beff:
+                    type: float double
+                N0.m1.cbb:
+                    units: C
+                    type: float double
+                N0.m1.cbd:
+                    units: C
+                    type: float double
+                N0.m1.cbg:
+                    units: C
+                    type: float double
+                N0.m1.cbs:
+                    units: C
+                    type: float double
+                N0.m1.cdb:
+                    units: C
+                    type: float double
+                N0.m1.cdd:
+                    units: C
+                    type: float double
+                N0.m1.cdg:
+                    units: C
+                    type: float double
+                N0.m1.cds:
+                    units: C
+                    type: float double
+                N0.m1.cgb:
+                    units: C
+                    type: float double
+                N0.m1.cgd:
+                    units: C
+                    type: float double
+                N0.m1.cgg:
+                    units: C
+                    type: float double
+                N0.m1.cgs:
+                    units: C
+                    type: float double
+                N0.m1.csb:
+                    units: C
+                    type: float double
+                N0.m1.csd:
+                    units: C
+                    type: float double
+                N0.m1.csg:
+                    units: C
+                    type: float double
+                N0.m1.css:
+                    units: C
+                    type: float double
+                N0.m1.dtsh:
+                    type: float double
+                N0.m1.ft:
+                    type: float double
+                N0.m1.gds:
+                    type: float double
+                N0.m1.gm:
+                    type: float double
+                N0.m1.gmb:
+                    type: float double
+                N0.m1.gmoverid:
+                    type: float double
+                N0.m1.ib:
+                    units: I
+                    type: float double
+                N0.m1.id:
+                    units: I
+                    type: float double
+                N0.m1.idb:
+                    units: I
+                    type: float double
+                N0.m1.ids:
+                    units: I
+                    type: float double
+                N0.m1.ig:
+                    units: I
+                    type: float double
+                N0.m1.igd:
+                    units: I
+                    type: float double
+                N0.m1.igidl:
+                    units: I
+                    type: float double
+                N0.m1.igisl:
+                    units: I
+                    type: float double
+                N0.m1.igs:
+                    units: I
+                    type: float double
+                N0.m1.is:
+                    units: I
+                    type: float double
+                N0.m1.isb:
+                    units: I
+                    type: float double
+                N0.m1.pwr:
+                    units: W
+                    type: float double
+                N0.m1.region:
+                    type: int byte
+                N0.m1.rgate:
+                    units: R
+                    type: float double
+                N0.m1.rout:
+                    units: R
+                    type: float double
+                N0.m1.self_gain:
+                    type: float double
+                N0.m1.tk:
+                    type: float double
+                N0.m1.typeop:
+                    type: float double
+                N0.m1.vds:
+                    units: V
+                    type: float double
+                N0.m1.vdsat:
+                    units: V
+                    type: float double
+                N0.m1.vdsat_marg:
+                    units: V
+                    type: float double
+                N0.m1.vearly:
+                    units: V
+                    type: float double
+                N0.m1.vgs:
+                    units: V
+                    type: float double
+                N0.m1.vsb:
+                    units: V
+                    type: float double
+                N0.m1.vth:
+                    units: V
+                    type: float double
+                N0.m1.vth_drive:
+                    units: V
+                    type: float double
+                N0.rb.i:
+                    units: A
+                    type: float double
+                N0.rb.pwr:
+                    units: W
+                    type: float double
+                N0.rb.res:
+                    units: Ohm
+                    type: float double
+                N0.rb.v:
+                    units: V
+                    type: float double
+                N0.rgcs.i:
+                    units: A
+                    type: float double
+                N0.rgcs.pwr:
+                    units: W
+                    type: float double
+                N0.rgcs.res:
+                    units: Ohm
+                    type: float double
+                N0.rgcs.v:
+                    units: V
+                    type: float double
+                N0.rgn.i:
+                    units: A
+                    type: float double
+                N0.rgn.pwr:
+                    units: W
+                    type: float double
+                N0.rgn.res:
+                    units: Ohm
+                    type: float double
+                N0.rgn.v:
+                    units: V
+                    type: float double
+                N0.rgvi.i:
+                    units: A
+                    type: float double
+                N0.rgvi.pwr:
+                    units: W
+                    type: float double
+                N0.rgvi.res:
+                    units: Ohm
+                    type: float double
+                N0.rgvi.v:
+                    units: V
+                    type: float double
+                N0.xdw.d1.cj:
+                    units: F
+                    type: float double
+                N0.xdw.d1.cjbot:
+                    units: F
+                    type: float double
+                N0.xdw.d1.cjgat:
+                    units: F
+                    type: float double
+                N0.xdw.d1.cjosbot:
+                    units: F
+                    type: float double
+                N0.xdw.d1.cjosgat:
+                    units: F
+                    type: float double
+                N0.xdw.d1.cjossti:
+                    units: F
+                    type: float double
+                N0.xdw.d1.cjsti:
+                    units: F
+                    type: float double
+                N0.xdw.d1.ctotal:
+                    units: F
+                    type: float double
+                N0.xdw.d1.diode_region:
+                    type: int long
+                N0.xdw.d1.idsatsbot:
+                    units: A
+                    type: float double
+                N0.xdw.d1.idsatsgat:
+                    units: A
+                    type: float double
+                N0.xdw.d1.idsatssti:
+                    units: A
+                    type: float double
+                N0.xdw.d1.ij:
+                    units: A
+                    type: float double
+                N0.xdw.d1.ijbot:
+                    units: A
+                    type: float double
+                N0.xdw.d1.ijgat:
+                    units: A
+                    type: float double
+                N0.xdw.d1.ijsti:
+                    units: A
+                    type: float double
+                N0.xdw.d1.lx5:
+                    units: F
+                    type: float double
+                N0.xdw.d1.si:
+                    units: A^2/Hz
+                    type: float double
+                N0.xdw.d1.vak:
+                    units: V
+                    type: float double
+                N0.xdw.d1.vbisbot:
+                    units: V
+                    type: float double
+                N0.xdw.d1.vbisgat:
+                    units: V
+                    type: float double
+                N0.xdw.d1.vbissti:
+                    units: V
+                    type: float double
+                N0.xdw:1.i:
+                    units: A
+                    type: float double
+                N0.xdw:2.i:
+                    units: A
+                    type: float double
+                N0:1.i:
+                    units: A
+                    type: float double
+                N0:2.i:
+                    units: A
+                    type: float double
+                N0:3.i:
+                    units: A
+                    type: float double
+                N0:4.i:
+                    units: A
+                    type: float double
+                V0.i:
+                    units: A
+                    type: float double
+                V0.pwr:
+                    units: W
+                    type: float double
+                V0.v:
+                    units: V
+                    type: float double
+                V1.i:
+                    units: A
+                    type: float double
+                V1.pwr:
+                    units: W
+                    type: float double
+                V1.v:
+                    units: V
+                    type: float double
+                V2.i:
+                    units: A
+                    type: float double
+                V2.pwr:
+                    units: W
+                    type: float double
+                V2.v:
+                    units: V
+                    type: float double
+                V4.i:
+                    units: A
+                    type: float double
+                V4.pwr:
+                    units: W
+                    type: float double
+                V4.v:
+                    units: V
+                    type: float double
+
+    rushikesh-dhanaji-phadtare:
+        path: ../samples/rushikesh-dhanaji-phadtare.tran
+        expected:
+            sweep:
+                name: time
+                units: s
+                length: 238
+                type: float double
+                grid: linear
+            signals:
+                V0:p:
+                    units: A
+                    type: float double
+                    min: -0.00042404
+                    max: 1.00119e-06
+                V1:p:
+                    units: A
+                    type: float double
+                    min: -1.67464e-08
+                    max: 1.8838e-08
+                net1:
+                    units: V
+                    type: float double
+                    min: 0.192
+                    max: 1.43
+                net2:
+                    units: V
+                    type: float double
+                    min: 0.254772
+                    max: 3.30016
+                vdd!:
+                    units: V
+                    type: float double
+                    min: 3.3
+                    max: 3.3
+

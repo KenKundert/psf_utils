@@ -215,6 +215,8 @@ Releases
     | Version: 1.4.0
     | Released: 2021-10-21
 
+    - Improved support of DC operating points.
+
 **1.4 (2021-10-21)**:
     - Allow signal names to contain backslashes.
 
