@@ -217,10 +217,10 @@ Releases
 
 
 **1.5 (2021-11-11)**:
-    - Improved support of DC operating points.
-    - Suppress access function names on members of PSF structures.
-    - Correct invalid units produced by Spectre on oppoint files.
     - Renamed *plot-psf* to *show-psf*.
+    - Improved support of DC operating points.
+    - Suppress access function names when printing members of PSF structures.
+    - Correct invalid units produced by Spectre on oppoint files (I, R, C).
 
 **1.4 (2021-10-21)**:
     - Allow signal names to contain backslashes.
