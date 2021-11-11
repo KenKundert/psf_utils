@@ -215,7 +215,11 @@ Releases
     | Version: 1.4.2
     | Released: 2021-11-11
 
+
+**1.5 (2021-11-11)**:
     - Improved support of DC operating points.
+    - Suppress access function names on members of PSF structures.
+    - Correct invalid units produced by Spectre on oppoint files.
 
 **1.4 (2021-10-21)**:
     - Allow signal names to contain backslashes.
@@ -234,10 +238,6 @@ Releases
     - Production release
 
 .. hide the pre-production releases
-
-    **0.8 (2021-11-11)**:
-        - Suppress access function names on members of PSF structures
-        - Correct invalid units produced by Spectre on oppoint files
 
     **0.7 (2020-09-23)**:
         - Add ability to show individual points
