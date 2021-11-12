@@ -53,7 +53,7 @@ import sys
 
 # Globals {{{1
 axis_prec = 9  # can request many digits as unneeded digits are not shown
-cursor_prec = 9
+cursor_prec = 3
 print_prec = 4
 Quantity.set_prefs(
     map_sf = Quantity.map_sf_to_sci_notation,
@@ -66,7 +66,6 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 saved_psf_file_filename = '.psf_file'
 saved_arguments_filename = '.psf_show_args'
 operators = '+ - * /'.split()
-signal_kinds = dict(V='V', A='I', s='t', Hz='f')
 
 
 # Utilities {{{1
@@ -232,10 +231,8 @@ def show_signals():
 
         # create formatter for cursor readout values {{{3
         xy_formatters = {}
-        x_kind = signal_kinds.get(x_units, x_units)
         for u in y_units:
-            y_kind = signal_kinds.get(x_units, u)
-            xy_label = f"{x_kind} = {{x}},  {y_kind} = {{y}}"
+            xy_label = "{x},  {y}"
             units = psf.units_to_unicode(u)
             xy_formatters[u] = lambda x, y: xy_label.format(
                 x = Quantity(x, x_units).render(prec=cursor_prec),

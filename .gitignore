@@ -3,6 +3,8 @@ psf_utils/parsetab.py
 psf_utils/lextab.py
 samples/*.cache
 samples/*/*.cache
+.psf_file
+.psf_show_args
 
 # version info
 .bump.cfg
