@@ -173,16 +173,11 @@ def show_signals():
                     display(f'{name:>{width+4}} = {y_data}')
                 return
 
-        x_units = sweep.units
-        x_data = sweep.abscissa
-        x_formatter = FuncFormatter(
-            lambda v, p: Quantity(v, x_units).render()
-        )
-
         # Process arguments for graphs {{{2
         waves = []
         y_units = set()
         for arg in to_show:
+            use_log_scale = psf.log_y(sweep)
             pair = arg.split('-')
             if len(pair) == 2:
                 psig = psf.get_signal(pair[0])
@@ -205,18 +200,29 @@ def show_signals():
             if dB:
                 y_data = 20*np.log10(np.absolute(y_data))
                 units = 'dB' + units
+                use_log_scale = False
             elif mag:
                 y_data = np.absolute(y_data)
             elif phase:
                 y_data = np.angle(y_data, deg=True)
                 units = '°'
+                use_log_scale = False
             elif np.iscomplexobj(y_data):
                 y_data = np.absolute(y_data)
-            waves.append((name, y_data, units))
+            waves.append((name, y_data, units, use_log_scale))
             y_units.add(units)
         if not y_units:
             raise Error(f'{plural(args):no match/es}.', culprit=args)
 
+        # Formatters {{{2
+        # create formatter for x-axis values {{{3
+        x_units = sweep.units
+        x_data = sweep.abscissa
+        x_formatter = FuncFormatter(
+            lambda v, p: Quantity(v, x_units).render()
+        )
+
+        # create formatter for y-axis values {{{3
         y_formatters = {
             u: FuncFormatter(
                 lambda v, p, u=u: str(Quantity(v, psf.units_to_unicode(u)))
@@ -224,6 +230,7 @@ def show_signals():
             for u in y_units
         }
 
+        # create formatter for cursor readout values {{{3
         xy_formatters = {}
         x_kind = signal_kinds.get(x_units, x_units)
         for u in y_units:
@@ -240,7 +247,7 @@ def show_signals():
             matplotlib.use('SVG')
         figure, axes = plt.subplots(len(y_units), 1, sharex=True, squeeze=False)
         for i, units in enumerate(y_units):
-            for sig_name, y_data, sig_units in waves:
+            for sig_name, y_data, sig_units, use_log_scale in waves:
                 if sig_units == units:
                     axes[i, 0].plot(
                         x_data, y_data,
@@ -251,7 +258,7 @@ def show_signals():
                     )
             axes[i, 0].legend(frameon=False, loc='best')
             axes[i, 0].set_xscale('log' if psf.log_x(sweep) else 'linear')
-            axes[i, 0].set_yscale('log' if psf.log_y(sweep) and not dB else 'linear')
+            axes[i, 0].set_yscale('log' if use_log_scale else 'linear')
             axes[i, 0].xaxis.set_major_formatter(x_formatter)
             axes[i, 0].yaxis.set_major_formatter(y_formatters[units])
             axes[i, 0].format_coord = xy_formatters[units]

@@ -1,16 +1,7 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-set nonomatch
-rm -rf generated_settings
-rm -rf .cache
-rm -f psf_utils/parser.out psf_utils/parsetab.py psf_utils/lextab.py
-
-# the rest is common to all python directories
-rm -f *.pyc *.pyo
-rm -f .test*.sum expected result install.out .*.log
-rm -rf build *.egg-info dist __pycache__ .eggs **/{__pycache__,*.pyc,*.pyo}
-rm -rf .coverage .coverage-html htmlcov .tox
-rm -rf .pytest_cache .cache dist .build *.egg.info
-rm -rf tests/{htmlcov,.cache,.coverage,.pytest_cache}
-rm -rf doc/.build
-rm -f  samples/*.cache samples/*/*.cache
+rm -rf build dist psf_utils.egg-info __pycache__ */__pycache__
+rm -f samples/*.cache samples/**/*.cache psf_utils/parser.out
+rm -f psf_utils/{lextab.py,parsetab.py}
+rm -rf .hypothesis .tox .pytest_cache tests/.pytest_cache .coverage htmlcov
+rm -f .psf_file .psf_show_args .test.sum .test.clones.sum
