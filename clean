@@ -3,5 +3,6 @@
 rm -rf build dist psf_utils.egg-info __pycache__ */__pycache__
 rm -f samples/*.cache samples/**/*.cache psf_utils/parser.out
 rm -f psf_utils/{lextab.py,parsetab.py}
-rm -rf .hypothesis .tox .pytest_cache tests/.pytest_cache .coverage htmlcov
+rm -rf .hypothesis .tox .pytest_cache .coverage htmlcov
+rm -rf tests/.hypothesis tests/.pytest_cache tests/.coverage tests/htmlcov
 rm -f .psf_file .psf_show_args .test.sum .test.clones.sum

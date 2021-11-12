@@ -31,8 +31,8 @@ Accessing the Results
 
 You can use the PSF class to read ASCII Parameter Storage Format files. When
 instantiating the class you pass in the path to the file and then the resulting
-PSF object contains a dictionary that containing the signals. For example, the
-following lists the signals present in a ASCII PSF file::
+PSF object contains the signals. For example, the following lists the signals 
+present in a ASCII PSF file::
 
     from psf_utils import PSF
     from inform import Error, display
@@ -81,7 +81,7 @@ computation with them::
     from numpy import sin
     sine = sin(sweep.abscissa)
 
-Reading large ASCII data files is slow, so *PSF* reads the PSF file once,
+Reading large ASCII data files is slow, so *psf_utils* reads the PSF file once,
 then pickles the data and writes it to disk. On subsequent runs the pickled data
 is used if the pickle file is newer that the corresponding PSF file.
 
@@ -109,13 +109,13 @@ given every time. *show-psf* also caches its arguments, so if you run it again
 with no arguments it will simply repeat what it did last time. For example, here
 is a typical session::
 
-    # display signals in noise PSF file
+    # list the signals in noise PSF file
     > list-psf -f resistor.raw/pnoise.pnoise
     Using resistor.raw/pnoise.pnoise.
         R1:flicker  R1:total    R2:fn       out
         R1:thermal  R2:rn       R2:total
 
-    # display them again, this time in long form
+    # list them again, this time in long form
     > list-psf -l
     Using resistor.raw/pnoise.pnoise.
         R1:flicker  A²/Hz  real  (12042 points)
@@ -126,36 +126,35 @@ is a typical session::
         R2:total    A²/Hz  real  (12042 points)
         out         A/√Hz  real  (12042 points)
 
-    # display only those that match R1:* (assumes nonomatch variable is set in shell)
+    # list only those that match R1:* (assumes nonomatch variable is set in shell)
     > list-psf -l R1:*
     Using resistor.raw/pnoise.pnoise.
         R1:flicker  A²/Hz  real  (12042 points)
         R1:thermal  A²/Hz  real  (12042 points)
         R1:total    A²/Hz  real  (12042 points)
 
-    # display a graph containing signals that start with R1:
+    # show a graph containing signals that start with R1:
     > show-psf R1:*
 
-    # display the thermal noise of R1, and then the total noise minus the flicker noise
+    # show the thermal noise of R1, and then the total noise minus the flicker noise
     > show-psf R1:thermal R1:total-R1:flicker
 
-    # display a graph containing only out
-    > show-psf out
+    > show-psf out        # show a graph containing only out
 
-    > show-psf            # display out again, exactly as in previous run
+    > show-psf            # show out again, exactly as in previous run
 
-    > show-psf -M out     # display out again, this time include point markers
+    > show-psf -M out     # show out again, this time include point markers
 
-    > show-psf -P out     # display out again, this time only show point markers
+    > show-psf -P out     # show out again, this time only show point markers
 
     > show-psf -s out.svg out     # send graph of out to svg file
 
-    # display signals in a PSF file from a DC operating point file:
+    # list signals in a PSF file from a DC operating point file:
     > list-psf -f diffamp.raw/tran.dc
     Using diffamp.raw/pnoise.pnoise.
         in_n    in_p    out_n   out_p   Vdd     Vdd:p
 
-    # display the DC voltages
+    # show the DC voltages
     > show-psf \*
          V(in_n) = 47.678 µV
          V(in_p) = 47.623 µV
@@ -164,7 +163,7 @@ is a typical session::
           V(Vdd) = 2.5 V
         I(Vdd:p) = −10.05 µA
 
-    # display signals in transient PSF file
+    # list signals in transient PSF file
     > list-psf -f diffamp.raw/tran.tran
     Using diffamp.raw/pnoise.pnoise.
         in_n    in_p    out_n   out_p   Vdd     Vdd:p
