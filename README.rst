@@ -1,6 +1,10 @@
 PSF Utilities - Read Spectre Data Files
 =======================================
 
+.. image::
+    https://github.com/KenKundert/psf_utils/actions/workflows/build.yaml/badge.svg
+    :target: https://github.com/KenKundert/psf_utils/actions/workflows/build.yaml
+
 .. image:: https://pepy.tech/badge/psf_utils/month
     :target: https://pepy.tech/project/psf_utils
 
