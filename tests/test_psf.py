@@ -137,7 +137,7 @@ def test_api(name, path, expected):
 
     # clean any existing cache
     cache_file = Path(str(psf_file) + '.cache')
-    cache_file.unlink(missing_ok=True)
+    rm(cache_file)
 
     # run test without cache
     assert not cache_file.exists()
