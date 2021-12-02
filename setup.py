@@ -25,7 +25,7 @@ setup(
         inform>=1.19
         matplotlib
         numpy
-        ply==3.9
+        ply==3.10
         quantiphy
     """.split(),
     python_requires = '>=3.6',
