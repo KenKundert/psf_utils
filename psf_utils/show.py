@@ -58,9 +58,7 @@ glob characters.
 from .psf import PSF, Quantity
 from docopt import docopt
 import fnmatch
-from inform import (
-    Error, display, done, fatal, os_error, plural, warn
-)
+from inform import Error, display, done, fatal, full_stop, os_error, plural, warn
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
@@ -282,6 +280,8 @@ def show_signals():
             plt.savefig(svg_file)
         else:
             plt.show()
+    except ValueError as e:
+        fatal(full_stop(e))
     except Error as e:
         e.terminate()
     except OSError as e:
