@@ -24,7 +24,6 @@ import ply.lex
 import ply.yacc
 from inform import Info, is_str, is_mapping
 
-
 # Globals {{{1
 Filename = None
 
@@ -101,9 +100,9 @@ class TokenLocation(object):
             return "%s\n    %s\n    %s^" % (
                 prefix,
                 self.line,
-                self.col*' '
+                self.col * ' '
             )
-        return "%s\n%s^" % (self.line, (self.col-1)*' ')
+        return "%s\n%s^" % (self.line, (self.col - 1) * ' ')
 
     def message(self, filename, msg):
         """
@@ -145,10 +144,10 @@ reserved = {rw: rw for rw in [
     'VALUE',
 ]}
 tokens = [
-    'INTEGER',
-    'REAL',
-    'STRING',
-] + list(reserved.values())
+             'INTEGER',
+             'REAL',
+             'STRING',
+         ] + list(reserved.values())
 
 # Literal tokens
 literals = r'()'
@@ -156,7 +155,7 @@ literals = r'()'
 # Regular expression tokens
 # Regular expressions that define numbers
 t_INTEGER = r"-?[0-9]+"
-t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
+t_REAL = r"([+-]?[0-9]*\.[0-9]*([eE][+-]?[0-9]+)?)|([+-]?[0-9]*\.?[0-9]*[eE][+-]?[0-9]+)"
 t_NAN = r"nan|NaN"
 
 # Regular expression for a string
@@ -186,12 +185,22 @@ def t_error(t):
 
 
 # Parser {{{1
-def p_contents(p):
+def p_contents_sweep_trace_value(p):
     "contents : header_section type_section sweep_section trace_section value_section end"
     p[0] = (p[1], p[2], p[3], p[4], p[5])
 
 
-def p_contents_without_sweep(p):
+def p_contents_sweep_value(p):
+    "contents : header_section type_section sweep_section value_section end"
+    p[0] = (p[1], p[2], p[3], None, p[4])
+
+
+def p_contents_trace_value(p):
+    "contents : header_section type_section trace_section value_section end"
+    p[0] = (p[1], p[2], None, p[3], p[4])
+
+
+def p_contents_value(p):
     "contents : header_section type_section value_section end"
     p[0] = (p[1], p[2], None, None, p[3])
 
