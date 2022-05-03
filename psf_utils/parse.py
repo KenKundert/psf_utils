@@ -103,7 +103,7 @@ class TokenLocation(object):
                 self.line,
                 self.col*' '
             )
-        return "%s\n%s^" % (self.line, (self.col-1) * ' ')
+        return "%s\n%s^" % (self.line, (self.col-1)*' ')
 
     def message(self, filename, msg):
         """

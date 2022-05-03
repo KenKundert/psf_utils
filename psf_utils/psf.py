@@ -23,11 +23,8 @@ Read PSF File
 from .parse import ParsePSF, ParseError
 from inform import Error, Info, join, log, os_error
 from pathlib import Path
-
 import numpy as np
-
 from quantiphy import Quantity
-
 
 try:
     import cPickle as pickle
