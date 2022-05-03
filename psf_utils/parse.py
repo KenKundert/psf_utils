@@ -18,7 +18,6 @@ Parse ASCII PSF Files
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see http://www.gnu.org/licenses/.
 
-
 # Imports {{{1
 import ply.lex
 import ply.yacc
@@ -144,10 +143,10 @@ reserved = {rw: rw for rw in [
     'VALUE',
 ]}
 tokens = [
-             'INTEGER',
-             'REAL',
-             'STRING',
-         ] + list(reserved.values())
+    'INTEGER',
+    'REAL',
+    'STRING',
+] + list(reserved.values())
 
 # Literal tokens
 literals = r'()'
