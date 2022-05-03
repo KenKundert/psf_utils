@@ -19,14 +19,15 @@ Read PSF File
 # along with this program.  If not, see [http://www.gnu.org/licenses/].
 
 
+# Imports {{{1
+from .parse import ParsePSF, ParseError
+from inform import Error, Info, join, log, os_error
 from pathlib import Path
 
 import numpy as np
-from inform import Error, Info, join, log, os_error
+
 from quantiphy import Quantity
 
-# Imports {{{1
-from .parse import ParsePSF, ParseError
 
 try:
     import cPickle as pickle
@@ -111,8 +112,8 @@ class PSF:
         except UnicodeError as e:
             raise Error(
                 e,
-                culprit=psf_filepath,
-                codicil=join(
+                culprit = psf_filepath,
+                codicil = join(
                     'This is likely a binary PSF file,',
                     'psf_utils only supports ASCII PSF files.',
                     '\nUse `psf {0!s} {0!s}.ascii` to convert.'.format(psf_filepath),
@@ -161,12 +162,12 @@ class PSF:
                     else:
                         ordinate = np.array([get_value(v, i) for v in vals])
                     signal = Signal(
-                        name=joined_name,
-                        ordinate=ordinate,
-                        type=t,
-                        access=t.name,
-                        units=t.units,
-                        meta=meta,
+                        name = joined_name,
+                        ordinate = ordinate,
+                        type = t,
+                        access = t.name,
+                        units = t.units,
+                        meta = meta,
                     )
                     signals[joined_name] = signal
                 del values[name]
@@ -180,22 +181,22 @@ class PSF:
                         n = f'{name}.{t.name}'
                         v = Quantity(v, unicode_units(t.units))
                         signal = Signal(
-                            name=n,
-                            ordinate=v,
-                            type=t,
-                            units=t.units,
-                            meta=meta,
+                            name = n,
+                            ordinate = v,
+                            type = t,
+                            units = t.units,
+                            meta = meta,
                         )
                         signals[n] = signal
                 else:
                     v = Quantity(value.values[0][0], unicode_units(type.units))
                     signal = Signal(
-                        name=name,
-                        ordinate=v,
-                        type=type,
-                        access=type.name,
-                        units=type.units,
-                        meta=meta,
+                        name = name,
+                        ordinate = v,
+                        type = type,
+                        access = type.name,
+                        units = type.units,
+                        meta = meta,
                     )
                     signals[name] = signal
         self.signals = signals

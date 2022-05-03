@@ -18,10 +18,12 @@ Parse ASCII PSF Files
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see http://www.gnu.org/licenses/.
 
+
 # Imports {{{1
 import ply.lex
 import ply.yacc
 from inform import Info, is_str, is_mapping
+
 
 # Globals {{{1
 Filename = None
@@ -99,9 +101,9 @@ class TokenLocation(object):
             return "%s\n    %s\n    %s^" % (
                 prefix,
                 self.line,
-                self.col * ' '
+                self.col*' '
             )
-        return "%s\n%s^" % (self.line, (self.col - 1) * ' ')
+        return "%s\n%s^" % (self.line, (self.col-1) * ' ')
 
     def message(self, filename, msg):
         """
