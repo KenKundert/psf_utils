@@ -214,32 +214,53 @@ script that shows how to write simple Python scripts that run Spectre and use
 Releases
 --------
 
-**Latest development release**:
-    | Version: 1.5.1
-    | Released: 2022-06-20
+Latest development release
+''''''''''''''''''''''''''
+
+| Version: 1.5.1
+| Released: 2022-06-20
+
+- changed ``--no-cache`` command line option to ``--refresh-cache``.
 
 
-**1.5 (2021-11-11)**:
-    - Renamed *plot-psf* to *show-psf*.
-    - Improved support of DC operating points.
-    - Suppress access function names when printing members of PSF structures.
-    - Correct invalid units produced by Spectre on oppoint files (I, R, C).
+1.5 (2021-11-11)
+''''''''''''''''
 
-**1.4 (2021-10-21)**:
-    - Allow signal names to contain backslashes.
+- Renamed *plot-psf* to *show-psf*.
+- Improved support of DC operating points.
+- Suppress access function names when printing members of PSF structures.
+- Correct invalid units produced by Spectre on oppoint files (I, R, C).
 
-**1.3 (2021-03-21)**:
-    - Improve support for DC operating points.
 
-**1.2 (2021-01-07)**:
-    - Support PSF files that contain DC operating points.
-    - Support PSF files where values are given in a group.
+1.4 (2021-10-21)
+''''''''''''''''
 
-**1.1 (2021-01-30)**:
-    - Allow, but ignore, properties on traces.
+- Allow signal names to contain backslashes.
 
-**1.0 (2020-11-03)**:
-    - Production release
+
+1.3 (2021-03-21)
+
+- Improve support for DC operating points.
+
+
+1.2 (2021-01-07)
+''''''''''''''''
+
+- Support PSF files that contain DC operating points.
+- Support PSF files where values are given in a group.
+
+
+1.1 (2021-01-30)
+''''''''''''''''
+
+- Allow, but ignore, properties on traces.
+
+
+1.0 (2020-11-03)
+''''''''''''''''
+
+- Production release
+
 
 .. hide the pre-production releases
 
