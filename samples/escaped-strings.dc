@@ -1,0 +1,102 @@
+HEADER
+"PSFversion" "1.00"
+"simulator" "spectre"
+"version" "19.1.0.373.isr7"
+"date" "1:07:28 PM, Tue Feb 2, 2021"
+"design" "(\"test\" \"sweep\" \"schematic\" \"\")"
+"analysis type" "dc"
+"analysis name" "dc"
+"analysis description" "DC Analysis `dc'"
+"xVecSorted" "unsorted"
+"tolerance.relative" 0.00100000
+"reltol" 0.00100000
+"abstol(V)" 1.00000e-06
+"abstol(I)" 1.00000e-12
+"temp" 25.0000
+"tnom" 25.0000
+"tempeffects" "all"
+"gmindc" 1.00000e-12
+"rabsshort" 0.00100000
+TYPE
+"LogicV" FLOAT DOUBLE PROP(
+"key" "node"
+)
+"V" FLOAT DOUBLE PROP(
+"units" "V"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"I" FLOAT DOUBLE PROP(
+"units" "A"
+"key" "branch"
+"tolerance" 1.00000e-12
+)
+"MMF" FLOAT DOUBLE PROP(
+"units" "A*turn"
+"key" "node"
+"tolerance" 1.00000e-12
+)
+"Wb" FLOAT DOUBLE PROP(
+"units" "Wb"
+"key" "node"
+"tolerance" 1.00000e-09
+)
+"Temp" FLOAT DOUBLE PROP(
+"units" "C"
+"key" "node"
+"tolerance" 0.000100000
+)
+"Pwr" FLOAT DOUBLE PROP(
+"units" "W"
+"key" "node"
+"tolerance" 1.00000e-09
+)
+"U" FLOAT DOUBLE PROP(
+"units" ""
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"V/Sec" FLOAT DOUBLE PROP(
+"units" "V/s"
+"key" "node"
+"tolerance" 0.000100000
+)
+"I/Sec" FLOAT DOUBLE PROP(
+"units" "A/s"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"1/Sec" FLOAT DOUBLE PROP(
+"units" "1/s"
+"key" "node"
+"tolerance" 0.000100000
+)
+"HOD" FLOAT DOUBLE PROP(
+"units" ""
+"key" "node"
+"tolerance" 0.0100000
+)
+"Q" FLOAT DOUBLE PROP(
+"units" "Coul"
+"key" "node"
+"tolerance" 1.00000e-15
+)
+VALUE
+"Vsupply800m:p" "I" -1.050027794352513e-06 PROP(
+"units" "A"
+)
+"I2.Idiffpair:in" "I" 4.767791259200037e-08 PROP(
+"units" "A"
+)
+"vref_o" "V" 2.000000000000000e-01
+"I2.pup2" "V" 2.795768876173348e-07
+"I2.pup_b" "V" 7.999982644672001e-01
+"I2.diff_cm" "V" 8.761644386176266e-04
+"I2.comp_out_pre" "V" 1.106383385957654e-06
+"I2.diff_out_right" "V" 7.998743518480765e-01
+"I2.diff_out_left" "V" 7.998743518479743e-01
+"out" "V" 1.737370212928399e-07
+"ibias" "V" 3.588155366237979e-01
+"vinp" "V" 2.000000000000000e-01
+"pup" "V" 0.000000000000000e+00
+END

@@ -7,11 +7,11 @@ Usage:
     list-psf [options] [<signal>...]
 
 Options:
-    -c, --no-cache                ignore, then regenerate, the cache
+    -c, --refresh-cache           refresh the cache
     -f <path>, --psf-file <path>  the path of the ASCII PSF file
     -l, --long                    include signal meta data
 
-The PSF file need only be given if it differs from the one use previously.
+The PSF file need only be given if it differs from the one used previously.
 
 Reading large ASCII data files is slow, so list-psf reads the PSF file once,
 then pickles the data and writes it to disk. On subsequent runs the pickled data
@@ -63,7 +63,7 @@ def list_signals():
         args = ['*']
     psf_file = get_psf_filename(cmdline['--psf-file'])
     show_meta = cmdline['--long']
-    use_cache = not cmdline['--no-cache']
+    use_cache = not cmdline['--refresh-cache']
 
     # List signals {{{2
     try:

@@ -9,7 +9,7 @@ Usage:
     show-psf [options] <signal>...
 
 Options:
-    -c, --no-cache                ignore, then regenerate, the cache
+    -c, --refresh-cache           refresh the cache
     -f <path>, --psf-file <path>  PSF file
     -d, --db                      show the magnitude of the signals in dB
     -m, --mag                     show the magnitude of the signals
@@ -91,7 +91,7 @@ def get_argv():
         # save the command line arguments for next time
         try:
             with open(saved_arguments_filename, 'w') as f:
-                args = [a for a in argv if a not in ['-c', '--no-cache']]
+                args = [a for a in argv if a not in ['-c', '--refresh-cache']]
                 f.write('\n'.join(args))
         except OSError as e:
             warn(os_error(e))
@@ -145,7 +145,7 @@ def show_signals():
         dB = cmdline['--db']
         mag = cmdline['--mag']
         phase = cmdline['--ph']
-        use_cache = not cmdline['--no-cache']
+        use_cache = not cmdline['--refresh-cache']
         linestyle = '' if cmdline['--just-points'] else '-'
         marker = '.' if cmdline['--mark-points'] or cmdline['--just-points'] else ''
 

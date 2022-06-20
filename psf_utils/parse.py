@@ -54,6 +54,10 @@ class Value(Info):
     pass
 
 
+class Array(Info):
+    pass
+
+
 # Exceptions {{{1
 # ParseError {{{2
 class ParseError(Exception):
@@ -127,6 +131,7 @@ class TokenLocation(object):
 # Lexer {{{1
 # List of the token names
 reserved = {rw: rw for rw in [
+    'ARRAY',
     'BYTE',
     'COMPLEX',
     'DOUBLE',
@@ -138,6 +143,7 @@ reserved = {rw: rw for rw in [
     'LONG',
     'NAN',
     'PROP',
+    'STRING',
     'STRUCT',
     'SWEEP',
     'TRACE',
@@ -147,11 +153,11 @@ reserved = {rw: rw for rw in [
 tokens = [
     'INTEGER',
     'REAL',
-    'STRING',
+    'QUOTED_STRING',
 ] + list(reserved.values())
 
 # Literal tokens
-literals = r'()'
+literals = r'()*'
 
 # Regular expression tokens
 # Regular expressions that define numbers
@@ -160,7 +166,12 @@ t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
 t_NAN = r"nan|NaN"
 
 # Regular expression for a string
-t_STRING = r'"[^\n"]*"'
+t_QUOTED_STRING = r'"([^\\\n"]|(\\.))*"'
+    # The complexity is because of the case "He yelled \"You are a fool!\".".
+    # The first part says string cannot contain a backslash, newline, or a
+    # quote. The second case allows backslashes when combined with any other
+    # character, which allows \" and \\.
+
 
 
 # Identifiers
@@ -194,6 +205,11 @@ def p_contents(p):
 def p_contents_without_sweep(p):
     "contents : header_section type_section value_section end"
     p[0] = (p[1], p[2], None, None, p[3])
+
+
+def p_contents_only_header(p):
+    "contents : header_section end"
+    p[0] = (p[1], {}, None, None, {})
 
 
 def p_header_section(p):
@@ -236,8 +252,13 @@ def p_real_value(p):
 
 
 def p_string(p):
-    "string : STRING"
+    "string : QUOTED_STRING"
     p[0] = (p[1][1:-1]).replace('\\', '')
+
+
+def p_star(p):
+    "star : '*'"
+    p[0] = p[1]
 
 
 def p_type_section(p):
@@ -290,8 +311,11 @@ def p_kind(p):
              | INT
              | BYTE
              | LONG
+             | STRING
+             | array
              | struct
              | prop
+             | star
     """
     p[0] = p[1]
 
@@ -299,6 +323,11 @@ def p_kind(p):
 def p_struct(p):
     "struct : STRUCT '(' types ')'"
     p[0] = Struct(types=dict(p[3]))
+
+
+def p_array(p):
+    "array : ARRAY '(' star ')'"
+    p[0] = Array(members=p[3])
 
 
 def p_prop(p):

@@ -409,6 +409,64 @@ test_api:
                     type: float double
                     value: 2.000000000000000e-01
 
+    # escaped_strings {{{2
+    escaped_strings_dc:
+        path: ../samples/escaped-strings.dc
+        expected:
+            signals:
+                I2.Idiffpair:in:
+                    units: A
+                    type: float double
+                    value: 4.767791259200037e-08
+                I2.comp_out_pre:
+                    units: V
+                    type: float double
+                    value: 1.106383385957654e-06
+                I2.diff_cm:
+                    units: V
+                    type: float double
+                    value: 8.761644386176266e-04
+                I2.diff_out_left:
+                    units: V
+                    type: float double
+                    value: 7.998743518479743e-01
+                I2.diff_out_right:
+                    units: V
+                    type: float double
+                    value: 7.998743518480765e-01
+                I2.pup2:
+                    units: V
+                    type: float double
+                    value: 2.795768876173348e-07
+                I2.pup_b:
+                    units: V
+                    type: float double
+                    value: 7.999982644672001e-01
+                Vsupply800m:p:
+                    units: A
+                    type: float double
+                    value: -1.050027794352513e-06
+                ibias:
+                    units: V
+                    type: float double
+                    value: 3.588155366237979e-01
+                out:
+                    units: V
+                    type: float double
+                    value: 1.737370212928399e-07
+                pup:
+                    units: V
+                    type: float double
+                    value: 0.000000000000000e+00
+                vinp:
+                    units: V
+                    type: float double
+                    value: 2.000000000000000e-01
+                vref_o:
+                    units: V
+                    type: float double
+                    value: 2.000000000000000e-01
+
     # fracpole_dc {{{2
     fracpole_dc:
         path: ../samples/fracpole.dc
@@ -3862,6 +3920,13 @@ test_api:
                     type: float double
                     min: 3.3
                     max: 3.3
+
+    # header_psf {{{2
+    header_psf:
+        path: ../samples/header.psf
+        expected:
+            signals:
+                {}
 
 # test_utils {{{1
 test_utils:

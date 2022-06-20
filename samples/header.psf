@@ -1,0 +1,13 @@
+HEADER
+"PSFversion" "1.00"
+"simulator" "spectre"
+"version" "21.1.0.303.isr5"
+"date" "4:45:29 PM, Fri May 27, 2022"
+"design" "// Point Netlist Generated on: May 27 16:45:27 2022"
+"analysis type" "info"
+"analysis name" "modelParameter"
+"analysis description" "Circuit Information"
+"xVecSorted" "unknown"
+"tolerance.relative" 0.00100000
+END
+

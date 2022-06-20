@@ -7,7 +7,7 @@ samples/*/*.cache
 .psf_show_args
 
 # version info
-.bump.cfg
+.bump.cfg.nt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
