@@ -173,7 +173,6 @@ t_QUOTED_STRING = r'"([^\\\n"]|(\\.))*"'
     # character, which allows \" and \\.
 
 
-
 # Identifiers
 def t_ID(t):
     r'[A-Z]+'
