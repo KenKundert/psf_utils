@@ -220,6 +220,10 @@ Latest development release
 | Version: 1.5.1
 | Released: 2022-06-20
 
+
+1.6 (2022-09-18)
+''''''''''''''''
+
 - changed ``--no-cache`` command line option to ``--refresh-cache``.
 
 
