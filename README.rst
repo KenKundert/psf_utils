@@ -1,4 +1,4 @@
-PSF Utilities - Read Spectre Data Files
+PSF Utilities — Read Spectre Data Files
 =======================================
 
 .. image::
