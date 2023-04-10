@@ -167,8 +167,8 @@ class PSF:
                     )
                     signals[joined_name] = signal
                 del values[name]
-        else:
-            # no traces, this should be a DC op-point analysis dataset
+        if traces is None and sweeps is None:
+            # no traces and no sweeps, this should be a DC op-point analysis dataset
             for name, value in values.items():
                 assert len(value.values) == 1
                 type = types[value.type]
