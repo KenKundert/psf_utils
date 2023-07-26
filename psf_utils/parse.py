@@ -163,7 +163,7 @@ literals = r'()*'
 # Regular expressions that define numbers
 t_INTEGER = r"-?[0-9]+"
 t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
-t_NAN = r"nan|NaN"
+t_NAN = r"nan|NaN|inf"
 
 # Regular expression for a string
 t_QUOTED_STRING = r'"([^\\\n"]|(\\.))*"'
