@@ -221,6 +221,13 @@ Latest development release
 | Released: 2022-09-18
 
 
+1.7 (2023-11-06)
+''''''''''''''''
+
+- fixed units on terminal currents
+- add support for *inf*
+
+
 1.6 (2022-09-18)
 ''''''''''''''''
 
