@@ -18,6 +18,7 @@ Options:
     -t <title>, --title <title>   title
     -M, --mark-points             place marker on each point
     -P, --just-points             do not connect points with lines (implies -M)
+    -V, --version                 show version number and exit
 
 The PSF file need only be given if it differs from the one used previously.
 
@@ -56,6 +57,7 @@ glob characters.
 
 # Imports {{{1
 from .psf import PSF, Quantity
+from . import __version__, __released__
 from docopt import docopt
 import fnmatch
 from inform import Error, display, done, fatal, full_stop, os_error, plural, warn
@@ -137,7 +139,11 @@ def expand_args(signals, args, allow_diff=True):
 def show_signals():
     try:
         # process command line {{{2
-        cmdline = docopt(__doc__, argv=get_argv())
+        cmdline = docopt(
+            __doc__,
+            argv = get_argv(),
+            version = f"{__version__} ({__released__})"
+        )
         psf_file = get_psf_filename(cmdline['--psf-file'])
         args = cmdline['<signal>']
         title = cmdline['--title']

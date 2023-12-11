@@ -10,6 +10,7 @@ Options:
     -c, --refresh-cache           refresh the cache
     -f <path>, --psf-file <path>  the path of the ASCII PSF file
     -l, --long                    include signal meta data
+    -V, --version                 show version number and exit
 
 The PSF file need only be given if it differs from the one used previously.
 
@@ -38,6 +39,7 @@ is used if the pickle file is newer that the corresponding PSF file.
 # Imports {{{1
 from .show import expand_args, get_psf_filename
 from .psf import PSF
+from . import __version__, __released__
 from docopt import docopt
 from inform import Error, columns, display, plural, warn
 import warnings
@@ -57,7 +59,7 @@ kinds = {
 # list_signals() {{{1
 def list_signals():
     # Read command line {{{2
-    cmdline = docopt(__doc__)
+    cmdline = docopt(__doc__, version=f"{__version__} ({__released__})")
     args = cmdline['<signal>']
     if not args:
         args = ['*']
