@@ -1,6 +1,6 @@
 [project]
 name = "psf_utils"
-version = "1.6.1"
+version = "1.6.2.dev1"
 description = "Cadence PSF file utilities"
 readme = "README.rst"
 keywords = ["cadence", "spectre", "PSF", "simulation"]
