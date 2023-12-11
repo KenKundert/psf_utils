@@ -51,6 +51,7 @@ unicode_unit_maps = {
     r'\bR\b': 'Ω',
     r'\bI\b': 'A',
     r'\bC\b': 'F',
+    r'\bDeg\b': '°',
 }
 
 
@@ -180,7 +181,10 @@ class PSF:
                 if type.struct:
                     for t, v in zip(type.struct.types.values(), value.values[0][0]):
                         n = f'{name}.{t.name}'
-                        v = Quantity(v, unicode_units(t.units))
+                        if 'float' in t.kind:
+                            v = Quantity(v, unicode_units(t.units))
+                        elif 'complex' in t.kind:
+                            v = complex(v[0], v[1])
                         signal = Signal(
                             name = n,
                             ordinate = v,
@@ -190,7 +194,13 @@ class PSF:
                         )
                         signals[n] = signal
                 else:
-                    v = Quantity(value.values[0][0], unicode_units(type.units))
+                    if 'float' in type.kind:
+                        v = Quantity(value.values[0][0], unicode_units(type.units))
+                    elif 'complex' in type.kind:
+                        v = complex(value.values[0][0], value.values[0][1])
+                    else:
+                        v = value.values[0]
+
                     signal = Signal(
                         name = name,
                         ordinate = v,

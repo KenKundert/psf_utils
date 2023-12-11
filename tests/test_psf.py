@@ -20,6 +20,7 @@ type_maps = {
     'complex double': complex,
     'int byte': int,
     'int long': int,
+    'string *': str,
 }
 parametrize_from_file = partial(parametrize, preprocess=name_from_dict_keys)
 with_quantiphy = Namespace('from quantiphy import Quantity')
@@ -90,6 +91,7 @@ def run_api_test(test_name, psf_file, expected):
     for signal in psf.all_signals():
         name = signal.name
         test_desc = f'in {test_name} on {name}'
+        print(f"NAME: {test_desc}")
 
         # check that this is a known signal
         assert name in remaining, test_desc
@@ -122,7 +124,9 @@ def run_api_test(test_name, psf_file, expected):
             expected_min = expected_type(signal_attributes['min'].replace(' ',''))
             assert min(signal.ordinate) >= expected_min, test_desc
         if 'value' in signal_attributes:
-            expected_value = expected_type(signal_attributes['value'].replace(' ',''))
+            expected_value = expected_type(signal_attributes['value'])
+            # print(f"    expected: {expected_value}")
+            # print(f"    achieved: {signal.ordinate}")
             assert signal.ordinate == pytest.approx(expected_value, abs=1e-12)
 
     # assure that all signals were checked

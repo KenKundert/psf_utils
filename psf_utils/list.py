@@ -49,10 +49,11 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 saved_psf_file_filename = '.psf_file'
 kinds = {
     'float double': 'real',
-    'float complex': 'complex',
+    'complex double': 'complex',
     'int byte': 'integer',
     'int long': 'integer',
     'int': 'integer',
+    'string *': 'string',
 }
 
 
@@ -87,10 +88,13 @@ def list_signals():
                 kind = kinds.get(kind, kind)
                 if len(kind) > kw:
                     kw = len(kind)
-                try:
-                    points = len(signal.ordinate)
-                except TypeError:
-                    points = None
+
+                points = None
+                if kind != 'string':
+                    try:
+                        points = len(signal.ordinate)
+                    except TypeError:
+                        pass
                 data.append((signal.name, units, kind, points))
             if not data:
                 raise Error(f'{plural(args):no match/es}.', culprit=args)

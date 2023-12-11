@@ -162,7 +162,7 @@ def show_signals():
 
         # Print scalars {{{2
         if not sweep:
-            with Quantity.prefs(map_sf = Quantity.map_sf_to_greek, prec = print_prec):
+            with Quantity.prefs(map_sf=Quantity.map_sf_to_greek, prec=print_prec):
                 to_print = []
                 width = 0
                 for arg in to_show:
@@ -177,7 +177,10 @@ def show_signals():
                             )
                         units = psig.units
                         access = psig.access
-                        y_data = Quantity(psig.ordinate - nsig.ordinate, units)
+                        y_data = Quantity(
+                            psig.ordinate - nsig.ordinate,
+                            psf.units_to_unicode(units)
+                        )
                         if access:
                             name = f'{access}({psig.name},{nsig.name})'
                         else:
@@ -187,6 +190,8 @@ def show_signals():
                         access = sig.access
                         name = f'{access}({sig.name})' if access else sig.name
                         y_data = sig.ordinate
+                        if hasattr(y_data, 'units'):
+                            y_data.units = psf.units_to_unicode(y_data.units)
                     to_print.append((name, y_data))
                     width = max(width, len(name))
                 for name, y_data in to_print:

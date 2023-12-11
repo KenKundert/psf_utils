@@ -1,0 +1,115 @@
+HEADER
+"PSFversion" "1.00"
+"BINPSF creation time" "1702140172"
+"simulator" "spectre"
+"version" "21.1.0.460.isr10"
+"date" "11:42:51 AM, Sat Dec 9, 2023"
+"design" "// Generated for: spectre"
+"analysis type" "pz"
+"analysis name" "pz"
+"analysis description" "PZ Analysis `pz'"
+"xVecSorted" "unknown"
+"tolerance.relative" 0.00100000
+"fmax" 1.00000e+12
+"zeroonly" 0.00000
+TYPE
+"transferGain" STRUCT(
+"gain" FLOAT DOUBLE PROP(
+"description" "V(out_2,0)/V2"
+)
+) PROP(
+"key" "inst"
+)
+"dcGain" STRUCT(
+"dcgain" FLOAT DOUBLE PROP(
+"description" "V(out_2,0)/V2"
+)
+) PROP(
+"key" "inst"
+)
+"PoleAndQ" STRUCT(
+"pole" COMPLEX DOUBLE PROP(
+"units" "Hz"
+"description" "pole"
+)
+"qfactor" FLOAT DOUBLE PROP(
+"description" "qfactor"
+)
+) PROP(
+"key" "inst"
+)
+"ZeroAndQ" STRUCT(
+"zero" COMPLEX DOUBLE PROP(
+"units" "Hz"
+"description" "zero"
+)
+"qfactor" FLOAT DOUBLE PROP(
+"description" "qfactor"
+)
+) PROP(
+"key" "inst"
+)
+VALUE
+"transferGain" "transferGain" (
+1.05590e-05
+)
+"dcGain" "dcGain" (
+0.999784
+)
+"Pole_1" "PoleAndQ" (
+(0.0322188 4.86899)
+-75.5630
+)
+"Pole_2" "PoleAndQ" (
+(0.0322188 -4.86899)
+-75.5630
+)
+"Pole_3" "PoleAndQ" (
+(-367.857 0.00000)
+0.500000
+)
+"Pole_4" "PoleAndQ" (
+(-580077. 0.00000)
+0.500000
+)
+"Pole_5" "PoleAndQ" (
+(-6.95704e+08 0.00000)
+0.500000
+)
+"Pole_6" "PoleAndQ" (
+(-8.50732e+08 0.00000)
+0.500000
+)
+"Pole_7" "PoleAndQ" (
+(-5.75365e+09 0.00000)
+0.500000
+)
+"Zero_1" "ZeroAndQ" (
+(-7.83770e-23 0.159155)
+1.01532e+21
+)
+"Zero_2" "ZeroAndQ" (
+(-7.83770e-23 -0.159155)
+1.01532e+21
+)
+"Zero_3" "ZeroAndQ" (
+(1.45746e+06 0.00000)
+-0.500000
+)
+"Zero_4" "ZeroAndQ" (
+(-7.03749e+08 0.00000)
+0.500000
+)
+"Zero_5" "ZeroAndQ" (
+(-2.26470e+09 0.00000)
+0.500000
+)
+"Zero_6" "ZeroAndQ" (
+(-3.01880e+09 0.00000)
+0.500000
+)
+"Zero_7" "ZeroAndQ" (
+(9.18342e+09 0.00000)
+-0.500000
+)
+END

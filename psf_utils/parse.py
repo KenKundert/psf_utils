@@ -453,6 +453,32 @@ def p_named_signal_with_type(p):
     p[0] = (p[1], p[2], p[3])
 
 
+def p_named_string_signal_with_type(p):
+    """
+    signal_value : string string string
+    """
+    p[0] = (p[1], p[2], p[3])
+
+
+def p_numbers(p):
+    "numbers : numbers number"
+    p[1].append(p[2])
+    p[0] = p[1]
+
+
+def p_last_number(p):
+    "numbers : number"
+    p[0] = [p[1]]
+
+
+def p_number(p):
+    """
+    number : simple_number
+           | composite_number
+    """
+    p[0] = p[1]
+
+
 def p_integer_number(p):
     "simple_number : INTEGER"
     p[0] = int(p[1])
@@ -469,42 +495,12 @@ def p_real_number(p):
     p[0] = float(p[1])
 
 
-def p_simple_numbers(p):
-    "simple_numbers : simple_numbers simple_number"
-    p[1].append(p[2])
-    p[0] = p[1]
-
-
-def p_simple_numbers_last(p):
-    "simple_numbers : simple_number"
-    p[0] = [p[1]]
-
-
 def p_composite_number(p):
     """
-    composite_number : '(' simple_numbers ')'
-                     | '(' simple_numbers ')' prop
+    composite_number : '(' numbers ')'
+                     | '(' numbers ')' prop
     """
     p[0] = tuple(p[2])
-
-
-def p_composite_numbers(p):
-    "composite_numbers : composite_numbers composite_number"
-    p[1].append(p[2])
-    p[0] = p[1]
-
-
-def p_composite_numbers_last(p):
-    "composite_numbers : composite_number"
-    p[0] = [p[1]]
-
-
-def p_numbers(p):
-    """
-    numbers : simple_numbers
-            | composite_numbers
-    """
-    p[0] = p[1]
 
 
 def p_end(p):

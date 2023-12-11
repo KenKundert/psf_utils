@@ -4,7 +4,7 @@ patch: 1
 revision: 0
 type: release
 files:
-    setup.py:
+    pyproject.toml:
         version: version
     psf_utils/__init__.py:
         version: __version__

@@ -3932,6 +3932,141 @@ test_api:
             signals:
                 {}
 
+    # pz {{{2
+    pz:
+        path: ../samples/presized_OTA_tb_v2.pz
+        expected:
+            signals:
+                Pole_1.pole:
+                    units: Hz
+                    type: complex double
+                    value: 0.0322188+4.86899j
+                Pole_1.qfactor:
+                    type: float double
+                    value: -75.563
+                Pole_2.pole:
+                    units: Hz
+                    type: complex double
+                    value: 0.0322188-4.86899j
+                Pole_2.qfactor:
+                    type: float double
+                    value: -75.563
+                Pole_3.pole:
+                    units: Hz
+                    type: complex double
+                    value: -367.857+0j
+                Pole_3.qfactor:
+                    type: float double
+                    value: 0.5
+                Pole_4.pole:
+                    units: Hz
+                    type: complex double
+                    value: -580077+0j
+                Pole_4.qfactor:
+                    type: float double
+                    value: 0.5
+                Pole_5.pole:
+                    units: Hz
+                    type: complex double
+                    value: -695704000+0j
+                Pole_5.qfactor:
+                    type: float double
+                    value: 0.5
+                Pole_6.pole:
+                    units: Hz
+                    type: complex double
+                    value: -850732000+0j
+                Pole_6.qfactor:
+                    type: float double
+                    value: 0.5
+                Pole_7.pole:
+                    units: Hz
+                    type: complex double
+                    value: -5753650000+0j
+                Pole_7.qfactor:
+                    type: float double
+                    value: 0.5
+                Zero_1.zero:
+                    units: Hz
+                    type: complex double
+                    value: -7.8377e-23+0.159155j
+                Zero_1.qfactor:
+                    type: float double
+                    value: 1.01532e21
+                Zero_2.zero:
+                    units: Hz
+                    type: complex double
+                    value: -7.8377e-23-0.159155j
+                Zero_2.qfactor:
+                    type: float double
+                    value: 1.01532e21
+                Zero_3.zero:
+                    units: Hz
+                    type: complex double
+                    value: 1457460+0j
+                Zero_3.qfactor:
+                    type: float double
+                    value: -0.5
+                Zero_4.zero:
+                    units: Hz
+                    type: complex double
+                    value: -703749000+0j
+                Zero_4.qfactor:
+                    type: float double
+                    value: 0.5
+                Zero_5.zero:
+                    units: Hz
+                    type: complex double
+                    value: -2264700000+0j
+                Zero_5.qfactor:
+                    type: float double
+                    value: 0.5
+                Zero_6.zero:
+                    units: Hz
+                    type: complex double
+                    value: -3018800000+0j
+                Zero_6.qfactor:
+                    type: float double
+                    value: 0.5
+                Zero_7.zero:
+                    units: Hz
+                    type: complex double
+                    value: 9183420000+0j
+                Zero_7.qfactor:
+                    type: float double
+                    value: -0.5
+                dcGain.dcgain:
+                    type: float double
+                    value: 0.999784
+                transferGain.gain:
+                    type: float double
+                    value: 10.559e-6
+
+    # stb {{{2
+    stb:
+        path: ../samples/presized_OTA_tb_v2.stb
+        expected:
+            signals:
+                gainMargin:
+                    units: dB
+                    type: float double
+                    value: 12.5387
+                gainMarginFreq:
+                    units: Hz
+                    type: float double
+                    value: 919127
+                phaseMargin:
+                    units: Deg
+                    type: float double
+                    value: 49.9149
+                phaseMarginFreq:
+                    units: Hz
+                    type: float double
+                    value: 310095
+                stb_state:
+                    type: string *
+                    value: The circuit is stable. Gain and phase margin are both found.
+
 # test_utils {{{1
 test_utils:
 
