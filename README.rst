@@ -15,8 +15,8 @@ PSF Utilities — Read Spectre Data Files
     :target: https://pypi.python.org/pypi/psf_utils/
 
 :Author: Ken Kundert
-:Version: 1.6.2.dev1
-:Released: 2023-12-11
+:Version: 1.7
+:Released: 2023-12-13
 
 
 What?
@@ -217,8 +217,8 @@ Releases
 Latest development release
 ''''''''''''''''''''''''''
 
-| Version: 1.6.2.dev1
-| Released: 2023-12-11
+| Version: 1.7
+| Released: 2023-12-13
 
 
 1.7 (2023-12-13)
