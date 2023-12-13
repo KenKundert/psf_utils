@@ -221,11 +221,12 @@ Latest development release
 | Released: 2023-12-11
 
 
-1.7 (2023-11-06)
+1.7 (2023-12-13)
 ''''''''''''''''
 
 - fixed units on terminal currents
 - add support for *inf*
+- add support for *PZ* and *STB* files
 
 
 1.6 (2022-09-18)
