@@ -163,7 +163,6 @@ literals = r'()*'
 # Regular expressions that define numbers
 t_INTEGER = r"-?[0-9]+"
 t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
-t_NAN = r"nan|NaN|inf"
 
 # Regular expression for a string
 t_QUOTED_STRING = r'"([^\\\n"]|(\\.))*"'
@@ -172,6 +171,10 @@ t_QUOTED_STRING = r'"([^\\\n"]|(\\.))*"'
     # quote. The second case allows backslashes when combined with any other
     # character, which allows \" and \\.
 
+def t_NAN(t):
+    r"nan|NaN|inf"
+    t.value = float(t.value)
+    return t
 
 # Identifiers
 def t_ID(t):
