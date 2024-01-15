@@ -8,6 +8,7 @@ from voluptuous import Schema, Optional, Required
 from psf_utils import PSF
 from pathlib import Path
 from shlib import Run, rm
+import math
 
 
 # Utilities {{{1
@@ -125,9 +126,12 @@ def run_api_test(test_name, psf_file, expected):
             assert min(signal.ordinate) >= expected_min, test_desc
         if 'value' in signal_attributes:
             expected_value = expected_type(signal_attributes['value'])
-            # print(f"    expected: {expected_value}")
-            # print(f"    achieved: {signal.ordinate}")
-            assert signal.ordinate == pytest.approx(expected_value, abs=1e-12)
+            if isinstance(signal.ordinate, float) and math.isnan(expected_value):
+                assert math.isnan(signal.ordinate)
+            else:
+                assert signal.ordinate == pytest.approx(expected_value, abs=1e-12)
+            if 'units' in signal_attributes:
+                assert signal.units == signal_attributes['units']
 
     # assure that all signals were checked
     assert not remaining
