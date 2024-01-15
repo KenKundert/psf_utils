@@ -4067,6 +4067,31 @@ test_api:
                     type: string *
                     value: The circuit is stable. Gain and phase margin are both found.
 
+    # phaseMargin {{{2
+    phaseMargin:
+        path: ../samples/phaseMargin.stb
+        expected:
+            signals:
+                gainMargin:
+                    units: dB
+                    type: float double
+                    value: NaN
+                gainMarginFreq:
+                    units: Hz
+                    type: float double
+                    value: NaN
+                phaseMargin:
+                    units: Deg
+                    type: float double
+                    value: NaN
+                phaseMarginFreq:
+                    units: Hz
+                    type: float double
+                    value: NaN
+                stb_state:
+                    type: string *
+                    value: Gain(dB)is always less than zero. The circuit is always stable. No gain margin or phase margin.
+
 # test_utils {{{1
 test_utils:
 

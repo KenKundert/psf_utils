@@ -163,7 +163,15 @@ literals = r'()*'
 # Regular expressions that define numbers
 t_INTEGER = r"-?[0-9]+"
 t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
-t_NAN = r"nan|NaN|inf"
+
+
+# NaN must be given as a function rather than a simple string.
+# Doing so causes Ply to give it priority over keyword recognition
+# because it is defined first.
+def t_NAN(t):
+    r"nan|NaN|inf"
+    return t
+
 
 # Regular expression for a string
 t_QUOTED_STRING = r'"([^\\\n"]|(\\.))*"'
