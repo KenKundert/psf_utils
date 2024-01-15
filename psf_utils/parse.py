@@ -129,7 +129,7 @@ class TokenLocation(object):
 
 
 # Lexer {{{1
-# List of the token names
+# Reserved name tokens {{{2
 reserved = {rw: rw for rw in [
     'ARRAY',
     'BYTE',
@@ -156,11 +156,10 @@ tokens = [
     'QUOTED_STRING',
 ] + list(reserved.values())
 
-# Literal tokens
+# Literal tokens {{{2
 literals = r'()*'
 
-# Regular expression tokens
-# Regular expressions that define numbers
+# Number tokens {{{2
 t_INTEGER = r"-?[0-9]+"
 t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
 
@@ -170,22 +169,19 @@ t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
 # because it is defined first.
 def t_NAN(t):
     r"nan|NaN|inf"
+    t.value = float(t.value)
     return t
 
 
-# Regular expression for a string
+# String tokens {{{2
 t_QUOTED_STRING = r'"([^\\\n"]|(\\.))*"'
     # The complexity is because of the case "He yelled \"You are a fool!\".".
     # The first part says string cannot contain a backslash, newline, or a
     # quote. The second case allows backslashes when combined with any other
     # character, which allows \" and \\.
 
-def t_NAN(t):
-    r"nan|NaN|inf"
-    t.value = float(t.value)
-    return t
 
-# Identifiers
+# Identifier tokens {{{2
 def t_ID(t):
     r'[A-Z]+'
     t.type = reserved.get(t.value)
@@ -196,10 +192,12 @@ def t_ID(t):
     return t
 
 
+# Whitespace {{{2
 # ignore whitespace
 t_ignore = ' \t\n'
 
 
+# Error {{{2
 def t_error(t):
     c = t.value[0]
     loc = TokenLocation(t)
@@ -207,7 +205,7 @@ def t_error(t):
     raise ParseError("illegal character '%s'." % c, loc)
 
 
-# Parser {{{1
+# Parser rules {{{1
 def p_contents(p):
     "contents : header_section type_section sweep_section trace_section value_section end"
     p[0] = (p[1], p[2], p[3], p[4], p[5])
