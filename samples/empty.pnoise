@@ -1,0 +1,225 @@
+HEADER
+"PSFversion" "1.00"
+"simulator" "spectre"
+"version" "21.1.0.303.isr5"
+"date" "4:36:33 PM, Thur Feb 29, 2024"
+"design" "(no title)"
+"analysis type" "sample.pnoise"
+"analysis name" "pnoiseMpm0"
+"analysis description" "jitter results for each measurement parent"
+"xVecSorted" "ascending"
+"tolerance.relative" 0.00100000
+TYPE
+"sweep" FLOAT DOUBLE PROP(
+"key" "sweep"
+)
+"Tau" FLOAT DOUBLE PROP(
+"units" "N*m"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Alpha" FLOAT DOUBLE PROP(
+"units" "rads/s^2"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Omega" FLOAT DOUBLE PROP(
+"units" "rads/s"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Theta" FLOAT DOUBLE PROP(
+"units" "rads"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"F" FLOAT DOUBLE PROP(
+"units" "N"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Imp" FLOAT DOUBLE PROP(
+"units" "m/s^3"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Acc" FLOAT DOUBLE PROP(
+"units" "m/s^2"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Vel" FLOAT DOUBLE PROP(
+"units" "m/s"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Pos" FLOAT DOUBLE PROP(
+"units" "m"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"Phi" FLOAT DOUBLE PROP(
+"units" "Wb"
+"key" "node"
+"tolerance" 1.00000e-09
+)
+"V" FLOAT DOUBLE PROP(
+"units" "V"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"I" FLOAT DOUBLE PROP(
+"units" "A"
+"key" "branch"
+"tolerance" 1.00000e-12
+)
+"MMF" FLOAT DOUBLE PROP(
+"units" "A*turn"
+"key" "node"
+"tolerance" 1.00000e-12
+)
+"Wb" FLOAT DOUBLE PROP(
+"units" "Wb"
+"key" "node"
+"tolerance" 1.00000e-09
+)
+"Temp" FLOAT DOUBLE PROP(
+"units" "C"
+"key" "node"
+"tolerance" 0.000100000
+)
+"Pwr" FLOAT DOUBLE PROP(
+"units" "W"
+"key" "node"
+"tolerance" 1.00000e-09
+)
+"U" FLOAT DOUBLE PROP(
+"units" ""
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"V/Sec" FLOAT DOUBLE PROP(
+"units" "V/s"
+"key" "node"
+"tolerance" 0.000100000
+)
+"I/Sec" FLOAT DOUBLE PROP(
+"units" "A/s"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"1/Sec" FLOAT DOUBLE PROP(
+"units" "1/s"
+"key" "node"
+"tolerance" 0.000100000
+)
+"HOD" FLOAT DOUBLE PROP(
+"units" ""
+"key" "node"
+"tolerance" 0.0100000
+)
+"Q" FLOAT DOUBLE PROP(
+"units" "coul"
+"key" "node"
+"tolerance" 1.00000e-14
+)
+SWEEP
+"jittereventtime" "sweep" PROP(
+"sweep_direction" 0
+"units" "real"
+"plot" 0
+"grid" 3
+)
+TRACE
+VALUE
+"jittereventtime" 0.000000000000000e+00
+"jittereventtime" 3.999999999999970e-10
+"jittereventtime" 6.999999999999997e-10
+"jittereventtime" 1.000000000000002e-09
+"jittereventtime" 1.000799999999999e-09
+"jittereventtime" 1.001589560469495e-09
+"jittereventtime" 1.002394780234749e-09
+"jittereventtime" 1.002797390117373e-09
+"jittereventtime" 1.003199999999997e-09
+"jittereventtime" 1.003278122949077e-09
+"jittereventtime" 1.003429954690233e-09
+"jittereventtime" 1.003565792639685e-09
+"jittereventtime" 1.003800187977392e-09
+"jittereventtime" 1.003973613398730e-09
+"jittereventtime" 1.004320464241404e-09
+"jittereventtime" 1.005014165926752e-09
+"jittereventtime" 1.006401569297443e-09
+"jittereventtime" 1.009176376038837e-09
+"jittereventtime" 1.012660673231694e-09
+"jittereventtime" 1.015537101916766e-09
+"jittereventtime" 1.017941000200046e-09
+"jittereventtime" 1.019069610491919e-09
+"jittereventtime" 1.021301008377685e-09
+"jittereventtime" 1.023596312675608e-09
+"jittereventtime" 1.026446997985364e-09
+"jittereventtime" 1.029716230004238e-09
+"jittereventtime" 1.033978800467510e-09
+"jittereventtime" 1.039920295759840e-09
+"jittereventtime" 1.049172208931443e-09
+"jittereventtime" 1.064915340335263e-09
+"jittereventtime" 1.096401603142897e-09
+"jittereventtime" 1.159374128758164e-09
+"jittereventtime" 1.285319179988705e-09
+"jittereventtime" 1.537209282449780e-09
+"jittereventtime" 1.937209282449783e-09
+"jittereventtime" 1.999999999999998e-09
+"jittereventtime" 2.337209282449780e-09
+"jittereventtime" 2.737209282449784e-09
+"jittereventtime" 3.000000000000000e-09
+"jittereventtime" 3.137209282449781e-09
+"jittereventtime" 3.537209282449784e-09
+"jittereventtime" 3.937209282449781e-09
+"jittereventtime" 4.000000000000003e-09
+"jittereventtime" 4.337209282449785e-09
+"jittereventtime" 4.737209282449782e-09
+"jittereventtime" 4.999999999999998e-09
+"jittereventtime" 5.137209282449786e-09
+"jittereventtime" 5.537209282449782e-09
+"jittereventtime" 5.768604641224888e-09
+"jittereventtime" 6.000000000000001e-09
+"jittereventtime" 6.000800000000004e-09
+"jittereventtime" 6.001608000368437e-09
+"jittereventtime" 6.002395563382385e-09
+"jittereventtime" 6.003200000000002e-09
+"jittereventtime" 6.003336066011394e-09
+"jittereventtime" 6.003573563114887e-09
+"jittereventtime" 6.003782582533802e-09
+"jittereventtime" 6.004070806305526e-09
+"jittereventtime" 6.004298758279513e-09
+"jittereventtime" 6.004714368092846e-09
+"jittereventtime" 6.005366193257235e-09
+"jittereventtime" 6.006390878409032e-09
+"jittereventtime" 6.008356433990887e-09
+"jittereventtime" 6.011876032175574e-09
+"jittereventtime" 6.018383120560086e-09
+"jittereventtime" 6.024273429088123e-09
+"jittereventtime" 6.029704553809702e-09
+"jittereventtime" 6.033371982041133e-09
+"jittereventtime" 6.037636384776900e-09
+"jittereventtime" 6.042323706542874e-09
+"jittereventtime" 6.048295675458516e-09
+"jittereventtime" 6.055462154901870e-09
+"jittereventtime" 6.064681920845968e-09
+"jittereventtime" 6.076815993544639e-09
+"jittereventtime" 6.094538342730668e-09
+"jittereventtime" 6.122869935710470e-09
+"jittereventtime" 6.179396614781297e-09
+"jittereventtime" 6.292449972922950e-09
+"jittereventtime" 6.509082316041057e-09
+"jittereventtime" 6.909082316041054e-09
+"jittereventtime" 7.000000000000003e-09
+"jittereventtime" 7.309082316041058e-09
+"jittereventtime" 7.709082316041055e-09
+"jittereventtime" 7.999999999999999e-09
+"jittereventtime" 8.109082316041058e-09
+"jittereventtime" 8.509082316041055e-09
+"jittereventtime" 8.909082316041059e-09
+"jittereventtime" 9.000000000000001e-09
+"jittereventtime" 9.309082316041056e-09
+"jittereventtime" 9.709082316041060e-09
+END

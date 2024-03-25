@@ -407,6 +407,11 @@ def p_traces_last(p):
     p[0] = [p[1]]
 
 
+def p_traces_empty(p):
+    "traces : "
+    p[0] = []
+
+
 def p_trace(p):
     "trace : named_value"
     name, type = p[1]
