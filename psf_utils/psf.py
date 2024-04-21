@@ -163,7 +163,8 @@ class PSF:
                         ordinate = ordinate,
                         type = t,
                         access = t.name,
-                        units = t.units if t.units else t.name,
+                        units = t.units,
+                        # units = t.units if t.units else t.name,
                             # I think that terminal currents are misnamed
                             # they should be named "I" but they are named "A"
                             # and "A" is a type where no units are specified,

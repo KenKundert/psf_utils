@@ -120,22 +120,18 @@ test_api:
                     type: complex double
                     min: -1 - 1j
                     max: 1 + 1j
-                    units: S-Param
                 s21:
                     type: complex double
                     min: -1 - 1j
                     max: 1 + 1j
-                    units: S-Param
                 s12:
                     type: complex double
                     min: -1 - 1j
                     max: 1 + 1j
-                    units: S-Param
                 s22:
                     type: complex double
                     min: -1 - 1j
                     max: 1 + 1j
-                    units: S-Param
 
     # noise {{{2
     noise:
