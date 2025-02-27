@@ -14,6 +14,8 @@ Options:
     -d, --db                      show the magnitude of the signals in dB
     -m, --mag                     show the magnitude of the signals
     -p, --ph                      show the phase of the signals
+    -g, --major-grid              show major grid lines
+    -G, --minor-grid              show major and minor grid lines
     -s <file>, --svg <file>       produce graph as SVG file rather than display it
     -t <title>, --title <title>   title
     -M, --mark-points             place marker on each point
@@ -285,6 +287,12 @@ def show_signals():
             axes[i, 0].xaxis.set_major_formatter(x_formatter)
             axes[i, 0].yaxis.set_major_formatter(y_formatters[units])
             axes[i, 0].format_coord = xy_formatters[units]
+            if cmdline['--minor-grid']:
+                axes[i, 0].grid(which="both")
+            elif cmdline['--major-grid']:
+                axes[i, 0].grid(which="major")
+            else:
+                axes[i, 0].grid(visible=False)
         if title:
             plt.suptitle(title)
         if svg_file:

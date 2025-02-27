@@ -220,6 +220,8 @@ Latest development release
 | Version: 1.8.1rc2
 | Released: 2024-04-21
 
+- Fixed units on unitless numbers
+- Added ``--major-grid`` and ``--minor-grid`` options to show command
 
 1.8 (2024-01-15)
 ''''''''''''''''

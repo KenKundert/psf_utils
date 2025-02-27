@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm -rf build dist psf_utils.egg-info __pycache__ */__pycache__
+rm -rf build dist psf_utils.egg-info __pycache__ */__pycache__ .tox
 rm -f samples/*.cache samples/**/*.cache psf_utils/parser.out
 rm -f psf_utils/{lextab.py,parsetab.py}
 rm -rf .hypothesis .tox .pytest_cache .coverage htmlcov
