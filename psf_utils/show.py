@@ -226,7 +226,7 @@ def show_signals():
                 units = ''
             if dB:
                 y_data = 20*np.log10(np.absolute(y_data))
-                units = 'dB' + units
+                units = 'dB' + (units or '')
                 use_log_scale = False
             elif mag:
                 y_data = np.absolute(y_data)
