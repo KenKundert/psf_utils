@@ -15,7 +15,7 @@ PSF Utilities — Read Spectre Data Files
     :target: https://pypi.python.org/pypi/psf_utils/
 
 :Author: Ken Kundert
-:Version: 1.8.1rc3
+:Version: 1.8.1rc4
 :Released: 2025-02-27
 
 
@@ -217,7 +217,7 @@ Releases
 Latest development release
 ''''''''''''''''''''''''''
 
-| Version: 1.8.1rc3
+| Version: 1.8.1rc4
 | Released: 2025-02-27
 
 - Fixed units on unitless numbers
