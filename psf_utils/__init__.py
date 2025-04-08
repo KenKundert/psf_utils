@@ -1,4 +1,4 @@
-__version__ = '1.8.1rc4'
-__released__ = '2025-02-27'
+__version__ = '1.9'
+__released__ = '2025-04-08'
 
 from .psf import PSF, UnknownSignal, Quantity
