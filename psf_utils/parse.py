@@ -435,23 +435,21 @@ def p_trace_with_props(p):
 
 def p_value_section(p):
     "value_section : VALUE values"
-    values = {}
-    for n, t, v in p[2]:
-        if n not in values:
-            values[n] = Value(type=t, values=[])
-        values[n].values.append(v)
-    p[0] = values
+    p[0] = p[2]
 
 
 def p_values(p):
     "values : values signal_value"
-    p[1].append(p[2])
+    if p[2][0] not in p[1]:
+        p[1][p[2][0]] = Value(type=p[2][1], values=[p[2][2]])
+    else:
+        p[1][p[2][0]].values.append(p[2][2])
     p[0] = p[1]
 
 
 def p_values_last(p):
     "values : signal_value"
-    p[0] = [p[1]]
+    p[0] = {p[1][0]: Value(type=p[1][1], values=[p[1][2]])}
 
 
 def p_named_signal_scalar(p):
