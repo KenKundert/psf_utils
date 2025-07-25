@@ -161,7 +161,9 @@ literals = r'()*'
 
 # Number tokens {{{2
 t_INTEGER = r"-?[0-9]+"
-t_REAL = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
+real_w_fract = r"[+-]?[0-9]+\.[0-9]*([eE][+-][0-9]+)?"
+real_w_exp = r"[+-]?[0-9]+(\.[0-9]*)?[eE][+-][0-9]+"
+t_REAL = f'({real_w_fract})|({real_w_exp})'
 
 
 # NaN must be given as a function rather than a simple string.
