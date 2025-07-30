@@ -221,6 +221,11 @@ Latest development release
 | Released: 2025-04-08
 
 
+1.10 (2025-07-30)
+'''''''''''''''''
+- Properly recognize real numbers with exponents but without decimal points.
+
+
 1.9 (2025-04-08)
 ''''''''''''''''
 
