@@ -548,6 +548,87 @@ test_api:
                     units: V
                     type: complex double
 
+    # fracpole_spdc {{{2
+    fracpole_spdc:
+        path: ../samples/fracpole.spdc
+        expected:
+            signals:
+                z6:
+                    units: V
+                    type: float single
+                    value: 0
+                z2:
+                    units: V
+                    type: float single
+                    value: 0
+                FP6.1:
+                    units: V
+                    type: float single
+                    value: 0
+                FP6.2:
+                    units: V
+                    type: float single
+                    value: 0
+                FP6.3:
+                    units: V
+                    type: float single
+                    value: 0
+                FP6.4:
+                    units: V
+                    type: float single
+                    value: 0
+                FP6.5:
+                    units: V
+                    type: float single
+                    value: 0
+                FP2.1:
+                    units: V
+                    type: float single
+                    value: 0
+                FP2.2:
+                    units: V
+                    type: float single
+                    value: 0
+
+    # fracpole_spac {{{2
+    fracpole_spac:
+        path: ../samples/fracpole.spac
+        expected:
+            sweep:
+                name: freq
+                units: Hz
+                length: 121
+                type: float single
+                grid: logarithmic
+            signals:
+                z6:
+                    units: V
+                    type: complex single
+                z2:
+                    units: V
+                    type: complex single
+                FP6.1:
+                    units: V
+                    type: complex single
+                FP6.2:
+                    units: V
+                    type: complex single
+                FP6.3:
+                    units: V
+                    type: complex single
+                FP6.4:
+                    units: V
+                    type: complex single
+                FP6.5:
+                    units: V
+                    type: complex single
+                FP2.1:
+                    units: V
+                    type: complex single
+                FP2.2:
+                    units: V
+                    type: complex single
+
     # dcopinfo {{{2
     dcopinfo:
         path: ../samples/dcOpInfo.info.psfascii

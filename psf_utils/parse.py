@@ -143,6 +143,7 @@ reserved = {rw: rw for rw in [
     'LONG',
     'NAN',
     'PROP',
+    'SINGLE',
     'STRING',
     'STRUCT',
     'SWEEP',
@@ -322,6 +323,7 @@ def p_kind(p):
              | INT
              | BYTE
              | LONG
+             | SINGLE
              | STRING
              | array
              | struct

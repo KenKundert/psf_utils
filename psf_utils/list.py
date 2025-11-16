@@ -49,7 +49,9 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 saved_psf_file_filename = '.psf_file'
 kinds = {
     'float double': 'real',
+    'float single': 'real',
     'complex double': 'complex',
+    'complex single': 'complex',
     'int byte': 'integer',
     'int long': 'integer',
     'int': 'integer',

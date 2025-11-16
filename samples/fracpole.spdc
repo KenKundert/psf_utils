@@ -1,0 +1,93 @@
+HEADER
+"PSFversion" "1.00"
+"simulator" "spectre"
+"version" "20.1.0.068"
+"date" "11:50:23 AM, Tue Feb 2, 2021"
+"design" ""
+"analysis type" "dc"
+"analysis name" "op"
+"analysis description" "DC Analysis `op'"
+"xVecSorted" "unsorted"
+"tolerance.relative" 0.00100000
+"reltol" 0.00100000
+"abstol(V)" 1.00000e-06
+"abstol(I)" 1.00000e-12
+"temp" 27.0000
+"tnom" 27.0000
+"tempeffects" "all"
+"gmindc" 1.00000e-12
+TYPE
+"LogicV" FLOAT SINGLE PROP(
+"key" "node"
+)
+"V" FLOAT SINGLE PROP(
+"units" "V"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"I" FLOAT SINGLE PROP(
+"units" "A"
+"key" "branch"
+"tolerance" 1.00000e-12
+)
+"MMF" FLOAT SINGLE PROP(
+"units" "A*turn"
+"key" "node"
+"tolerance" 1.00000e-12
+)
+"Wb" FLOAT SINGLE PROP(
+"units" "Wb"
+"key" "node"
+"tolerance" 1.00000e-09
+)
+"Temp" FLOAT SINGLE PROP(
+"units" "C"
+"key" "node"
+"tolerance" 0.000100000
+)
+"Pwr" FLOAT SINGLE PROP(
+"units" "W"
+"key" "node"
+"tolerance" 1.00000e-09
+)
+"U" FLOAT SINGLE PROP(
+"units" ""
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"V/Sec" FLOAT SINGLE PROP(
+"units" "V/s"
+"key" "node"
+"tolerance" 0.000100000
+)
+"I/Sec" FLOAT SINGLE PROP(
+"units" "A/s"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+"1/Sec" FLOAT SINGLE PROP(
+"units" "1/s"
+"key" "node"
+"tolerance" 0.000100000
+)
+"HOD" FLOAT SINGLE PROP(
+"units" ""
+"key" "node"
+"tolerance" 0.0100000
+)
+"Q" FLOAT SINGLE PROP(
+"units" "Coul"
+"key" "node"
+"tolerance" 1.00000e-15
+)
+VALUE
+"z6" "V" 0.000000000000000e+00
+"z2" "V" 0.000000000000000e+00
+"FP6.1" "V" 0.000000000000000e+00
+"FP6.2" "V" 0.000000000000000e+00
+"FP6.3" "V" 0.000000000000000e+00
+"FP6.4" "V" 0.000000000000000e+00
+"FP6.5" "V" 0.000000000000000e+00
+"FP2.1" "V" 0.000000000000000e+00
+"FP2.2" "V" 0.000000000000000e+00
+END

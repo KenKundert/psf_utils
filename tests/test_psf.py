@@ -18,7 +18,9 @@ def name_from_dict_keys(cases):
 # Globals {{{1
 type_maps = {
     'float double': float,
+    'float single': float,
     'complex double': complex,
+    'complex single': complex,
     'int byte': int,
     'int long': int,
     'string *': str,
