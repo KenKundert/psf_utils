@@ -210,6 +210,10 @@ Examples
 script that shows how to write simple Python scripts that run Spectre and use 
 *psf_utils* to extract and display the desired results.
 
+.. image:: flicker.svg
+    :width: 100 %
+    :align: center
+
 
 Releases
 --------
