@@ -20,7 +20,7 @@ Read PSF File
 
 
 # Imports {{{1
-from .parse import ParsePSF, ParseError
+from .parse import ParsePSF, ParseError, Sweep
 from inform import Error, Info, join, log, os_error
 from pathlib import Path
 import numpy as np
@@ -96,6 +96,15 @@ class PSF:
                 log(os_error(e))
             except Exception as e:
                 log(e)
+
+        # Try fast read first
+        if self._try_fast_read(filename):
+            if update_cache:
+                try:
+                    self._write_cache(cache_filepath)
+                except Exception as e:
+                    log(e)
+            return
 
         # open and parse PSF file
         parser = ParsePSF()
@@ -215,6 +224,82 @@ class PSF:
 
         if update_cache:
             self._write_cache(cache_filepath)
+
+    def _try_fast_read(self, filename):
+        try:
+            # Ensure filename is a string for open()
+            fname = str(filename)
+            
+            with open(fname, 'rb') as f:
+                content = f.read()
+
+            # Check for VALUE section
+            idx = content.find(b"\nVALUE\n")
+            if idx == -1:
+                idx = content.find(b"VALUE\n")
+                if idx == -1:
+                    return False
+                start_offset = idx + 6
+            else:
+                start_offset = idx + 7
+
+            data_content = content[start_offset:]
+            tokens = data_content.split()
+
+            if not tokens:
+                return False
+
+            first_name_bytes = tokens[0]
+            cycle_len = 0
+            for i in range(2, len(tokens), 2):
+                if tokens[i] == first_name_bytes:
+                    cycle_len = i // 2
+                    break
+            
+            if cycle_len == 0:
+                 cycle_len = len(tokens) // 2
+                 if cycle_len == 0:
+                     return False
+
+            names = [t.decode('utf-8').strip('"') for t in tokens[0:cycle_len*2:2]]
+            
+            total_tokens = len(tokens)
+            num_rows = total_tokens // (2 * cycle_len)
+            tokens = tokens[:num_rows * 2 * cycle_len]
+            
+            values = np.array(tokens[1::2], dtype=float)
+            data = values.reshape((num_rows, cycle_len))
+
+            sweep_name = names[0]
+            sweep_data = data[:, 0]
+            
+            # Create Sweep object
+            sweep = Sweep(name=sweep_name, abscissa=sweep_data, grid=1)
+            self.sweeps = [sweep]
+
+            self.signals = {}
+            for i, name in enumerate(names):
+                sig_data = data[:, i]
+                signal = Signal(
+                    name=name,
+                    ordinate=sig_data,
+                    type=None,
+                    access=name,
+                    units=None,
+                    meta=None
+                )
+                self.signals[name] = signal
+            
+            # Initialize other attributes expected by the class
+            self.meta = {}
+            self.types = {}
+            self.traces = None 
+            
+            return True
+
+        except Exception:
+            # If anything goes wrong during fast read, return False to fall back
+            return False
 
     def get_sweep(self, index=0):
         """
