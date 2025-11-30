@@ -20,7 +20,7 @@ Read PSF File
 
 
 # Imports {{{1
-from .parse import ParsePSF, ParseError, Sweep
+from .parse import ParsePSF, ParseError
 from inform import Error, Info, join, log, os_error
 from pathlib import Path
 import numpy as np
@@ -97,20 +97,84 @@ class PSF:
             except Exception as e:
                 log(e)
 
-        # Try fast read first
-        if self._try_fast_read(filename):
-            if update_cache:
-                try:
-                    self._write_cache(cache_filepath)
-                except Exception as e:
-                    log(e)
-            return
-
         # open and parse PSF file
         parser = ParsePSF()
         try:
             content = psf_filepath.read_text()
-            sections = parser.parse(filename, content)
+            
+            # Hybrid approach: Try to separate header/types from values
+            # We look for the VALUE section
+            value_idx = content.find("\nVALUE")
+            if value_idx == -1:
+                value_idx = content.find("VALUE")
+                
+            if value_idx != -1:
+                # We found VALUE section.
+                # Let's see if we can fast-read it.
+                
+                # Check for GROUP in TRACE section before attempting fast read
+                # The TRACE section is before VALUE.
+                trace_idx = content.find("\nTRACE")
+                if trace_idx == -1:
+                    trace_idx = content.find("TRACE")
+                
+                has_group = False
+                if trace_idx != -1 and trace_idx < value_idx:
+                    trace_section = content[trace_idx:value_idx]
+                    if "GROUP" in trace_section:
+                        has_group = True
+                
+                fast_values = None
+                fast_names = None
+                
+                if not has_group:
+                    # Let's try to read the file as bytes for fast reading
+                    with open(filename, 'rb') as f:
+                        content_bytes = f.read()
+                        
+                    # Try fast read of values
+                    fast_values, fast_names = self._fast_read_values(content_bytes)
+                
+                if fast_values is not None:
+                    # Fast read successful!
+                    # Now parse metadata.
+                    
+                    # Truncate content for parser
+                    prefix = content[:value_idx]
+                    dummy_content = prefix + "\nVALUE\n\"dummy_var_for_fast_read\" 0.0\nEND"
+                    
+                    sections = parser.parse(filename, dummy_content)
+                    
+                    # Now we have metadata.
+                    # We need to inject our fast values into 'sections'.
+                    # sections = (meta, types, sweeps, traces, values)
+                    meta, types, sweeps, traces, values = sections
+                    
+                    # 'values' contains the dummy. We discard it.
+                    values = {}
+                    
+                    # Re-construct values dict
+                    class Value(Info):
+                        pass
+                    
+                    for i, name in enumerate(fast_names):
+                        # Extract column
+                        col = fast_values[:, i]
+                        # We wrap it in a Value object
+                        # We flag it as 'fast_array' so __init__ knows
+                        v_obj = Value(values=col, is_fast=True)
+                        values[name] = v_obj
+                        
+                    # Update sections
+                    sections = (meta, types, sweeps, traces, values)
+                    
+                else:
+                    # Fast read failed or skipped, fallback
+                    sections = parser.parse(filename, content)
+            else:
+                # No VALUE section?
+                sections = parser.parse(filename, content)
+
         except ParseError as e:
             raise Error(str(e))
         except OSError as e:
@@ -125,6 +189,7 @@ class PSF:
                     '\nUse `psf {0!s} {0!s}.ascii` to convert.'.format(psf_filepath),
                 )
             )
+        
         meta, types, sweeps, traces, values = sections
         self.meta = meta
         self.types = types
@@ -135,7 +200,14 @@ class PSF:
         if sweeps:
             for sweep in sweeps:
                 n = sweep.name
-                sweep.abscissa = np.array([v[0] for v in values[n].values])
+                # Check if it's a fast value
+                val_obj = values[n]
+                if getattr(val_obj, 'is_fast', False):
+                    # It's already a numpy array
+                    sweep.abscissa = val_obj.values
+                else:
+                    # Original logic
+                    sweep.abscissa = np.array([v[0] for v in val_obj.values])
 
         # process signals
         # 1. convert to numpy and delete the original list
@@ -147,7 +219,11 @@ class PSF:
             for trace in traces:
                 name = trace.name
                 type = types.get(trace.type, trace.type)
-                vals = values[name].values
+                
+                val_obj = values[name]
+                vals = val_obj.values
+                is_fast = getattr(val_obj, 'is_fast', False)
+                
                 if type == 'GROUP':
                     group = {k: types.get(v, v) for k, v in groups[name].items()}
                     prefix = ''
@@ -163,10 +239,18 @@ class PSF:
                 for i, v in enumerate(group.items()):
                     n, t = v
                     joined_name = prefix + n
-                    if 'complex' in t.kind:
-                        ordinate = np.array([complex(*get_value(v, i)) for v in vals])
+                    
+                    if is_fast:
+                        # If fast read, vals is already the numpy array for this signal
+                        # And we assume fast read only handles simple scalar floats for now.
+                        # So 'vals' IS the ordinate.
+                        ordinate = vals
                     else:
-                        ordinate = np.array([get_value(v, i) for v in vals])
+                        if 'complex' in t.kind:
+                            ordinate = np.array([complex(*get_value(v, i)) for v in vals])
+                        else:
+                            ordinate = np.array([get_value(v, i) for v in vals])
+                            
                     signal = Signal(
                         name = joined_name,
                         ordinate = ordinate,
@@ -186,69 +270,79 @@ class PSF:
         else:
             # no traces, this should be a DC op-point analysis dataset
             for name, value in values.items():
-                assert len(value.values) == 1
-                type = types[value.type]
-                if type.struct:
-                    for t, v in zip(type.struct.types.values(), value.values[0][0]):
-                        n = f'{name}.{t.name}'
-                        if 'float' in t.kind:
-                            v = Quantity(v, unicode_units(t.units))
-                        elif 'complex' in t.kind:
-                            v = complex(v[0], v[1])
+                # For DC analysis, fast read likely failed or we didn't use it
+                is_fast = getattr(value, 'is_fast', False)
+                if is_fast:
+                     v = value.values[0] 
+                else:
+                    assert len(value.values) == 1
+                    type = types[value.type]
+                    if type.struct:
+                        for t, v in zip(type.struct.types.values(), value.values[0][0]):
+                            n = f'{name}.{t.name}'
+                            if 'float' in t.kind:
+                                v = Quantity(v, unicode_units(t.units))
+                            elif 'complex' in t.kind:
+                                v = complex(v[0], v[1])
+                            signal = Signal(
+                                name = n,
+                                ordinate = v,
+                                type = t,
+                                units = t.units,
+                                meta = meta,
+                            )
+                            signals[n] = signal
+                    else:
+                        if 'float' in type.kind:
+                            v = Quantity(value.values[0][0], unicode_units(type.units))
+                        elif 'complex' in type.kind:
+                            v = complex(value.values[0][0], value.values[0][1])
+                        else:
+                            v = value.values[0]
+
                         signal = Signal(
-                            name = n,
+                            name = name,
                             ordinate = v,
-                            type = t,
-                            units = t.units,
+                            type = type,
+                            access = type.name,
+                            units = type.units,
                             meta = meta,
                         )
-                        signals[n] = signal
-                else:
-                    if 'float' in type.kind:
-                        v = Quantity(value.values[0][0], unicode_units(type.units))
-                    elif 'complex' in type.kind:
-                        v = complex(value.values[0][0], value.values[0][1])
-                    else:
-                        v = value.values[0]
-
-                    signal = Signal(
-                        name = name,
-                        ordinate = v,
-                        type = type,
-                        access = type.name,
-                        units = type.units,
-                        meta = meta,
-                    )
-                    signals[name] = signal
+                        signals[name] = signal
         self.signals = signals
 
         if update_cache:
             self._write_cache(cache_filepath)
 
-    def _try_fast_read(self, filename):
+    def _fast_read_values(self, content_bytes):
+        """
+        Attempts to read the VALUE section using fast numpy parsing.
+        Returns (values_array, names_list) if successful, or (None, None) if not.
+        """
         try:
-            # Ensure filename is a string for open()
-            fname = str(filename)
-            
-            with open(fname, 'rb') as f:
-                content = f.read()
-
-            # Check for VALUE section
-            idx = content.find(b"\nVALUE\n")
+            # Find VALUE section
+            idx = content_bytes.find(b"\nVALUE\n")
             if idx == -1:
-                idx = content.find(b"VALUE\n")
+                idx = content_bytes.find(b"VALUE\n")
                 if idx == -1:
-                    return False
+                    return None, None
                 start_offset = idx + 6
             else:
                 start_offset = idx + 7
 
-            data_content = content[start_offset:]
+            data_content = content_bytes[start_offset:]
+            
+            # We need to stop at END if it exists
+            end_idx = data_content.rfind(b"\nEND")
+            if end_idx != -1:
+                data_content = data_content[:end_idx]
+            
             tokens = data_content.split()
 
             if not tokens:
-                return False
+                return None, None
 
+            # Identify signals
             first_name_bytes = tokens[0]
             cycle_len = 0
             for i in range(2, len(tokens), 2):
@@ -257,49 +351,29 @@ class PSF:
                     break
             
             if cycle_len == 0:
-                 cycle_len = len(tokens) // 2
-                 if cycle_len == 0:
-                     return False
+                 return None, None
 
             names = [t.decode('utf-8').strip('"') for t in tokens[0:cycle_len*2:2]]
             
             total_tokens = len(tokens)
             num_rows = total_tokens // (2 * cycle_len)
+            
+            if num_rows == 0:
+                return None, None
+                
             tokens = tokens[:num_rows * 2 * cycle_len]
             
-            values = np.array(tokens[1::2], dtype=float)
+            try:
+                values = np.array(tokens[1::2], dtype=float)
+            except ValueError:
+                return None, None
+                
             data = values.reshape((num_rows, cycle_len))
-
-            sweep_name = names[0]
-            sweep_data = data[:, 0]
             
-            # Create Sweep object
-            sweep = Sweep(name=sweep_name, abscissa=sweep_data, grid=1)
-            self.sweeps = [sweep]
-
-            self.signals = {}
-            for i, name in enumerate(names):
-                sig_data = data[:, i]
-                signal = Signal(
-                    name=name,
-                    ordinate=sig_data,
-                    type=None,
-                    access=name,
-                    units=None,
-                    meta=None
-                )
-                self.signals[name] = signal
-            
-            # Initialize other attributes expected by the class
-            self.meta = {}
-            self.types = {}
-            self.traces = None 
-            
-            return True
+            return data, names
 
         except Exception:
-            # If anything goes wrong during fast read, return False to fall back
-            return False
+            return None, None
 
     def get_sweep(self, index=0):
         """
