@@ -101,62 +101,62 @@ class PSF:
         parser = ParsePSF()
         try:
             content = psf_filepath.read_text()
-            
+
             # Hybrid approach: Try to separate header/types from values
             # We look for the VALUE section
             value_idx = content.find("\nVALUE")
             if value_idx == -1:
                 value_idx = content.find("VALUE")
-                
+
             if value_idx != -1:
                 # We found VALUE section.
                 # Let's see if we can fast-read it.
-                
+
                 # Check for GROUP in TRACE section before attempting fast read
                 # The TRACE section is before VALUE.
                 trace_idx = content.find("\nTRACE")
                 if trace_idx == -1:
                     trace_idx = content.find("TRACE")
-                
+
                 has_group = False
                 if trace_idx != -1 and trace_idx < value_idx:
                     trace_section = content[trace_idx:value_idx]
                     if "GROUP" in trace_section:
                         has_group = True
-                
+
                 fast_values = None
                 fast_names = None
-                
+
                 if not has_group:
                     # Let's try to read the file as bytes for fast reading
                     with open(filename, 'rb') as f:
                         content_bytes = f.read()
-                        
+
                     # Try fast read of values
                     fast_values, fast_names = self._fast_read_values(content_bytes)
-                
+
                 if fast_values is not None:
                     # Fast read successful!
                     # Now parse metadata.
-                    
+
                     # Truncate content for parser
                     prefix = content[:value_idx]
                     dummy_content = prefix + "\nVALUE\n\"dummy_var_for_fast_read\" 0.0\nEND"
-                    
+
                     sections = parser.parse(filename, dummy_content)
-                    
+
                     # Now we have metadata.
                     # We need to inject our fast values into 'sections'.
                     # sections = (meta, types, sweeps, traces, values)
                     meta, types, sweeps, traces, values = sections
-                    
+
                     # 'values' contains the dummy. We discard it.
                     values = {}
-                    
+
                     # Re-construct values dict
                     class Value(Info):
                         pass
-                    
+
                     for i, name in enumerate(fast_names):
                         # Handle escaped characters in names from fast reader
                         # The fast reader might return "I48.LOGIC_OUT\<3\>"
@@ -173,7 +173,7 @@ class PSF:
                         
                     # Update sections
                     sections = (meta, types, sweeps, traces, values)
-                    
+
                 else:
                     # Fast read failed or skipped, fallback
                     sections = parser.parse(filename, content)
@@ -195,7 +195,7 @@ class PSF:
                     '\nUse `psf {0!s} {0!s}.ascii` to convert.'.format(psf_filepath),
                 )
             )
-        
+
         meta, types, sweeps, traces, values = sections
         self.meta = meta
         self.types = types
@@ -225,11 +225,11 @@ class PSF:
             for trace in traces:
                 name = trace.name
                 type = types.get(trace.type, trace.type)
-                
+
                 val_obj = values[name]
                 vals = val_obj.values
                 is_fast = getattr(val_obj, 'is_fast', False)
-                
+
                 if type == 'GROUP':
                     group = {k: types.get(v, v) for k, v in groups[name].items()}
                     prefix = ''
@@ -245,7 +245,7 @@ class PSF:
                 for i, v in enumerate(group.items()):
                     n, t = v
                     joined_name = prefix + n
-                    
+
                     if is_fast:
                         # If fast read, vals is already the numpy array for this signal
                         # And we assume fast read only handles simple scalar floats for now.
@@ -256,7 +256,7 @@ class PSF:
                             ordinate = np.array([complex(*get_value(v, i)) for v in vals])
                         else:
                             ordinate = np.array([get_value(v, i) for v in vals])
-                            
+
                     signal = Signal(
                         name = joined_name,
                         ordinate = ordinate,
@@ -279,7 +279,7 @@ class PSF:
                 # For DC analysis, fast read likely failed or we didn't use it
                 is_fast = getattr(value, 'is_fast', False)
                 if is_fast:
-                     v = value.values[0] 
+                     v = value.values[0]
                 else:
                     assert len(value.values) == 1
                     type = types[value.type]
@@ -337,12 +337,12 @@ class PSF:
                 start_offset = idx + 7
 
             data_content = content_bytes[start_offset:]
-            
+
             # We need to stop at END if it exists
             end_idx = data_content.rfind(b"\nEND")
             if end_idx != -1:
                 data_content = data_content[:end_idx]
-            
+
             tokens = data_content.split()
 
             if not tokens:
@@ -355,27 +355,27 @@ class PSF:
                 if tokens[i] == first_name_bytes:
                     cycle_len = i // 2
                     break
-            
+
             if cycle_len == 0:
                  return None, None
 
             names = [t.decode('utf-8').strip('"') for t in tokens[0:cycle_len*2:2]]
-            
+
             total_tokens = len(tokens)
             num_rows = total_tokens // (2 * cycle_len)
-            
+
             if num_rows == 0:
                 return None, None
-                
+
             tokens = tokens[:num_rows * 2 * cycle_len]
-            
+
             try:
                 values = np.array(tokens[1::2], dtype=float)
             except ValueError:
                 return None, None
-                
+
             data = values.reshape((num_rows, cycle_len))
-            
+
             return data, names
 
         except Exception:
