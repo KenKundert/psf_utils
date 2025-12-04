@@ -315,7 +315,7 @@ test_api:
                 I2.diff_cm:
                     units: V
                     type: float double
-                    min: 0.41
+                    min: 0.411
                     max: 0.412
                 I2.diff_out_left:
                     units: V
