@@ -164,14 +164,14 @@ class PSF:
                         # We need to unescape backslashes
                         #clean_name = name
                         clean_name = name.replace('\\', '')
-                        
+
                         # Extract column
                         col = fast_values[:, i]
                         # We wrap it in a Value object
                         # We flag it as 'fast_array' so __init__ knows
                         v_obj = Value(values=col, is_fast=True)
                         values[clean_name] = v_obj
-                        
+
                     # Update sections
                     sections = (meta, types, sweeps, traces, values)
 
