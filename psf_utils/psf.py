@@ -162,6 +162,7 @@ class PSF:
                         # The fast reader might return "I48.LOGIC_OUT\<3\>"
                         # But the parser (and traces) expects "I48.LOGIC_OUT<3>"
                         # We need to unescape backslashes
+                        #clean_name = name
                         clean_name = name.replace('\\', '')
                         
                         # Extract column

@@ -48,7 +48,16 @@ utils_test_schema = Schema({
 # run_api_test {{{1
 def run_api_test(test_name, psf_file, expected):
     # open the PSF file
-    psf = PSF(psf_file)
+    # open the PSF file
+    try:
+        psf = PSF(psf_file)
+    except KeyError as e:
+        msg = f"in {test_name}\nERROR: Failed to load PSF file. KeyError: {e}\n" \
+              f"This usually means a signal name in the TRACE section (e.g. 'I48.LOGIC_OUT<3>')\n" \
+              f"does not match any signal found in the VALUE section.\n" \
+              f"If this is the 'bus_chevrons_tran' test, check if escaped characters are being handled correctly."
+        pytest.fail(msg)
+
     sweep = psf.get_sweep()
     test_desc = f'in {test_name}'
 
@@ -97,7 +106,13 @@ def run_api_test(test_name, psf_file, expected):
         print(f"NAME: {test_desc}")
 
         # check that this is a known signal
-        assert name in remaining, test_desc
+        # check that this is a known signal
+        if name not in remaining:
+            msg = f"{test_desc}\nERROR: Found unexpected signal '{name}' in the PSF file.\n" \
+                  f"Expected signals: {list(remaining.keys())}\n" \
+                  f"This failure means the PSF reader found a signal that wasn't in the test expectation.\n" \
+                  f"If this is the 'bus_chevrons_tran' test, check if 'I48.LOGIC_OUT<3>' is being parsed correctly (e.g. unescaped)."
+            pytest.fail(msg)
 
         # check get_signal()
         sig = psf.get_signal(name)
