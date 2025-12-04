@@ -158,13 +158,20 @@ class PSF:
                         pass
 
                     for i, name in enumerate(fast_names):
+                        # Handle escaped characters in names from fast reader
+                        # The fast reader might return "I48.LOGIC_OUT\<3\>"
+                        # But the parser (and traces) expects "I48.LOGIC_OUT<3>"
+                        # We need to unescape backslashes
+                        #clean_name = name
+                        clean_name = name.replace('\\', '')
+                        
                         # Extract column
                         col = fast_values[:, i]
                         # We wrap it in a Value object
                         # We flag it as 'fast_array' so __init__ knows
                         v_obj = Value(values=col, is_fast=True)
-                        values[name] = v_obj
-
+                        values[clean_name] = v_obj
+                        
                     # Update sections
                     sections = (meta, types, sweeps, traces, values)
 

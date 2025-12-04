@@ -1,0 +1,59 @@
+HEADER
+"PSFversion" "1.00"
+"simulator" "spectre"
+"version" "19.1.0.396.isr8"
+"date" "1:35:51 AM, Mon Dec 1, 2025"
+"design" "// Point Netlist Generated on: Aug 22 13:55:31 2025, mod by circuitmuggle@3Dec25"
+"analysis type" "tran"
+"analysis name" "tran"
+"analysis description" "Transient Analysis `tran': time = (0 s -> 4.0 ps)" 
+"xVecSorted" "ascending"
+"tolerance.relative" 1.00000e-06
+"start" 0.00000
+"outputstart" 0.00000
+"stop" 0.0171167
+"step" 5.00000e-08
+"istep" 0.00100000
+"maxstep" 0.000171167
+"ic" "all"
+"useprevic" "no"
+"skipdc" "yes"
+"reltol" 1.00000e-07
+"abstol(V)" 1.00000e-09
+"abstol(I)" 1.00000e-15
+"temp" 25.0000
+"tnom" 27.0000
+"tempeffects" "all"
+"errpreset" "conservative"
+"method" "gear2only"
+"lteratio" 10.0000
+"relref" "alllocal"
+"cmin" 1.00000e-18
+"gmin" 1.00000e-18
+"rabsshort" 0.00100000
+TYPE
+"sweep" FLOAT DOUBLE PROP(
+"key" "sweep"
+)
+"V" FLOAT DOUBLE PROP(
+"units" "V"
+"key" "node"
+"tolerance" 1.00000e-06
+)
+SWEEP
+"time" "sweep" PROP(
+"sweep_direction" 0
+"units" "s"
+"plot" 0
+"grid" 1
+)
+TRACE
+"I48.LOGIC_OUT\<3\>" "V"
+VALUE
+"time" 0.00000
+"I48.LOGIC_OUT\<3\>" 0.00000
+"time" 1.00000e-09
+"I48.LOGIC_OUT\<3\>" 8.00000e-04
+"time" 2.00000e-09
+"I48.LOGIC_OUT\<3\>" -1.00000e-06
+END

@@ -1,6 +1,23 @@
 # test_api {{{1
 test_api:
 
+    # bus_chevrons_tran {{{2
+    bus_chevrons_tran:
+        path: ../samples/bus_chevrons.tran
+        expected:
+            sweep:
+                name: time
+                units: s
+                length: 3
+                type: float double
+                grid: linear
+            signals:
+                I48.LOGIC_OUT<3>:
+                    units: V
+                    type: float double
+                    min: -1.10e-06
+                    max: 8.10e-04
+
     # aclin {{{2
     aclin:
         path: ../samples/pnoise.raw/aclin.ac
@@ -4008,6 +4025,7 @@ test_api:
         expected:
             signals:
                 {}
+
 
     # pz {{{2
     pz:
