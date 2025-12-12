@@ -195,3 +195,97 @@ def test_utils(name, command, psf_file, arguments, expected):
 
     # remove svg_file if it was created
     rm(svg_file)
+
+# Error Handling Tests {{{1
+def test_binary_psf_error():
+    """Test that binary PSF files raise appropriate error"""
+    test_dir = Path(__file__).parent
+    binary_file = test_dir / "binary_test.psf"
+    
+    # Create a binary file
+    binary_file.write_bytes(b'\x00\xff\xfe\xfd' * 100)
+    
+    try:
+        with pytest.raises(Exception) as exc_info:
+            PSF(binary_file)
+        # Should raise Error about binary PSF
+        assert "binary PSF" in str(exc_info.value) or "UnicodeDecodeError" in str(type(exc_info.value))
+    finally:
+        # Clean up
+        rm(binary_file)
+
+def test_missing_file_error():
+    """Test that missing files raise appropriate error"""
+    from inform import Error
+    with pytest.raises(Error):
+        PSF("nonexistent_file_12345.psf")
+
+def test_malformed_psf_error():
+    """Test that malformed PSF files raise appropriate error"""
+    from inform import Error
+    test_dir = Path(__file__).parent
+    malformed_file = test_dir / "malformed_test.psf"
+    
+    # Create a malformed PSF file
+    malformed_file.write_text("HEADER\nGARBAGE DATA!!!\nMORE GARBAGE\n")
+    
+    try:
+        with pytest.raises(Error):
+            PSF(malformed_file)
+    finally:
+        # Clean up
+        rm(malformed_file)
+
+def test_corrupted_cache():
+    """Test that corrupted cache files are handled gracefully"""
+    test_dir = Path(__file__).parent
+    psf_file = test_dir / "../samples/pnoise.raw/aclin.ac"
+    cache_file = psf_file.with_suffix(".ac.cache")
+    
+    # Remove existing cache
+    rm(cache_file)
+    
+    # Create corrupted cache
+    cache_file.write_bytes(b"corrupted cache data\x00\xff")
+    
+    try:
+        # Should fall back to parsing PSF file
+        psf = PSF(psf_file)
+        assert psf is not None
+        assert psf.get_sweep() is not None
+    finally:
+        # Clean up
+        rm(cache_file)
+
+# Static Method Tests {{{1
+def test_unknown_signal():
+    """Test that accessing unknown signal raises UnknownSignal"""
+    from psf_utils.psf import UnknownSignal
+    test_dir = Path(__file__).parent
+    psf_file = test_dir / "../samples/pnoise.raw/aclin.ac"
+    
+    # Clean cache
+    cache_file = psf_file.with_suffix(".ac.cache")
+    rm(cache_file)
+    
+    try:
+        psf = PSF(psf_file)
+        with pytest.raises(UnknownSignal):
+            psf.get_signal("nonexistent_signal_xyz_12345")
+    finally:
+        rm(cache_file)
+
+def test_units_to_unicode():
+    """Test units conversion to unicode"""
+    assert PSF.units_to_unicode("Ohm") == "Ω"
+    assert PSF.units_to_unicode("V^2") == "V²"
+    assert PSF.units_to_unicode("sqrt(Hz)") == "√Hz"
+    assert PSF.units_to_unicode("R") == "Ω"  # Resistance
+    assert PSF.units_to_unicode("") == ""
+    assert PSF.units_to_unicode(None) == ""
+
+def test_units_to_latex():
+    """Test units conversion to latex (not implemented)"""
+    result = PSF.units_to_latex("V/A")
+    # Currently returns input unchanged
+    assert result == "V/A"
