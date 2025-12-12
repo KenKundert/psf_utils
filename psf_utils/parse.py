@@ -193,7 +193,7 @@ def t_VALUE(t):
     # Look ahead for END
     lexdata = t.lexer.lexdata
     lexpos = t.lexer.lexpos
-    
+
     # First, check if there are GROUP traces in the TRACE section
     # TRACE section comes before VALUE
     trace_start = lexdata.rfind('TRACE', 0, lexpos)
@@ -203,81 +203,81 @@ def t_VALUE(t):
             # GROUP traces have different VALUES format, can't fast parse
             t.type = 'VALUE'
             return t
-    
+
     end_idx = lexdata.find('END', lexpos)
-    
+
     if end_idx != -1:
         # Check if the content between VALUE and END is "simple"
         # i.e. no composite values (parentheses)
-        
+
         section_content = lexdata[lexpos:end_idx]
-        
+
         # Heuristic: if '(' is present, fallback to slow parsing
         # This handles complex/composite values
         if '(' in section_content:
              t.type = 'VALUE'
              return t
-             
+
         # Try fast parsing with numpy
         try:
             tokens_list = section_content.split()
             if not tokens_list:
                 t.type = 'VALUE'
                 return t
-                
+
             # Identify signals
             # "name" value "name" value ...
             # Find cycle length
             if len(tokens_list) < 2:
                  t.type = 'VALUE'
                  return t
-                 
+
             first_name = tokens_list[0]
             cycle_len = 0
             for i in range(2, len(tokens_list), 2):
                 if tokens_list[i] == first_name:
                     cycle_len = i // 2
                     break
-            
+
             if cycle_len == 0:
                  t.type = 'VALUE'
                  return t
-            
+
             names = [tok.strip('"') for tok in tokens_list[0:cycle_len*2:2]]
-            
+
             total_tokens = len(tokens_list)
             num_rows = total_tokens // (2 * cycle_len)
-            
+
             if num_rows == 0:
                 t.type = 'VALUE'
                 return t
-                
+
             # Truncate to full cycles
             tokens_list = tokens_list[:num_rows * 2 * cycle_len]
-            
+
             # Convert to numpy array
             # This is the critical speedup
             values = np.array(tokens_list[1::2], dtype=float)
             data = values.reshape((num_rows, cycle_len))
-            
+
             # Success!
             # Return FAST_VALUES token
             t.type = 'FAST_VALUES'
             t.value = (names, data)
-            
+
             # Update lexer position to skip the consumed content
             # We consumed up to end_idx.
             # But we didn't consume 'END'.
             # So lexpos should be end_idx.
             t.lexer.lexpos = end_idx
-            
+
             return t
-            
+
         except Exception:
             # Fallback on any error
             t.type = 'VALUE'
             return t
-            
+
     t.type = 'VALUE'
     return t
 
@@ -543,22 +543,22 @@ def p_value_section_fast(p):
     "value_section : FAST_VALUES"
     names, data = p[1]
     values = {}
-    
+
     # Construct values dict
     # We need to handle escaped names here too?
     # The names come from fast reader which might have escapes.
     # But standard parser unescapes strings in p_string.
     # So we should probably unescape here to match standard parser output.
-    
+
     for i, name in enumerate(names):
         clean_name = name.replace('\\', '')
         col = data[:, i]
-        # Wrap in Value object. 
+        # Wrap in Value object.
         # Note: Standard parser produces Value(type=..., values=[list])
         # We produce Value(values=numpy_array, is_fast=True)
         # We don't have type info here, but __init__ handles that.
         values[clean_name] = Value(values=col, is_fast=True)
-        
+
     p[0] = values
 
 

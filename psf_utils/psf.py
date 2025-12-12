@@ -116,7 +116,7 @@ class PSF:
                     '\nUse `psf {0!s} {0!s}.ascii` to convert.'.format(psf_filepath),
                 )
             )
-        
+
         meta, types, sweeps, traces, values = sections
         self.meta = meta
         self.types = types
@@ -144,11 +144,11 @@ class PSF:
             for trace in traces:
                 name = trace.name
                 type = types.get(trace.type, trace.type)
-                
+
                 val_obj = values[name]
                 vals = val_obj.values
                 is_fast = getattr(val_obj, 'is_fast', False)
-                
+
                 if type == 'GROUP':
                     group = {k: types.get(v, v) for k, v in groups[name].items()}
                     prefix = ''
@@ -164,7 +164,7 @@ class PSF:
                 for i, v in enumerate(group.items()):
                     n, t = v
                     joined_name = prefix + n
-                    
+
                     if is_fast:
                         # Fast read assumes simple scalar floats
                         ordinate = vals
@@ -173,7 +173,7 @@ class PSF:
                             ordinate = np.array([complex(*get_value(v, i)) for v in vals])
                         else:
                             ordinate = np.array([get_value(v, i) for v in vals])
-                            
+
                     signal = Signal(
                         name = joined_name,
                         ordinate = ordinate,
@@ -196,7 +196,7 @@ class PSF:
                 is_fast = getattr(value, 'is_fast', False)
                 if is_fast:  # pragma: no cover
                     # Fast reader doesn't handle DC files (no SWEEP section)
-                     v = value.values[0] 
+                     v = value.values[0]
                 else:
                     assert len(value.values) == 1
                     type = types[value.type]

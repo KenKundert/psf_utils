@@ -201,10 +201,10 @@ def test_binary_psf_error():
     """Test that binary PSF files raise appropriate error"""
     test_dir = Path(__file__).parent
     binary_file = test_dir / "binary_test.psf"
-    
+
     # Create a binary file
     binary_file.write_bytes(b'\x00\xff\xfe\xfd' * 100)
-    
+
     try:
         with pytest.raises(Exception) as exc_info:
             PSF(binary_file)
@@ -225,10 +225,10 @@ def test_malformed_psf_error():
     from inform import Error
     test_dir = Path(__file__).parent
     malformed_file = test_dir / "malformed_test.psf"
-    
+
     # Create a malformed PSF file
     malformed_file.write_text("HEADER\nGARBAGE DATA!!!\nMORE GARBAGE\n")
-    
+
     try:
         with pytest.raises(Error):
             PSF(malformed_file)
@@ -241,13 +241,13 @@ def test_corrupted_cache():
     test_dir = Path(__file__).parent
     psf_file = test_dir / "../samples/pnoise.raw/aclin.ac"
     cache_file = psf_file.with_suffix(".ac.cache")
-    
+
     # Remove existing cache
     rm(cache_file)
-    
+
     # Create corrupted cache
     cache_file.write_bytes(b"corrupted cache data\x00\xff")
-    
+
     try:
         # Should fall back to parsing PSF file
         psf = PSF(psf_file)
@@ -263,11 +263,11 @@ def test_unknown_signal():
     from psf_utils.psf import UnknownSignal
     test_dir = Path(__file__).parent
     psf_file = test_dir / "../samples/pnoise.raw/aclin.ac"
-    
+
     # Clean cache
     cache_file = psf_file.with_suffix(".ac.cache")
     rm(cache_file)
-    
+
     try:
         psf = PSF(psf_file)
         with pytest.raises(UnknownSignal):
