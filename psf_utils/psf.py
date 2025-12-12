@@ -194,7 +194,8 @@ class PSF:
             # no traces, this should be a DC op-point analysis dataset
             for name, value in values.items():
                 is_fast = getattr(value, 'is_fast', False)
-                if is_fast:
+                if is_fast:  # pragma: no cover
+                    # Fast reader doesn't handle DC files (no SWEEP section)
                      v = value.values[0] 
                 else:
                     assert len(value.values) == 1
@@ -217,7 +218,7 @@ class PSF:
                     else:
                         if 'float' in type.kind:
                             v = Quantity(value.values[0][0], unicode_units(type.units))
-                        elif 'complex' in type.kind:
+                        elif 'complex' in type.kind:  # pragma: no cover
                             v = complex(value.values[0][0], value.values[0][1])
                         else:
                             v = value.values[0]
