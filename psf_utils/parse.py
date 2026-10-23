@@ -24,6 +24,7 @@ import ply.lex
 import ply.yacc
 from inform import Info, is_str, is_mapping
 import numpy as np
+import re
 
 
 # Globals {{{1
@@ -194,15 +195,21 @@ def t_VALUE(t):
     lexdata = t.lexer.lexdata
     lexpos = t.lexer.lexpos
 
-    # First, check if there are GROUP traces in the TRACE section
-    # TRACE section comes before VALUE
+    # First, check if there are GROUP traces in the TRACE section.
+    # Single-member GROUP records (`" 1" GROUP 1`) keep VALUE rows scalar —
+    # just keyed by short IDs like `" 1"` instead of the real trace name —
+    # so the fast path can still handle them. Only MULTI-member groups
+    # (`GROUP 2`, `GROUP 3`, ...) emit composite records that need PLY.
+    # TRACE section comes before VALUE.
+    has_group = False
     trace_start = lexdata.rfind('TRACE', 0, lexpos)
     if trace_start != -1:
         trace_section = lexdata[trace_start:lexpos]
-        if 'GROUP' in trace_section:
-            # GROUP traces have different VALUES format, can't fast parse
+        if re.search(r'GROUP\s+(?:[2-9]|\d{2,})\b', trace_section):
+            # Multi-member GROUP — VALUES use composite (...) syntax, can't fast parse
             t.type = 'VALUE'
             return t
+        has_group = 'GROUP' in trace_section
 
     end_idx = lexdata.find('END', lexpos)
 
@@ -220,7 +227,14 @@ def t_VALUE(t):
 
         # Try fast parsing with numpy
         try:
-            tokens_list = section_content.split()
+            # GROUP-encoded files use short IDs like `" 1"` whose internal
+            # whitespace would defeat str.split() (it would split " 1" into
+            # `"` and `1"`). Regex tokenizer keeps quoted names intact;
+            # plain split() is faster when no GROUP names are present.
+            if has_group:
+                tokens_list = re.findall(r'"[^"]*"|\S+', section_content)
+            else:
+                tokens_list = section_content.split()
             if not tokens_list:
                 t.type = 'VALUE'
                 return t
